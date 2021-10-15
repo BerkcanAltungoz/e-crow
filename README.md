@@ -1,2 +1,2 @@
-# E-Crow
-E-Crow - An Escrow Service for Everyone
+# E-Crow - An Escrow Service for Everyone
+
