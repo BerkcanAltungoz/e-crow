@@ -90,4 +90,6 @@ While being **free and open source**, PostgreSQL is highly extensible. For examp
 
 PostgreSQL tries to conform with the SQL standard where such conformance does not contradict traditional features or could lead to poor architectural decisions. Many of the features required by the SQL standard are supported, though sometimes with slightly differing syntax or function. Further moves towards conformance can be expected over time. As of the version 14 release in September 2021, PostgreSQL conforms to at least 170 of the 179 mandatory features for SQL:2016 Core conformance. As of this writing, no relational database meets full conformance with this standard.
 
+---
+
 ![Akdeniz University Logo](http://cse.akdeniz.edu.tr/wp-content/themes/fakulte/images/logo.png)
