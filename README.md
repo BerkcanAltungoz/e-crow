@@ -47,4 +47,4 @@ You can then access the website here: http://localhost:8080/
 
 *Further details will be added on how to configure the database*
 
-![Akdeniz University Logo](https://cdn.freelogovectors.net/wp-content/uploads/2017/04/akdeniz-university-logo.png)
+![Akdeniz University Logo](http://cse.akdeniz.edu.tr/wp-content/themes/fakulte/images/logo.png)
