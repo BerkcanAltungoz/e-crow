@@ -45,6 +45,48 @@ java -jar target/*.jar
 ```
 You can then access the website here: http://localhost:8080/
 
-*Further details will be added on how to configure the database*
+*Further details will be added on how to configure the database and frontend*
 
+## Why Spring Boot?
+
+Spring is a very popular Java-based framework for building web and enterprise applications. Unlike many other frameworks, which focus on only one area, 
+Spring framework provides a wide verity of features addressing the modern business needs via its portfolio project. The main goal of the Spring Boot 
+framework is to reduce overall development time and increase efficiency by having a default setup for unit and integration tests.
+
+In relation to Spring, Spring Boot aims to make it easy to create Spring-powered, production-grade applications and services with minimum fuss. It takes an opinionated view of the Spring platform so that new and existing users can quickly get to the bits they need.
+
+## Why ReactJS?
+
+
+* **Simplicity**
+
+ReactJS is just simpler to grasp right away. The component-based approach, well-defined lifecycle, and use of just plain JavaScript make React very simple to learn, build a professional web (and mobile applications), and support it. 
+
+* **Easy to learn**
+
+Anyone with a basic previous knowledge in programming can easily understand React while Angular and Ember are referred to as ‘Domain-specific Language’, implying that it is difficult to learn them. To react, you just need basic knowledge of CSS and HTML.
+
+* **Native Approach**
+
+React can be used to create mobile applications (React Native). And React is a diehard fan of reusability, meaning extensive code reusability is supported.
+
+* **Data Binding**
+
+React uses one-way data binding and an application architecture called Flux controls the flow of data to components through one control point – the dispatcher. It's easier to debug self-contained components of large ReactJS apps.
+
+* **Performance**
+
+React does not offer any concept of a built-in container for dependency. You can use Browserify, Require JS, EcmaScript 6 modules which we can use via Babel, ReactJS-di to inject dependencies automatically.
+
+* **Testability**
+
+ReactJS applications are super easy to test. React views can be treated as functions of the state, so we can manipulate with the state we pass to the ReactJS view and take a look at the output and triggered actions, events, functions, etc.
+
+## Why PostgreSQL?
+
+PostgreSQL is a powerful, open source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.
+
+While being **free and open source**, PostgreSQL is highly extensible. For example, you can define your own data types, build out custom functions, even write code from different programming languages without recompiling your database!
+
+PostgreSQL tries to conform with the SQL standard where such conformance does not contradict traditional features or could lead to poor architectural decisions. Many of the features required by the SQL standard are supported, though sometimes with slightly differing syntax or function. Further moves towards conformance can be expected over time. As of the version 14 release in September 2021, PostgreSQL conforms to at least 170 of the 179 mandatory features for SQL:2016 Core conformance. As of this writing, no relational database meets full conformance with this standard.
 ![Akdeniz University Logo](http://cse.akdeniz.edu.tr/wp-content/themes/fakulte/images/logo.png)
