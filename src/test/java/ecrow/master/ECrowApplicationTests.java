@@ -1,4 +1,4 @@
-package com.example.ecrow;
+package ecrow.master;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
