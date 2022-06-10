@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.time.OffsetTime;
 
 @Builder
@@ -19,7 +20,7 @@ public class Customer {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Embedded
+    @Email
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
