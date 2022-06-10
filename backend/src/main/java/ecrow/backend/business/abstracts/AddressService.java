@@ -9,9 +9,10 @@ import java.util.List;
 
 public interface AddressService {
     DataResult<List<Address>> getAll();
+    Result existsById(Integer id);
     DataResult<Address> getById(Integer id);
     Result deleteById(Integer id);
-    Result existsById(Integer id);
+    Result existsByFkCustomerId(Integer customerId);
     DataResult<List<Address>> getByFkCustomerId(Integer customerId);
 
     Result add(AddressDto addressDto);

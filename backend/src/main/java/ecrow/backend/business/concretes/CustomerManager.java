@@ -1,8 +1,7 @@
 package ecrow.backend.business.concretes;
 
 import ecrow.backend.business.abstracts.CustomerService;
-import ecrow.backend.core.utilities.results.DataResult;
-import ecrow.backend.core.utilities.results.SuccessDataResult;
+import ecrow.backend.core.utilities.results.*;
 import ecrow.backend.dataAccess.concretes.CustomerDao;
 import ecrow.backend.entities.concretes.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,15 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
+    public Result existsById(Integer id) {
+        return customerDao.existsById(id) ? new SuccessResult() : new ErrorResult();
+    }
+
+    @Override
     public DataResult<Customer> getById(Integer id) {
+        if(!existsById(id).isSuccess()){
+            return new ErrorDataResult<>("Customer Not Found");
+        }
         return new SuccessDataResult<>(customerDao.findById(id).get());
     }
 }

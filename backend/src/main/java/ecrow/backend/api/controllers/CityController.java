@@ -7,10 +7,7 @@ import ecrow.backend.core.utilities.results.SuccessDataResult;
 import ecrow.backend.entities.concretes.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,12 +28,12 @@ public class CityController {
     }
 
     @GetMapping("/getByName")
-    public ResponseEntity<?> getByName(String name) {
+    public ResponseEntity<?> getByName(@RequestParam String name) {
         return Utils.getResponseEntity(cityService.getByName(name));
     }
 
     @GetMapping("/getById")
-    public ResponseEntity<?> getById(Integer id){
+    public ResponseEntity<?> getById(@RequestParam Integer id){
         return Utils.getResponseEntity(cityService.getById(id));
     }
 }

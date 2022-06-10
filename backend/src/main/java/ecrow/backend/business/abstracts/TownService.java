@@ -3,14 +3,14 @@ package ecrow.backend.business.abstracts;
 import ecrow.backend.core.utilities.results.DataResult;
 import ecrow.backend.core.utilities.results.Result;
 import ecrow.backend.entities.concretes.City;
+import ecrow.backend.entities.concretes.Town;
 
 import java.util.List;
 
-public interface CityService {
-    DataResult<List<City>> getAll();
+public interface TownService {
+    DataResult<List<Town>> getAll();
+    DataResult<Town> getById(Integer id);
     Result existsById(Integer id);
-    Result existsByName(String name);
-    DataResult<City> getById(Integer id);
-    DataResult<City> getByName(String name);
-
+    Result existsByFkCityId(Integer cityId);
+    DataResult<List<Town>> getByFkCityId(Integer cityId);
 }

@@ -10,4 +10,5 @@ import javax.transaction.Transactional;
 @Repository
 public interface CityDao extends JpaRepository<City, Integer> {
     City getByName(String name);
+    boolean existsByName(String name);
 }

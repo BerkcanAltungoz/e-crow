@@ -36,13 +36,24 @@ public class AddressManager implements AddressService {
 
     @Override
     public DataResult<Address> getById(Integer id) {
+        if(!existsById(id).isSuccess()){
+            return new ErrorDataResult<>("Address Not Found");
+        }
         return new SuccessDataResult<>(addressDao.findById(id).get());
     }
 
     @Override
     public Result deleteById(Integer id) {
+        if(!existsById(id).isSuccess()){
+            return new ErrorDataResult<>("Address Not Found");
+        }
         addressDao.deleteById(id);
         return new SuccessResult();
+    }
+
+    @Override
+    public Result existsByFkCustomerId(Integer customerId) {
+        return addressDao.existsByFkCustomerId(customerId) ? new SuccessResult() : new ErrorResult();
     }
 
     @Override
@@ -52,6 +63,9 @@ public class AddressManager implements AddressService {
 
     @Override
     public DataResult<List<Address>> getByFkCustomerId(Integer customerId) {
+        if(!existsByFkCustomerId(customerId).isSuccess()){
+            return new ErrorDataResult<>("Address Not Found");
+        }
         return new SuccessDataResult<>(addressDao.getByFkCustomerId(customerId));
     }
 
@@ -72,6 +86,13 @@ public class AddressManager implements AddressService {
 
     @Override
     public Result update(AddressDto addressDto) {
-        return null;
+        if(!existsById(addressDto.getId()).isSuccess()){
+            new ErrorResult("Address Not Found");
+        }
+        Address address = addressDao.findById(addressDto.getId()).get();
+        address.setNamesurname(addressDto.getNamesurname());
+        address.setPostalCode(addressDto.getPostalCode());
+        address.setAddressLine(addressDto.getAddressLine());
+        return new SuccessResult("Address Updated");
     }
 }

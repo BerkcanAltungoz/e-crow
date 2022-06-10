@@ -10,6 +10,6 @@ import java.util.List;
 @Transactional
 @Repository
 public interface AddressDao extends JpaRepository<Address, Integer> {
+    boolean existsByFkCustomerId(Integer customerId);
     List<Address> getByFkCustomerId(Integer customerId);
-
 }

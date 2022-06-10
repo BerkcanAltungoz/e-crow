@@ -9,5 +9,4 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface CustomerDao extends JpaRepository<Customer, Integer> {
-
 }
