@@ -9,6 +9,5 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface CityDao extends JpaRepository<City, Integer> {
-
-    City findByName(String name);
+    City getByName(String name);
 }

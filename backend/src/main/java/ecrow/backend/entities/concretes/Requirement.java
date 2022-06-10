@@ -10,18 +10,21 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "town")
-public class Town {
+@Table(name = "requirement")
+public class Requirement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_city_id", nullable = false)
-    private City fkCity;
+    @JoinColumn(name = "fk_transaction_id", nullable = false)
+    private Transaction fkTransaction;
 
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
+    @Column(name = "requirement", nullable = false, length = 200)
+    private String requirement;
+
+    @Column(name = "satisfied")
+    private Boolean satisfied;
 
 }
