@@ -1,8 +1,8 @@
 package ecrow.backend.core.utilities.verification;
 
-import kodlamaio.hrms.core.utilities.results.ErrorResult;
-import kodlamaio.hrms.core.utilities.results.Result;
-import kodlamaio.hrms.core.utilities.results.SuccessResult;
+import ecrow.backend.core.utilities.results.ErrorResult;
+import ecrow.backend.core.utilities.results.Result;
+import ecrow.backend.core.utilities.results.SuccessResult;
 import org.springframework.stereotype.Service;
 
 import java.util.regex.Matcher;

@@ -1,6 +1,7 @@
 package ecrow.backend.core.utilities.verification;
 
-import kodlamaio.hrms.core.utilities.results.Result;
+import ecrow.backend.core.utilities.results.Result;
+
 
 
 public interface EmailVerificationService {
