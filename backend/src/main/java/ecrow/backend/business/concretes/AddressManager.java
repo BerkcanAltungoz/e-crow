@@ -48,7 +48,7 @@ public class AddressManager implements AddressService {
             return new ErrorDataResult<>("Address Not Found");
         }
         addressDao.deleteById(id);
-        return new SuccessResult();
+        return new SuccessResult("Address Deleted");
     }
 
 
