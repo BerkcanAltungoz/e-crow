@@ -1,9 +1,11 @@
 package ecrow.backend.entities.dtos;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
 
+@Builder
 @Data
 public class AddressDto implements Serializable {
     private final Integer id;

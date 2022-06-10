@@ -25,6 +25,11 @@ public class CityManager implements CityService {
     }
 
     @Override
+    public DataResult<City> getById(Integer id) {
+        return new SuccessDataResult<>(cityDao.findById(id).get());
+    }
+
+    @Override
     public DataResult<City> getByName(String name) {
         return new SuccessDataResult<>(cityDao.getByName(name));
     }

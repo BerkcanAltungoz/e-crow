@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface CityService {
     DataResult<List<City>> getAll();
+    DataResult<City> getById(Integer id);
     DataResult<City> getByName(String name);
+
 }
