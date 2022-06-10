@@ -1,6 +1,7 @@
 package ecrow.backend.entities.concretes;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.OffsetTime;
@@ -18,6 +19,7 @@ public class Customer {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Embedded
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
@@ -42,6 +44,7 @@ public class Customer {
     @Column(name = "phone_validation")
     private Boolean phoneValidation;
 
+    @CreatedDate
     @Column(name = "date_created")
     private OffsetTime dateCreated;
 

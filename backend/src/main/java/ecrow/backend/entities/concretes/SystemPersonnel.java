@@ -3,6 +3,7 @@ package ecrow.backend.entities.concretes;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Builder
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class SystemPersonnel {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Email
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 

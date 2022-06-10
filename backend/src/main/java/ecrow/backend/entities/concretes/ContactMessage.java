@@ -3,6 +3,7 @@ package ecrow.backend.entities.concretes;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Builder
 @AllArgsConstructor
@@ -23,6 +24,7 @@ public class ContactMessage {
     @Column(name = "surname", nullable = false, length = 50)
     private String surname;
 
+    @Email
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 

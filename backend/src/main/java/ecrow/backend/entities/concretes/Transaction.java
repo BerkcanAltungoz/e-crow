@@ -1,8 +1,10 @@
 package ecrow.backend.entities.concretes;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.OffsetTime;
 
 @Builder
@@ -33,6 +35,7 @@ public class Transaction {
     @Column(name = "item_name", nullable = false, length = 100)
     private String itemName;
 
+    @PositiveOrZero
     @Column(name = "item_price", nullable = false)
     private Integer itemPrice;
 
@@ -47,6 +50,7 @@ public class Transaction {
     @JoinColumn(name = "fk_status_id", nullable = false)
     private Status fkStatus;
 
+    @CreatedDate
     @Column(name = "date_created")
     private OffsetTime dateCreated;
 
