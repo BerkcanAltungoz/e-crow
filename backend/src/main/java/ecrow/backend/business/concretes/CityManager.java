@@ -24,18 +24,8 @@ public class CityManager implements CityService {
     }
 
     @Override
-    public Result existsById(Integer id) {
-        return cityDao.existsById(id) ? new SuccessResult() : new ErrorResult();
-    }
-
-    @Override
-    public Result existsByName(String name) {
-        return cityDao.existsByName(name) ? new SuccessResult() : new Result();
-    }
-
-    @Override
     public DataResult<City> getById(Integer id) {
-        if(!existsById(id).isSuccess()){
+        if(!cityDao.existsById(id)){
             return new ErrorDataResult<>("City Not Found");
         }
         return new SuccessDataResult<>(cityDao.findById(id).get());
@@ -43,7 +33,7 @@ public class CityManager implements CityService {
 
     @Override
     public DataResult<City> getByName(String name) {
-        if(!existsByName(name).isSuccess()){
+        if(!cityDao.existsByName(name)){
             return new ErrorDataResult<>("City Not Found");
         }
         return new SuccessDataResult<>(cityDao.getByName(name));

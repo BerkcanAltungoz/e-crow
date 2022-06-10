@@ -2,14 +2,11 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.CityService;
 import ecrow.backend.core.utilities.Utils;
-import ecrow.backend.core.utilities.results.DataResult;
-import ecrow.backend.core.utilities.results.SuccessDataResult;
-import ecrow.backend.entities.concretes.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @CrossOrigin

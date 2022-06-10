@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface CityService {
     DataResult<List<City>> getAll();
-    Result existsById(Integer id);
-    Result existsByName(String name);
     DataResult<City> getById(Integer id);
     DataResult<City> getByName(String name);
 

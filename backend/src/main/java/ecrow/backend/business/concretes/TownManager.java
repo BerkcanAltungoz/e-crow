@@ -25,25 +25,15 @@ public class TownManager implements TownService {
 
     @Override
     public DataResult<Town> getById(Integer id) {
-        if(!existsById(id).isSuccess()){
+        if(!townDao.existsById(id)){
             return new ErrorDataResult<>("Town Not Found");
         }
         return new SuccessDataResult<>(townDao.findById(id).get());
     }
 
     @Override
-    public Result existsById(Integer id) {
-        return townDao.existsById(id) ? new SuccessResult() : new ErrorResult();
-    }
-
-    @Override
-    public Result existsByFkCityId(Integer cityId) {
-        return townDao.existsByFkCityId(cityId) ? new SuccessResult() : new ErrorResult();
-    }
-
-    @Override
     public DataResult<List<Town>> getByFkCityId(Integer cityId) {
-        if(!existsByFkCityId(cityId).isSuccess()){
+        if(!townDao.existsByFkCityId(cityId)){
             return new ErrorDataResult<>("Town Not Found");
         }
         return new SuccessDataResult<>(townDao.getByFkCityId(cityId));

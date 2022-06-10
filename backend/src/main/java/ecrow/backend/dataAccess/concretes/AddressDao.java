@@ -11,5 +11,7 @@ import java.util.List;
 @Repository
 public interface AddressDao extends JpaRepository<Address, Integer> {
     boolean existsByFkCustomerId(Integer customerId);
+    boolean existsByFkTownId(Integer townId);
+    boolean existsByFkCityId(Integer cityId);
     List<Address> getByFkCustomerId(Integer customerId);
 }

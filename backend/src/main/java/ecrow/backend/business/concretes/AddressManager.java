@@ -36,7 +36,7 @@ public class AddressManager implements AddressService {
 
     @Override
     public DataResult<Address> getById(Integer id) {
-        if(!existsById(id).isSuccess()){
+        if(!addressDao.existsById(id)){
             return new ErrorDataResult<>("Address Not Found");
         }
         return new SuccessDataResult<>(addressDao.findById(id).get());
@@ -44,26 +44,17 @@ public class AddressManager implements AddressService {
 
     @Override
     public Result deleteById(Integer id) {
-        if(!existsById(id).isSuccess()){
+        if(!addressDao.existsById(id)){
             return new ErrorDataResult<>("Address Not Found");
         }
         addressDao.deleteById(id);
         return new SuccessResult();
     }
 
-    @Override
-    public Result existsByFkCustomerId(Integer customerId) {
-        return addressDao.existsByFkCustomerId(customerId) ? new SuccessResult() : new ErrorResult();
-    }
-
-    @Override
-    public Result existsById(Integer id) {
-        return addressDao.existsById(id) ? new SuccessResult() : new ErrorResult();
-    }
 
     @Override
     public DataResult<List<Address>> getByFkCustomerId(Integer customerId) {
-        if(!existsByFkCustomerId(customerId).isSuccess()){
+        if(!addressDao.existsByFkCustomerId(customerId)){
             return new ErrorDataResult<>("Address Not Found");
         }
         return new SuccessDataResult<>(addressDao.getByFkCustomerId(customerId));
@@ -71,6 +62,15 @@ public class AddressManager implements AddressService {
 
     @Override
     public Result add(AddressDto addressDto) {
+        if(!addressDao.existsByFkCustomerId(addressDto.getFkCustomerId())){
+            return new ErrorResult("Invalid Customer Id");
+        }
+        else if(!addressDao.existsByFkCityId(addressDto.getFkCityId())){
+            return new ErrorResult("Invalid City Id");
+        }
+        else if(!addressDao.existsByFkTownId(addressDto.getFkTownId())){
+            return new ErrorResult("Invalid Town Id");
+        }
         Address address = Address.builder()
                 .fkCustomer(customerDao.findById(addressDto.getFkCustomerId()).get())
                 .namesurname(addressDto.getNamesurname())
@@ -86,7 +86,7 @@ public class AddressManager implements AddressService {
 
     @Override
     public Result update(AddressDto addressDto) {
-        if(!existsById(addressDto.getId()).isSuccess()){
+        if(!addressDao.existsById(addressDto.getId())){
             new ErrorResult("Address Not Found");
         }
         Address address = addressDao.findById(addressDto.getId()).get();
