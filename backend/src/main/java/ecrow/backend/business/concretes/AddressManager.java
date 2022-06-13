@@ -8,6 +8,7 @@ import ecrow.backend.dataAccess.concretes.CustomerDao;
 import ecrow.backend.dataAccess.concretes.TownDao;
 import ecrow.backend.entities.concretes.Address;
 import ecrow.backend.entities.dtos.AddressDto;
+import ecrow.backend.entities.dtos.AddressUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,14 +86,14 @@ public class AddressManager implements AddressService {
     }
 
     @Override
-    public Result update(AddressDto addressDto) {
-        if(!addressDao.existsById(addressDto.getId())){
+    public Result update(AddressUpdateDto addressUpdateDto) {
+        if(!addressDao.existsById(addressUpdateDto.getId())){
             new ErrorResult("Address Not Found");
         }
-        Address address = addressDao.findById(addressDto.getId()).get();
-        address.setNamesurname(addressDto.getNamesurname());
-        address.setPostalCode(addressDto.getPostalCode());
-        address.setAddressLine(addressDto.getAddressLine());
+        Address address = addressDao.findById(addressUpdateDto.getId()).get();
+        address.setNamesurname(addressUpdateDto.getNamesurname());
+        address.setPostalCode(addressUpdateDto.getPostalCode());
+        address.setAddressLine(addressUpdateDto.getAddressLine());
         return new SuccessResult("Address Updated");
     }
 }

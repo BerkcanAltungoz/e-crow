@@ -3,6 +3,7 @@ package ecrow.backend.api.controllers;
 import ecrow.backend.business.abstracts.AddressService;
 import ecrow.backend.core.utilities.Utils;
 import ecrow.backend.entities.dtos.AddressDto;
+import ecrow.backend.entities.dtos.AddressUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +44,7 @@ public class AddressController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<?> update(@RequestBody AddressDto addressDto) {
-        return Utils.getResponseEntity(addressService.update(addressDto));
+    public ResponseEntity<?> update(@RequestBody AddressUpdateDto addressUpdateDto) {
+        return Utils.getResponseEntity(addressService.update(addressUpdateDto));
     }
 }

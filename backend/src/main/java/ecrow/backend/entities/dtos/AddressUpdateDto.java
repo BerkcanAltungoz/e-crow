@@ -7,7 +7,8 @@ import java.io.Serializable;
 
 @Builder
 @Data
-public class AddressDto implements Serializable {
+public class AddressUpdateDto implements Serializable {
+    private final Integer id;
     private final Integer fkCustomerId;
     private final String namesurname;
     private final Integer fkCityId;
