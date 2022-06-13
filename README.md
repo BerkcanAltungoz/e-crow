@@ -2,7 +2,7 @@
 
 This project is made for Akdeniz University Class CSE 492 Senior Design Project
 
-Made by:Berkcan Altungöz
+Made by: Berkcan Altungöz
 
 Student Number: 20170808014
 
@@ -29,7 +29,7 @@ E-Crow is built using the tools and libraries below. If you wish to tweak and lo
 | PostgreSQL 14.2 or higher    | [Download](https://www.postgresql.org/download/)               |
 | Maven 3.8 or higher          | [Download](https://maven.apache.org/download.cgi)              |
 | Git 2.36 or higher           | [Download](https://git-scm.com/downloads)                      |
-| Spring Boot 2.6 or higher    | [Website](https://spring.io/projects/spring-boot#learn)        |
+| Spring Boot 2.4.5 or higher  | [Website](https://spring.io/projects/spring-boot#learn)        |
 | React 18.1 or higher         | [Website](https://reactjs.org/docs/getting-started.html)       |
 | Your Preferred IDE           | [IntelliJ Idea](https://www.jetbrains.com/idea/download/)      |
 
