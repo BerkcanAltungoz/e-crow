@@ -1,5 +1,6 @@
 package ecrow.backend.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "town")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Town {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

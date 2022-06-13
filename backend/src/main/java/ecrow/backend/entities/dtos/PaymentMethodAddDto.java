@@ -6,8 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
-public class PaymentMethodDto implements Serializable {
-    private final Integer id;
+public class PaymentMethodAddDto implements Serializable {
     private final Integer fkCustomerId;
     private final String nameOnCard;
     private final String cardNumber;

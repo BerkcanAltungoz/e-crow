@@ -5,8 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class RequirementDto implements Serializable {
-    private final Integer id;
+public class RequirementAddDto implements Serializable {
     private final Integer fkTransactionId;
     private final String requirement;
 }

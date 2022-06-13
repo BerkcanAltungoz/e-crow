@@ -1,10 +1,9 @@
 package ecrow.backend.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.PositiveOrZero;
 import java.time.OffsetTime;
 
 @Builder
@@ -14,6 +13,7 @@ import java.time.OffsetTime;
 @Setter
 @Entity
 @Table(name = "transaction")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,6 @@ public class Transaction {
     @Column(name = "item_name", nullable = false, length = 100)
     private String itemName;
 
-    @PositiveOrZero
     @Column(name = "item_price", nullable = false)
     private Integer itemPrice;
 
@@ -46,12 +45,12 @@ public class Transaction {
     @Column(name = "details")
     private String details;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_status_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_status_id")
     private Status fkStatus;
 
-    @CreatedDate
     @Column(name = "date_created")
     private OffsetTime dateCreated;
+
 
 }

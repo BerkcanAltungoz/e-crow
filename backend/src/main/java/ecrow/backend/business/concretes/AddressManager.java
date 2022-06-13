@@ -6,8 +6,7 @@ import ecrow.backend.dataAccess.concretes.AddressDao;
 import ecrow.backend.dataAccess.concretes.CityDao;
 import ecrow.backend.dataAccess.concretes.CustomerDao;
 import ecrow.backend.dataAccess.concretes.TownDao;
-import ecrow.backend.entities.concretes.Address;
-import ecrow.backend.entities.dtos.AddressDto;
+import ecrow.backend.entities.dtos.AddressAddDto;
 import ecrow.backend.entities.dtos.AddressUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,23 +61,23 @@ public class AddressManager implements AddressService {
     }
 
     @Override
-    public Result add(AddressDto addressDto) {
-        if(!addressDao.existsByFkCustomerId(addressDto.getFkCustomerId())){
+    public Result add(AddressAddDto addressAddDto) {
+        if(!addressDao.existsByFkCustomerId(addressAddDto.getFkCustomerId())){
             return new ErrorResult("Invalid Customer Id");
         }
-        else if(!addressDao.existsByFkCityId(addressDto.getFkCityId())){
+        else if(!addressDao.existsByFkCityId(addressAddDto.getFkCityId())){
             return new ErrorResult("Invalid City Id");
         }
-        else if(!addressDao.existsByFkTownId(addressDto.getFkTownId())){
+        else if(!addressDao.existsByFkTownId(addressAddDto.getFkTownId())){
             return new ErrorResult("Invalid Town Id");
         }
         Address address = Address.builder()
-                .fkCustomer(customerDao.findById(addressDto.getFkCustomerId()).get())
-                .namesurname(addressDto.getNamesurname())
-                .fkCity(cityDao.findById(addressDto.getFkCityId()).get())
-                .fkTown(townDao.findById(addressDto.getFkTownId()).get())
-                .postalCode(addressDto.getPostalCode())
-                .addressLine(addressDto.getAddressLine())
+                .fkCustomer(customerDao.findById(addressAddDto.getFkCustomerId()).get())
+                .namesurname(addressAddDto.getNamesurname())
+                .fkCity(cityDao.findById(addressAddDto.getFkCityId()).get())
+                .fkTown(townDao.findById(addressAddDto.getFkTownId()).get())
+                .postalCode(addressAddDto.getPostalCode())
+                .addressLine(addressAddDto.getAddressLine())
                 .build();
 
         addressDao.save(address);

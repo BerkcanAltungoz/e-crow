@@ -1,5 +1,6 @@
 package ecrow.backend.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "payment_method")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

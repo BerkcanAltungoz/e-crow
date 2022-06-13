@@ -5,8 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class CustomerDto implements Serializable {
-    private final Integer id;
+public class CustomerAddDto implements Serializable {
     private final String email;
     private final String password;
     private final String name;

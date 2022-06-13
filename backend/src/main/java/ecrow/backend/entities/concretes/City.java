@@ -1,14 +1,10 @@
 package ecrow.backend.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 
 @Builder
 @Getter
@@ -17,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "city")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class City  {
     @Id
     @Column(name = "id")

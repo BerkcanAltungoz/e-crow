@@ -1,10 +1,12 @@
 package ecrow.backend.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import java.time.OffsetTime;
 
 @Builder
@@ -14,30 +16,9 @@ import java.time.OffsetTime;
 @Setter
 @Entity
 @Table(name = "customer")
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
-
-    @Email
-    @Column(name = "email", nullable = false, length = 100)
-    private String email;
-
-    @Column(name = "password", nullable = false, length = 100)
-    private String password;
-
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
-
-    @Column(name = "surname", nullable = false, length = 50)
-    private String surname;
-
-    @Column(name = "phone_number", nullable = false, length = 10)
-    private String phoneNumber;
-
-    @Column(name = "balance")
-    private Integer balance;
+@PrimaryKeyJoinColumn(name = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Customer extends BaseUser {
 
     @Column(name = "email_validation")
     private Boolean emailValidation;
@@ -45,7 +26,6 @@ public class Customer {
     @Column(name = "phone_validation")
     private Boolean phoneValidation;
 
-    @CreatedDate
     @Column(name = "date_created")
     private OffsetTime dateCreated;
 

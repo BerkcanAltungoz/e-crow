@@ -1,5 +1,6 @@
 package ecrow.backend.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Email;
 @Setter
 @Entity
 @Table(name = "contact_message")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ContactMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

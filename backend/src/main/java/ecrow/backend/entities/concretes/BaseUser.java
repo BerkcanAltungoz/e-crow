@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 
 @Builder
 @AllArgsConstructor
@@ -12,28 +11,31 @@ import javax.validation.constraints.Email;
 @Getter
 @Setter
 @Entity
-@Table(name = "system_personnel")
+@Table(name = "base_user")
+@Inheritance(strategy = InheritanceType.JOINED)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class SystemPersonnel {
+public class BaseUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Email
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "identity_number", nullable = false, length = 11)
-    private String identityNumber;
-
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     @Column(name = "surname", nullable = false, length = 50)
     private String surname;
+
+    @Column(name = "phone_number", nullable = false, length = 10)
+    private String phoneNumber;
+
+    @Column(name = "balance")
+    private Integer balance;
 
 }

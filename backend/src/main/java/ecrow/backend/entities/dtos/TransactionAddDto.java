@@ -6,8 +6,7 @@ import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 
 @Data
-public class TransactionDto implements Serializable {
-    private final Integer id;
+public class TransactionAddDto implements Serializable {
     private final Integer fkEmployeeId;
     private final Integer fkBuyerId;
     private final Integer fkSellerId;
