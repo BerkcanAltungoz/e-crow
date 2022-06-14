@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @Getter
@@ -20,8 +21,8 @@ public class City  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-    @NotBlank
+    @NotNull(message = "Required")
+    @NotBlank(message = "Field Cannot Be Empty")
     @Column(name = "name", length = 50, nullable = false, unique = true)
     private String name;
 

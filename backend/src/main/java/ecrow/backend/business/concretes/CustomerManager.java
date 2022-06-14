@@ -3,7 +3,9 @@ package ecrow.backend.business.concretes;
 import ecrow.backend.business.abstracts.CustomerService;
 import ecrow.backend.core.utilities.results.*;
 import ecrow.backend.dataAccess.concretes.CustomerDao;
+import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
+import ecrow.backend.entities.dtos.CustomerUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,13 +77,13 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public Result update(CustomerAddDto customerAddDto) {
-        if(!customerDao.existsById(customerAddDto.getId())){
+    public Result update(CustomerUpdateDto customerUpdateDto) {
+        if(!customerDao.existsById(customerUpdateDto.getId())){
             return new ErrorResult("Customer Not Found");
         }
-        Customer customer = customerDao.findById(customerAddDto.getId()).get();
-        customer.setEmail(customerAddDto.getEmail());
-        customer.setPassword(customerAddDto.getPassword());
+        Customer customer = customerDao.findById(customerUpdateDto.getId()).get();
+        customer.setEmail(customerUpdateDto.getEmail());
+        customer.setPassword(customerUpdateDto.getPassword());
         customer.setName(customer.getName());
         customer.setSurname(customer.getSurname());
         customer.setPhoneNumber(customer.getPhoneNumber());

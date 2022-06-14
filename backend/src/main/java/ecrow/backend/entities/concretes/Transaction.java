@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.OffsetTime;
 
 @Builder
@@ -32,12 +34,17 @@ public class Transaction {
     @JoinColumn(name = "fk_seller_id", nullable = false)
     private Customer fkSeller;
 
+    @NotNull(message = "Required")
     @Column(name = "item_name", nullable = false, length = 100)
     private String itemName;
 
+    @NotNull(message = "Required")
+    @PositiveOrZero(message = "Cannot Be Negative")
     @Column(name = "item_price", nullable = false)
     private Integer itemPrice;
 
+    @NotNull(message = "Required")
+    @PositiveOrZero(message = "Cannot Be Negative")
     @Column(name = "employee_fee", nullable = false)
     private Integer employeeFee;
 

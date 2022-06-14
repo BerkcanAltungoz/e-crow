@@ -2,6 +2,7 @@ package ecrow.backend.business.abstracts;
 
 import ecrow.backend.core.utilities.results.DataResult;
 import ecrow.backend.core.utilities.results.Result;
+import ecrow.backend.entities.concretes.Address;
 import ecrow.backend.entities.dtos.AddressAddDto;
 import ecrow.backend.entities.dtos.AddressUpdateDto;
 

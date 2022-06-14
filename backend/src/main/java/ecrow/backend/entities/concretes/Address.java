@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Builder
 @AllArgsConstructor
@@ -23,6 +26,8 @@ public class Address {
     @JoinColumn(name = "fk_customer_id", nullable = false)
     private Customer fkCustomer;
 
+    @NotNull(message = "Required")
+    @NotBlank(message = "Field Cannot Be Empty")
     @Column(name = "namesurname", nullable = false, length = 100)
     private String namesurname;
 
@@ -34,9 +39,13 @@ public class Address {
     @JoinColumn(name = "fk_town_id", nullable = false)
     private Town fkTown;
 
+    @NotNull(message = "Required")
+    @Pattern(regexp = "\\d{5}", message = "Invalid Postal Code Format")
     @Column(name = "postal_code", nullable = false, length = 5)
     private String postalCode;
 
+    @NotNull(message = "Required")
+    @NotBlank(message = "Field Cannot Be Empty")
     @Lob
     @Column(name = "address_line", nullable = false)
     private String addressLine;

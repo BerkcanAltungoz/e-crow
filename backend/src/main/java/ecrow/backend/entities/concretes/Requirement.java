@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @AllArgsConstructor
@@ -23,6 +25,8 @@ public class Requirement {
     @JoinColumn(name = "fk_transaction_id", nullable = false)
     private Transaction fkTransaction;
 
+    @NotNull(message = "Required")
+    @NotBlank(message = "Field Cannot Be Empty")
     @Column(name = "requirement", nullable = false, length = 200)
     private String requirement;
 

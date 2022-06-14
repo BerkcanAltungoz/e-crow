@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Builder
 @AllArgsConstructor
@@ -23,13 +26,15 @@ public class BankInformation {
     @JoinColumn(name = "fk_user_id", nullable = false)
     private BaseUser fkUser;
 
+    @NotNull(message = "Required")
+    @NotBlank(message = "Field Cannot Be Empty")
     @Column(name = "nickname", nullable = false, length = 50)
     private String nickname;
 
-    @Column(name = "iban", nullable = false, length = 26)
+    @NotNull(message = "Required")
+    @Pattern(regexp = "TR\\d{24}", message = "Invalid IBAN Format")
+    @Column(name = "iban", nullable = false, unique = true, length = 26)
     private String iban;
 
-    @Column(name = "fk_customer_id", nullable = false)
-    private Integer fkCustomerId;
 
 }
