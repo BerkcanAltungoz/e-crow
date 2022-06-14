@@ -46,7 +46,7 @@ public class AddressManager implements AddressService {
     @Override
     public Result deleteById(Integer id) {
         if(!addressDao.existsById(id)){
-            return new ErrorDataResult<>("Address Not Found");
+            return new ErrorResult("Address Not Found");
         }
         addressDao.deleteById(id);
         return new SuccessResult("Address Deleted");
