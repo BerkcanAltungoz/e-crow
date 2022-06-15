@@ -3,7 +3,6 @@ package ecrow.backend.business.abstracts;
 import ecrow.backend.core.utilities.results.DataResult;
 import ecrow.backend.core.utilities.results.Result;
 import ecrow.backend.entities.concretes.BankInformation;
-import ecrow.backend.entities.concretes.Employee;
 import ecrow.backend.entities.dtos.BankInformationAddDto;
 import ecrow.backend.entities.dtos.BankInformationUpdateDto;
 
