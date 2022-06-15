@@ -5,7 +5,8 @@ import ecrow.backend.core.utilities.results.*;
 import ecrow.backend.dataAccess.concretes.CustomerDao;
 import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
-import ecrow.backend.entities.dtos.CustomerUpdateDto;
+import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
+import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +55,7 @@ public class CustomerManager implements CustomerService {
         if(!customerDao.existsById(id)){
             return new ErrorResult("Customer Not Found");
         }
+        customerDao.deleteById(id);
         return new SuccessResult("Customer Deleted");
     }
 
@@ -77,16 +79,26 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public Result update(CustomerUpdateDto customerUpdateDto) {
-        if(!customerDao.existsById(customerUpdateDto.getId())){
+    public Result updateBase(CustomerBaseUpdateDto customerBaseUpdateDto) {
+        if(!customerDao.existsById(customerBaseUpdateDto.getId())){
             return new ErrorResult("Customer Not Found");
         }
-        Customer customer = customerDao.findById(customerUpdateDto.getId()).get();
-        customer.setEmail(customerUpdateDto.getEmail());
-        customer.setPassword(customerUpdateDto.getPassword());
+        Customer customer = customerDao.findById(customerBaseUpdateDto.getId()).get();
+        customer.setEmail(customerBaseUpdateDto.getEmail());
+        customer.setPassword(customerBaseUpdateDto.getPassword());
         customer.setName(customer.getName());
         customer.setSurname(customer.getSurname());
         customer.setPhoneNumber(customer.getPhoneNumber());
         return new SuccessResult("Customer Updated");
+    }
+
+    @Override
+    public Result updateBalance(CustomerBalanceUpdateDto customerBalanceUpdateDto) {
+        if(!customerDao.existsById(customerBalanceUpdateDto.getId())){
+            return new ErrorResult("Customer Not Found");
+        }
+        Customer customer = customerDao.findById(customerBalanceUpdateDto.getId()).get();
+        customer.setBalance(customerBalanceUpdateDto.getBalance());
+        return new SuccessResult("Customer Balance Updated");
     }
 }

@@ -3,7 +3,8 @@ package ecrow.backend.api.controllers;
 import ecrow.backend.business.abstracts.CustomerService;
 import ecrow.backend.core.utilities.Utils;
 import ecrow.backend.entities.dtos.CustomerAddDto;
-import ecrow.backend.entities.dtos.CustomerUpdateDto;
+import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
+import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,8 +51,13 @@ public class CustomerController {
         return Utils.getResponseEntity(customerService.add(customerAddDto));
     }
 
-    @PatchMapping("/update")
-    public ResponseEntity<?> update(@RequestBody CustomerUpdateDto customerUpdateDto) {
-        return Utils.getResponseEntity(customerService.update(customerUpdateDto));
+    @PatchMapping("/updateBase")
+    public ResponseEntity<?> updateBase(@RequestBody CustomerBaseUpdateDto customerBaseUpdateDto) {
+        return Utils.getResponseEntity(customerService.updateBase(customerBaseUpdateDto));
+    }
+
+    @PatchMapping("/updateBalance")
+    public ResponseEntity<?> updateBalance(@RequestBody CustomerBalanceUpdateDto customerBalanceUpdateDto) {
+        return Utils.getResponseEntity(customerService.updateBalance(customerBalanceUpdateDto));
     }
 }

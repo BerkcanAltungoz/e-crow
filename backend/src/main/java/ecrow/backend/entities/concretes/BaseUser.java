@@ -1,14 +1,17 @@
 package ecrow.backend.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.time.OffsetTime;
 
 @SuperBuilder
 @AllArgsConstructor
@@ -54,4 +57,6 @@ public class BaseUser {
     @Column(name = "balance")
     private Integer balance;
 
+    @Column(name = "date_created")
+    private OffsetTime dateCreated;
 }

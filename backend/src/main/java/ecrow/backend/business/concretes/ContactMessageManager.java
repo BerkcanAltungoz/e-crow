@@ -36,6 +36,7 @@ public class ContactMessageManager implements ContactMessageService {
         if(!contactMessageDao.existsById(id)){
             return new ErrorResult("Contact Message Not Found");
         }
+        contactMessageDao.deleteById(id);
         return new SuccessResult("Contact Message Deleted");
     }
 

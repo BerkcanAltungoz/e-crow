@@ -1,12 +1,14 @@
 package ecrow.backend.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
-import java.time.OffsetTime;
 
 @SuperBuilder
 @AllArgsConstructor
@@ -51,7 +53,6 @@ public class Employee extends BaseUser{
     @Column(name = "phone_validation")
     private Boolean phoneValidation;
 
-    @Column(name = "date_created")
-    private OffsetTime dateCreated;
+
 
 }

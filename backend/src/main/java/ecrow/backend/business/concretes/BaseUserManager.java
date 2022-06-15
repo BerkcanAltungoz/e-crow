@@ -6,7 +6,6 @@ import ecrow.backend.core.utilities.results.ErrorDataResult;
 import ecrow.backend.core.utilities.results.SuccessDataResult;
 import ecrow.backend.dataAccess.concretes.BaseUserDao;
 import ecrow.backend.entities.concretes.BaseUser;
-import ecrow.backend.entities.concretes.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

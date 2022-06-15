@@ -4,7 +4,8 @@ import ecrow.backend.core.utilities.results.DataResult;
 import ecrow.backend.core.utilities.results.Result;
 import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
-import ecrow.backend.entities.dtos.CustomerUpdateDto;
+import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
+import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
 
 import java.util.List;
 
@@ -16,5 +17,6 @@ public interface CustomerService {
     Result deleteById(Integer id);
 
     Result add(CustomerAddDto customerAddDto);
-    Result update(CustomerUpdateDto customerAddDto);
+    Result updateBase(CustomerBaseUpdateDto customerBaseUpdateDto);
+    Result updateBalance(CustomerBalanceUpdateDto customerBalanceUpdateDto);
 }

@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Data
-public class CustomerUpdateDto implements Serializable {
+public class CustomerBaseUpdateDto implements Serializable {
     @NotNull(message = "Required")
     private final Integer id;
 

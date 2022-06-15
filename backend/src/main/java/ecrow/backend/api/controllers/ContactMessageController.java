@@ -2,14 +2,10 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.ContactMessageService;
 import ecrow.backend.core.utilities.Utils;
-import ecrow.backend.core.utilities.results.*;
-import ecrow.backend.entities.concretes.ContactMessage;
 import ecrow.backend.entities.dtos.ContactMessageAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
