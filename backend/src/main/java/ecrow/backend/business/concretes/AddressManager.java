@@ -90,8 +90,16 @@ public class AddressManager implements AddressService {
         if(!addressDao.existsById(addressUpdateDto.getId())){
             new ErrorResult("Address Not Found");
         }
+        else if(!addressDao.existsByFkCityId(addressUpdateDto.getFkCityId())){
+            return new ErrorResult("Invalid City Id");
+        }
+        else if(!addressDao.existsByFkTownId(addressUpdateDto.getFkTownId())){
+            return new ErrorResult("Invalid Town Id");
+        }
         Address address = addressDao.findById(addressUpdateDto.getId()).get();
         address.setNamesurname(addressUpdateDto.getNamesurname());
+        address.setFkCity(cityDao.findById(addressUpdateDto.getFkCityId()).get());
+        address.setFkTown(townDao.findById(addressUpdateDto.getFkTownId()).get());
         address.setPostalCode(addressUpdateDto.getPostalCode());
         address.setAddressLine(addressUpdateDto.getAddressLine());
         return new SuccessResult("Address Updated");

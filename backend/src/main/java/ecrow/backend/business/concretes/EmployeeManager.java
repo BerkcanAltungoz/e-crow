@@ -2,6 +2,7 @@ package ecrow.backend.business.concretes;
 
 import ecrow.backend.business.abstracts.EmployeeService;
 import ecrow.backend.core.utilities.results.*;
+import ecrow.backend.dataAccess.concretes.BaseUserDao;
 import ecrow.backend.dataAccess.concretes.CityDao;
 import ecrow.backend.dataAccess.concretes.EmployeeDao;
 import ecrow.backend.dataAccess.concretes.TownDao;
@@ -20,12 +21,14 @@ public class EmployeeManager implements EmployeeService {
     private final EmployeeDao employeeDao;
     private final TownDao townDao;
     private final CityDao cityDao;
+    private final BaseUserDao baseUserDao;
 
     @Autowired
-    public EmployeeManager(EmployeeDao employeeDao, TownDao townDao, CityDao cityDao) {
+    public EmployeeManager(EmployeeDao employeeDao, TownDao townDao, CityDao cityDao, BaseUserDao baseUserDao) {
         this.employeeDao = employeeDao;
         this.townDao = townDao;
         this.cityDao = cityDao;
+        this.baseUserDao = baseUserDao;
     }
 
     @Override
@@ -35,6 +38,9 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public DataResult<Employee> getById(Integer id) {
+        if(!employeeDao.existsById(id)){
+            return new ErrorDataResult<>("Employee Not Found");
+        }
         return new SuccessDataResult<>(employeeDao.findById(id).get());
     }
 
@@ -81,11 +87,17 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public Result add(EmployeeAddDto employeeAddDto) {
-        if(!employeeDao.existsByFkTownId(employeeAddDto.getFkTownId())){
+        if(!townDao.existsById(employeeAddDto.getFkTownId())){
             return new ErrorResult("Invalid Town Id");
         }
-        else if(!employeeDao.existsByFkCityId(employeeAddDto.getFkCityId())){
+        else if(!cityDao.existsById(employeeAddDto.getFkCityId())){
             return new ErrorResult("Invalid City Id");
+        }
+        else if(baseUserDao.existsByEmail(employeeAddDto.getEmail())){
+            return new ErrorResult("Email Already In Use");
+        }
+        else if(baseUserDao.existsByPhoneNumber(employeeAddDto.getPhoneNumber())){
+            return new ErrorResult("Phone Number Already In Use");
         }
         Employee employee = Employee.builder()
                 .fkCity(cityDao.findById(employeeAddDto.getFkCityId()).get())
@@ -105,6 +117,7 @@ public class EmployeeManager implements EmployeeService {
         if(!employeeDao.existsById(employeeBaseUpdateDto.getId())){
             return new ErrorResult("Employee Not Found");
         }
+
         Employee employee = employeeDao.findById(employeeBaseUpdateDto.getId()).get();
         employee.setEmail(employeeBaseUpdateDto.getEmail());
         employee.setPassword(employeeBaseUpdateDto.getPassword());
@@ -118,6 +131,12 @@ public class EmployeeManager implements EmployeeService {
     public Result updateDetails(EmployeeDetailsUpdateDto employeeDetailsUpdateDto) {
         if(!employeeDao.existsById(employeeDetailsUpdateDto.getId())){
             return new ErrorResult("Employee Not Found");
+        }
+        else if(!employeeDao.existsByFkTownId(employeeDetailsUpdateDto.getFkTownId())){
+            return new ErrorResult("Invalid Town Id");
+        }
+        else if(!employeeDao.existsByFkCityId(employeeDetailsUpdateDto.getFkCityId())){
+            return new ErrorResult("Invalid City Id");
         }
         Employee employee = employeeDao.findById(employeeDetailsUpdateDto.getId()).get();
         employee.setFkCity(cityDao.findById(employeeDetailsUpdateDto.getFkCityId()).get());

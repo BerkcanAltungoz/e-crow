@@ -38,13 +38,18 @@ public class PaymentMethod {
     private String cardNumber;
 
     @NotNull(message = "Required")
-    @Pattern(regexp = "\\d{2}/\\d{2}", message = "Invalid Expiry Date Format")
-    @Column(name = "expiry_date", nullable = false)
-    private LocalDate expiryDate;
-
-    @NotNull(message = "Required")
     @Pattern(regexp = "\\d{3}", message = "Invalid Card Number Format")
     @Column(name = "cvc", nullable = false, length = 3)
     private String cvc;
+
+    @NotNull(message = "Required")
+    @Pattern(regexp = "\\d{2}", message = "Invalid Expiry Date Month Format")
+    @Column(name = "expiry_date_month", nullable = false, length = 2)
+    private Integer expiryDateMonth;
+
+    @NotNull(message = "Required")
+    @Pattern(regexp = "\\d{2}", message = "Invalid Expiry Date Year Format")
+    @Column(name = "expiry_date_year", nullable = false, length = 2)
+    private Integer expiryDateYear;
 
 }

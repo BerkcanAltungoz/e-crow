@@ -12,13 +12,15 @@ import java.io.Serializable;
 @Data
 public class AddressUpdateDto implements Serializable {
     private final Integer id;
-    private final Integer fkCustomerId;
 
     @NotNull(message = "Required")
     @NotBlank(message = "Field Cannot Be Empty")
     private final String namesurname;
 
+    @NotNull(message = "Required")
     private final Integer fkCityId;
+
+    @NotNull(message = "Required")
     private final Integer fkTownId;
 
     @NotNull(message = "Required")

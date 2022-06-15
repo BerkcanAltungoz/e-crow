@@ -13,9 +13,6 @@ public class BankInformationUpdateDto implements Serializable {
     private final Integer id;
 
     @NotNull(message = "Required")
-    private final Integer fkUserId;
-
-    @NotNull(message = "Required")
     @NotBlank(message = "Field Cannot Be Empty")
     private final String nickname;
 

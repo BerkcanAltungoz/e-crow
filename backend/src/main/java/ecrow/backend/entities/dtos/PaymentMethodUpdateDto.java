@@ -2,7 +2,6 @@ package ecrow.backend.entities.dtos;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -10,13 +9,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
-public class PaymentMethodAddDto implements Serializable {
+public class PaymentMethodUpdateDto implements Serializable {
+    private final Integer id;
 
     @NotNull(message = "Required")
-    private final Integer fkCustomerId;
-
     @NotBlank(message = "Field Cannot Be Empty")
-    @NotNull(message = "Required")
     private final String nameOnCard;
 
     @NotNull(message = "Required")

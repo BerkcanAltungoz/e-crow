@@ -2,6 +2,7 @@ package ecrow.backend.business.concretes;
 
 import ecrow.backend.business.abstracts.CustomerService;
 import ecrow.backend.core.utilities.results.*;
+import ecrow.backend.dataAccess.concretes.BaseUserDao;
 import ecrow.backend.dataAccess.concretes.CustomerDao;
 import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
@@ -15,11 +16,14 @@ import java.util.List;
 @Service
 public class CustomerManager implements CustomerService {
     private final CustomerDao customerDao;
+    private final BaseUserDao baseUserDao;
 
     @Autowired
-    public CustomerManager(CustomerDao customerDao) {
+    public CustomerManager(CustomerDao customerDao, BaseUserDao baseUserDao) {
         this.customerDao = customerDao;
+        this.baseUserDao = baseUserDao;
     }
+
 
     @Override
     public DataResult<List<Customer>> getAll() {
@@ -61,10 +65,10 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public Result add(CustomerAddDto customerAddDto) {
-        if(customerDao.existsByEmail(customerAddDto.getEmail())){
+        if(baseUserDao.existsByEmail(customerAddDto.getEmail())){
             return new ErrorResult("Email Already In Use");
         }
-        else if(customerDao.existsByPhoneNumber(customerAddDto.getPhoneNumber())){
+        else if(baseUserDao.existsByPhoneNumber(customerAddDto.getPhoneNumber())){
             return new ErrorResult("Phone Number Already In Use");
         }
         Customer customer = Customer.builder()
