@@ -2,7 +2,6 @@ package ecrow.backend.business.abstracts;
 
 import ecrow.backend.core.utilities.results.DataResult;
 import ecrow.backend.core.utilities.results.Result;
-import ecrow.backend.entities.concretes.Employee;
 import ecrow.backend.entities.concretes.Transaction;
 import ecrow.backend.entities.dtos.TransactionAddDto;
 import ecrow.backend.entities.dtos.TransactionStatusUpdateDto;

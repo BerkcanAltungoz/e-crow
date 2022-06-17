@@ -85,10 +85,10 @@ public class TransactionManager implements TransactionService {
         if(!employeeDao.existsById(transactionAddDto.getFkEmployeeId())){
             return new ErrorResult("Invalid Employee Id");
         }
-        if(!customerDao.existsById(transactionAddDto.getFkBuyerId())){
+        else if(!customerDao.existsById(transactionAddDto.getFkBuyerId())){
             return new ErrorResult("Invalid Buyer Id");
         }
-        if(!customerDao.existsById(transactionAddDto.getFkSellerId())){
+        else if(!customerDao.existsById(transactionAddDto.getFkSellerId())){
             return new ErrorResult("Invalid Seller Id");
         }
         Transaction transaction = Transaction.builder()
