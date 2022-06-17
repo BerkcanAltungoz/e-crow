@@ -11,7 +11,7 @@ import java.util.List;
 public interface RequirementService {
     DataResult<List<Requirement>> getAll();
     DataResult<Requirement> getById(Integer id);
-    DataResult<List<Requirement>> getByFkTransactionId(Integer transactionId);
+    DataResult<List<Requirement>> getByFkTransactionId(Integer itemTransactionId);
     Result deleteById(Integer id);
 
     Result add(RequirementAddDto requirementAddDto);

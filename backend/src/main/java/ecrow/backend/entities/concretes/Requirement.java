@@ -23,7 +23,7 @@ public class Requirement {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_transaction_id", nullable = false)
-    private Transaction fkTransaction;
+    private ItemTransaction fkItemTransaction;
 
     @NotNull(message = "Required")
     @NotBlank(message = "Field Cannot Be Empty")

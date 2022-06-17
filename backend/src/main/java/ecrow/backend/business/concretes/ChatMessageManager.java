@@ -8,9 +8,11 @@ import ecrow.backend.dataAccess.concretes.EmployeeDao;
 import ecrow.backend.entities.concretes.ChatMessage;
 import ecrow.backend.entities.dtos.ChatMessageAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ChatMessageManager implements ChatMessageService {
     private final ChatMessageDao chatMessageDao;
     private final EmployeeDao employeeDao;

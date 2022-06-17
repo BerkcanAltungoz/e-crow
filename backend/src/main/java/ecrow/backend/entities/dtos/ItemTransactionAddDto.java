@@ -8,7 +8,7 @@ import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 
 @Data
-public class TransactionAddDto implements Serializable {
+public class ItemTransactionAddDto implements Serializable {
 
     @NotNull(message = "Required")
     private final Integer fkEmployeeId;

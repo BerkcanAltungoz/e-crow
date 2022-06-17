@@ -10,6 +10,6 @@ import java.util.List;
 @Transactional
 @Repository
 public interface RequirementDao extends JpaRepository<Requirement, Integer> {
-    boolean existsByFkTransactionId(Integer transactionId);
-    List<Requirement> getByFkTransactionId(Integer transactionId);
+    boolean existsByFkItemTransactionId(Integer itemTransactionId);
+    List<Requirement> getByFkItemTransactionId(Integer itemTransactionId);
 }

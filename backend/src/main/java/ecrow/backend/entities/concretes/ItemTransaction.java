@@ -14,9 +14,9 @@ import java.time.OffsetTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "transaction")
+@Table(name = "item_transaction")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Transaction {
+public class ItemTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

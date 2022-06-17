@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS public.town
     CONSTRAINT pk_town PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS public.transaction
+CREATE TABLE IF NOT EXISTS public.itemTransaction
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     fk_employee_id integer NOT NULL,
@@ -218,7 +218,7 @@ ALTER TABLE IF EXISTS public.payment_method
 
 ALTER TABLE IF EXISTS public.requirement
     ADD CONSTRAINT fk_requirement_transaction FOREIGN KEY (fk_transaction_id)
-    REFERENCES public.transaction (id) MATCH SIMPLE
+    REFERENCES public.itemTransaction (id) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
@@ -230,28 +230,28 @@ ALTER TABLE IF EXISTS public.town
     ON DELETE CASCADE;
 
 
-ALTER TABLE IF EXISTS public.transaction
+ALTER TABLE IF EXISTS public.itemTransaction
     ADD CONSTRAINT fk_transaction_buyer_id FOREIGN KEY (fk_buyer_id)
     REFERENCES public.customer (id) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
 
-ALTER TABLE IF EXISTS public.transaction
+ALTER TABLE IF EXISTS public.itemTransaction
     ADD CONSTRAINT fk_transaction_employee_id FOREIGN KEY (fk_employee_id)
     REFERENCES public.employee (id) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
 
-ALTER TABLE IF EXISTS public.transaction
+ALTER TABLE IF EXISTS public.itemTransaction
     ADD CONSTRAINT fk_transaction_seller_id FOREIGN KEY (fk_seller_id)
     REFERENCES public.customer (id) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
 
-ALTER TABLE IF EXISTS public.transaction
+ALTER TABLE IF EXISTS public.itemTransaction
     ADD CONSTRAINT fk_transaction_status_id FOREIGN KEY (fk_status_id)
     REFERENCES public.status (id) MATCH SIMPLE
     ON UPDATE CASCADE

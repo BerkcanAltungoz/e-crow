@@ -3,7 +3,7 @@ package ecrow.backend.business.concretes;
 import ecrow.backend.business.abstracts.RequirementService;
 import ecrow.backend.core.utilities.results.*;
 import ecrow.backend.dataAccess.concretes.RequirementDao;
-import ecrow.backend.dataAccess.concretes.TransactionDao;
+import ecrow.backend.dataAccess.concretes.ItemTransactionDao;
 import ecrow.backend.entities.concretes.Requirement;
 import ecrow.backend.entities.dtos.RequirementAddDto;
 import ecrow.backend.entities.dtos.RequirementSatisfiedUpdateDto;
@@ -15,12 +15,12 @@ import java.util.List;
 @Service
 public class RequirementManager implements RequirementService {
     private final RequirementDao requirementDao;
-    private final TransactionDao transactionDao;
+    private final ItemTransactionDao itemTransactionDao;
 
     @Autowired
-    public RequirementManager(RequirementDao requirementDao, TransactionDao transactionDao) {
+    public RequirementManager(RequirementDao requirementDao, ItemTransactionDao itemTransactionDao) {
         this.requirementDao = requirementDao;
-        this.transactionDao = transactionDao;
+        this.itemTransactionDao = itemTransactionDao;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class RequirementManager implements RequirementService {
     }
 
     @Override
-    public DataResult<List<Requirement>> getByFkTransactionId(Integer transactionId) {
-        if(!requirementDao.existsByFkTransactionId(transactionId)){
+    public DataResult<List<Requirement>> getByFkTransactionId(Integer itemTransactionId) {
+        if(!requirementDao.existsByFkItemTransactionId(itemTransactionId)){
             return new ErrorDataResult<>("Transaction Not Found");
         }
-        return new SuccessDataResult<>(requirementDao.getByFkTransactionId(transactionId));
+        return new SuccessDataResult<>(requirementDao.getByFkItemTransactionId(itemTransactionId));
     }
 
     @Override
@@ -55,11 +55,11 @@ public class RequirementManager implements RequirementService {
 
     @Override
     public Result add(RequirementAddDto requirementAddDto) {
-        if(!transactionDao.existsById(requirementAddDto.getFkTransactionId())){
+        if(!itemTransactionDao.existsById(requirementAddDto.getFkTransactionId())){
             return new ErrorResult("Invalid Transaction Id");
         }
         Requirement requirement = Requirement.builder()
-                .fkTransaction(transactionDao.findById(requirementAddDto.getFkTransactionId()).get())
+                .fkItemTransaction(itemTransactionDao.findById(requirementAddDto.getFkTransactionId()).get())
                 .requirement(requirementAddDto.getRequirement())
                 .build();
         requirementDao.save(requirement);

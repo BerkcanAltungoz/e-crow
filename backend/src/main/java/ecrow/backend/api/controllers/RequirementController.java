@@ -30,8 +30,8 @@ public class RequirementController {
     }
 
     @GetMapping("/getByFkTransactionId")
-    public ResponseEntity<?> getByFkTransactionId(@RequestParam Integer transactionId) {
-        return Utils.getResponseEntity(requirementService.getByFkTransactionId(transactionId));
+    public ResponseEntity<?> getByFkTransactionId(@RequestParam Integer itemTransactionId) {
+        return Utils.getResponseEntity(requirementService.getByFkTransactionId(itemTransactionId));
     }
 
     @DeleteMapping("/deleteById")
