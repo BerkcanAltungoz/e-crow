@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS public.bank_information
     fk_user_id integer NOT NULL,
     nickname character varying(50) COLLATE pg_catalog."default" NOT NULL,
     iban character varying(26) COLLATE pg_catalog."default" NOT NULL,
-    fk_customer_id integer NOT NULL,
     CONSTRAINT pk_bank_information PRIMARY KEY (id),
     CONSTRAINT unq_bank_information_iban UNIQUE (iban)
 );
@@ -35,9 +34,19 @@ CREATE TABLE IF NOT EXISTS public.base_user
     surname character varying(50) COLLATE pg_catalog."default" NOT NULL,
     phone_number character varying(10) COLLATE pg_catalog."default" NOT NULL,
     balance integer DEFAULT 0,
+    date_created time with time zone DEFAULT now(),
     CONSTRAINT pk_ecrow_user PRIMARY KEY (id),
     CONSTRAINT unq_ecrow_user_email UNIQUE (email),
     CONSTRAINT unq_ecrow_user_phone_number UNIQUE (phone_number)
+);
+
+CREATE TABLE IF NOT EXISTS public.chat_message
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    fk_employee_id integer NOT NULL,
+    fk_customer_id integer NOT NULL,
+    message text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT pk_chat_message PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.city
@@ -64,7 +73,6 @@ CREATE TABLE IF NOT EXISTS public.customer
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     email_validation boolean DEFAULT false,
     phone_validation boolean DEFAULT false,
-    date_created time with time zone DEFAULT now(),
     CONSTRAINT pk_customer PRIMARY KEY (id)
 );
 
@@ -80,8 +88,22 @@ CREATE TABLE IF NOT EXISTS public.employee
     description text COLLATE pg_catalog."default" DEFAULT ''::text,
     email_validation boolean DEFAULT false,
     phone_validation boolean DEFAULT false,
-    date_created time with time zone DEFAULT now(),
     CONSTRAINT pk_employee PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.item_transaction
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    fk_employee_id integer NOT NULL,
+    fk_buyer_id integer NOT NULL,
+    fk_seller_id integer NOT NULL,
+    item_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    item_price integer NOT NULL,
+    employee_fee integer NOT NULL,
+    details text COLLATE pg_catalog."default" DEFAULT ''::text,
+    fk_status_id integer DEFAULT 1,
+    date_created time with time zone DEFAULT now(),
+    CONSTRAINT pk_transaction PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.payment_method
@@ -90,8 +112,9 @@ CREATE TABLE IF NOT EXISTS public.payment_method
     fk_customer_id integer NOT NULL,
     name_on_card character varying(100) COLLATE pg_catalog."default" NOT NULL,
     card_number character varying(16) COLLATE pg_catalog."default" NOT NULL,
-    expiry_date date NOT NULL,
     cvc character varying(3) COLLATE pg_catalog."default" NOT NULL,
+    expiry_date_month smallint NOT NULL,
+    expiry_date_year smallint NOT NULL,
     CONSTRAINT pk_payment_method PRIMARY KEY (id),
     CONSTRAINT unq_payment_method_card_number UNIQUE (card_number)
 );
@@ -134,21 +157,6 @@ CREATE TABLE IF NOT EXISTS public.town
     CONSTRAINT pk_town PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS public.itemTransaction
-(
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    fk_employee_id integer NOT NULL,
-    fk_buyer_id integer NOT NULL,
-    fk_seller_id integer NOT NULL,
-    item_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    item_price integer NOT NULL,
-    employee_fee integer NOT NULL,
-    details text COLLATE pg_catalog."default" DEFAULT ''::text,
-    fk_status_id integer DEFAULT 1,
-    date_created time with time zone DEFAULT now(),
-    CONSTRAINT pk_transaction PRIMARY KEY (id)
-);
-
 ALTER TABLE IF EXISTS public.address
     ADD CONSTRAINT fk_address_city_id FOREIGN KEY (fk_city_id)
     REFERENCES public.city (id) MATCH SIMPLE
@@ -173,6 +181,20 @@ ALTER TABLE IF EXISTS public.address
 ALTER TABLE IF EXISTS public.bank_information
     ADD CONSTRAINT fk_bank_information_base_user_id FOREIGN KEY (fk_user_id)
     REFERENCES public.base_user (id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.chat_message
+    ADD CONSTRAINT fk_chat_message_customer_id FOREIGN KEY (fk_customer_id)
+    REFERENCES public.customer (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.chat_message
+    ADD CONSTRAINT fk_chat_message_employee_id FOREIGN KEY (fk_employee_id)
+    REFERENCES public.employee (id) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
@@ -209,6 +231,34 @@ ALTER TABLE IF EXISTS public.employee
     ON DELETE CASCADE;
 
 
+ALTER TABLE IF EXISTS public.item_transaction
+    ADD CONSTRAINT fk_transaction_buyer_id FOREIGN KEY (fk_buyer_id)
+    REFERENCES public.customer (id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.item_transaction
+    ADD CONSTRAINT fk_transaction_employee_id FOREIGN KEY (fk_employee_id)
+    REFERENCES public.employee (id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.item_transaction
+    ADD CONSTRAINT fk_transaction_seller_id FOREIGN KEY (fk_seller_id)
+    REFERENCES public.customer (id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.item_transaction
+    ADD CONSTRAINT fk_transaction_status_id FOREIGN KEY (fk_status_id)
+    REFERENCES public.status (id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE;
+
+
 ALTER TABLE IF EXISTS public.payment_method
     ADD CONSTRAINT fk_payment_method_customer_id FOREIGN KEY (fk_customer_id)
     REFERENCES public.customer (id) MATCH SIMPLE
@@ -218,7 +268,7 @@ ALTER TABLE IF EXISTS public.payment_method
 
 ALTER TABLE IF EXISTS public.requirement
     ADD CONSTRAINT fk_requirement_transaction FOREIGN KEY (fk_transaction_id)
-    REFERENCES public.itemTransaction (id) MATCH SIMPLE
+    REFERENCES public.item_transaction (id) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
@@ -226,34 +276,6 @@ ALTER TABLE IF EXISTS public.requirement
 ALTER TABLE IF EXISTS public.town
     ADD CONSTRAINT fk_town_city FOREIGN KEY (fk_city_id)
     REFERENCES public.city (id) MATCH SIMPLE
-    ON UPDATE CASCADE
-    ON DELETE CASCADE;
-
-
-ALTER TABLE IF EXISTS public.itemTransaction
-    ADD CONSTRAINT fk_transaction_buyer_id FOREIGN KEY (fk_buyer_id)
-    REFERENCES public.customer (id) MATCH SIMPLE
-    ON UPDATE CASCADE
-    ON DELETE CASCADE;
-
-
-ALTER TABLE IF EXISTS public.itemTransaction
-    ADD CONSTRAINT fk_transaction_employee_id FOREIGN KEY (fk_employee_id)
-    REFERENCES public.employee (id) MATCH SIMPLE
-    ON UPDATE CASCADE
-    ON DELETE CASCADE;
-
-
-ALTER TABLE IF EXISTS public.itemTransaction
-    ADD CONSTRAINT fk_transaction_seller_id FOREIGN KEY (fk_seller_id)
-    REFERENCES public.customer (id) MATCH SIMPLE
-    ON UPDATE CASCADE
-    ON DELETE CASCADE;
-
-
-ALTER TABLE IF EXISTS public.itemTransaction
-    ADD CONSTRAINT fk_transaction_status_id FOREIGN KEY (fk_status_id)
-    REFERENCES public.status (id) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
 
