@@ -1,5 +1,6 @@
 package ecrow.backend.dataAccess.concretes;
 
+import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.concretes.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,9 +15,11 @@ public interface EmployeeDao extends JpaRepository<Employee, Integer> {
     boolean existsByFkTownId(Integer townId);
     boolean existsByEmail(String email);
     boolean existsByPhoneNumber(String phoneNumber);
+    boolean existsByEmailAndPassword(String email, String password);
     List<Employee> getByFkTownId(Integer townId);
     List<Employee> getByFkCityId(Integer cityId);
     Employee getByEmail(String email);
     Employee getByPhoneNumber(String phoneNumber);
+    Employee getByEmailAndPassword(String email, String password);
 
 }

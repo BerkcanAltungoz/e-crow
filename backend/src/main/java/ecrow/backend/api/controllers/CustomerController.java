@@ -2,9 +2,12 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.CustomerService;
 import ecrow.backend.core.utilities.Utils;
+import ecrow.backend.core.utilities.results.DataResult;
+import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
 import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
 import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
+import ecrow.backend.entities.dtos.SignInDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +44,10 @@ public class CustomerController {
         return Utils.getResponseEntity(customerService.getByPhoneNumber(phoneNumber));
     }
 
+    @GetMapping("/getByEmailAndPassword")
+    public ResponseEntity<?> getByEmailAndPassword(@RequestBody SignInDto signInDto) {
+        return Utils.getResponseEntity(customerService.getByEmailAndPassword(signInDto));
+    }
     @DeleteMapping("/deleteById")
     public ResponseEntity<?> deleteById(@RequestParam Integer id) {
         return Utils.getResponseEntity(customerService.deleteById(id));

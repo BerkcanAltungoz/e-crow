@@ -8,6 +8,7 @@ import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
 import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
 import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
+import ecrow.backend.entities.dtos.SignInDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,17 @@ public class CustomerManager implements CustomerService {
             return new ErrorDataResult<>("Customer Not Found");
         }
         return new SuccessDataResult<>(customerDao.getByPhoneNumber(phoneNumber));
+    }
+
+    @Override
+    public DataResult<Customer> getByEmailAndPassword(SignInDto signInDto) {
+        if(!customerDao.existsByEmail(signInDto.getEmail())){
+            return new ErrorDataResult<>("Email Does Not Exist");
+        }
+        else if(!customerDao.existsByEmailAndPassword(signInDto.getEmail(), signInDto.getPassword())){
+            return new ErrorDataResult<>("Wrong Password");
+        }
+        return new SuccessDataResult<>(customerDao.getByEmailAndPassword(signInDto.getEmail(), signInDto.getPassword()));
     }
 
     @Override

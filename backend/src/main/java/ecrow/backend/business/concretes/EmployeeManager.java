@@ -7,10 +7,7 @@ import ecrow.backend.dataAccess.concretes.CityDao;
 import ecrow.backend.dataAccess.concretes.EmployeeDao;
 import ecrow.backend.dataAccess.concretes.TownDao;
 import ecrow.backend.entities.concretes.Employee;
-import ecrow.backend.entities.dtos.EmployeeAddDto;
-import ecrow.backend.entities.dtos.EmployeeBalanceUpdateDto;
-import ecrow.backend.entities.dtos.EmployeeBaseUpdateDto;
-import ecrow.backend.entities.dtos.EmployeeDetailsUpdateDto;
+import ecrow.backend.entities.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +71,17 @@ public class EmployeeManager implements EmployeeService {
             return new ErrorDataResult<>("Employee Not Found");
         }
         return new SuccessDataResult<>(employeeDao.getByFkCityId(cityId));
+    }
+
+    @Override
+    public DataResult<Employee> getByEmailAndPassword(SignInDto signInDto) {
+        if(!employeeDao.existsByEmail(signInDto.getEmail())){
+            return new ErrorDataResult<>("Email Does Not Exist");
+        }
+        else if(!employeeDao.existsByEmailAndPassword(signInDto.getEmail(), signInDto.getPassword())){
+            return new ErrorDataResult<>("Wrong Password");
+        }
+        return new SuccessDataResult<>(employeeDao.getByEmailAndPassword(signInDto.getEmail(), signInDto.getPassword()));
     }
 
     @Override

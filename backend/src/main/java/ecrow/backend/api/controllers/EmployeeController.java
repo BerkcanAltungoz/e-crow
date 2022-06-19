@@ -2,10 +2,9 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.EmployeeService;
 import ecrow.backend.core.utilities.Utils;
-import ecrow.backend.entities.dtos.EmployeeAddDto;
-import ecrow.backend.entities.dtos.EmployeeBalanceUpdateDto;
-import ecrow.backend.entities.dtos.EmployeeBaseUpdateDto;
-import ecrow.backend.entities.dtos.EmployeeDetailsUpdateDto;
+import ecrow.backend.core.utilities.results.DataResult;
+import ecrow.backend.entities.concretes.Employee;
+import ecrow.backend.entities.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +38,11 @@ public class EmployeeController {
     @GetMapping("/getByPhoneNumber")
     public ResponseEntity<?> getByPhoneNumber(@RequestParam String phoneNumber) {
         return Utils.getResponseEntity(employeeService.getByPhoneNumber(phoneNumber));
+    }
+
+    @GetMapping("/getByEmailAndPassword")
+    public ResponseEntity<?> getByEmailAndPassword(@RequestBody SignInDto signInDto) {
+        return Utils.getResponseEntity(employeeService.getByEmailAndPassword(signInDto));
     }
 
     @GetMapping("getByFkTownId")

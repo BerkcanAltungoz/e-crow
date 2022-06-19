@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 public interface CustomerDao extends JpaRepository<Customer, Integer> {
     boolean existsByEmail(String email);
     boolean existsByPhoneNumber(String phoneNumber);
+    boolean existsByEmailAndPassword(String email, String password);
     Customer getByEmail(String email);
     Customer getByPhoneNumber(String phoneNumber);
+    Customer getByEmailAndPassword(String email, String password);
 }
