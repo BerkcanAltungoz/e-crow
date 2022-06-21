@@ -78,11 +78,11 @@ public class RequirementManager implements RequirementService {
     }
 
     @Override
-    public Result updateSatisfiedTrue(RequirementSatisfiedUpdateDto requirementSatisfiedUpdateDto) {
-        if(!requirementDao.existsById(requirementSatisfiedUpdateDto.getId())){
+    public Result updateSatisfiedTrue(Integer id) {
+        if(!requirementDao.existsById(id)){
             return new ErrorDataResult<>("Requirement Not Found");
         }
-        Requirement requirement = requirementDao.findById(requirementSatisfiedUpdateDto.getId()).get();
+        Requirement requirement = requirementDao.findById(id).get();
         requirement.setSatisfied(true);
         requirementDao.save(requirement);
         return new SuccessResult("Satisfied Updated to True");

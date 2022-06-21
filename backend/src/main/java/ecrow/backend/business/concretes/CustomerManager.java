@@ -56,7 +56,7 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public DataResult<Customer> getByEmailAndPassword(SignInDto signInDto) {
+    public DataResult<Customer> signIn(SignInDto signInDto) {
         if(!customerDao.existsByEmail(signInDto.getEmail())){
             return new ErrorDataResult<>("Email Does Not Exist");
         }

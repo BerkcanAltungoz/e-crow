@@ -74,7 +74,7 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public DataResult<Employee> getByEmailAndPassword(SignInDto signInDto) {
+    public DataResult<Employee> signIn(SignInDto signInDto) {
         if(!employeeDao.existsByEmail(signInDto.getEmail())){
             return new ErrorDataResult<>("Email Does Not Exist");
         }

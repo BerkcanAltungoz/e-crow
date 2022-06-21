@@ -50,7 +50,7 @@ public class RequirementController {
     }
 
     @PatchMapping("/updateSatisfiedTrue")
-    public ResponseEntity<?> updateSatisfiedTrue(@RequestBody RequirementSatisfiedUpdateDto requirementSatisfiedUpdateDto) {
-        return Utils.getResponseEntity(requirementService.updateSatisfiedTrue(requirementSatisfiedUpdateDto));
+    public ResponseEntity<?> updateSatisfiedTrue(@RequestParam Integer id) {
+        return Utils.getResponseEntity(requirementService.updateSatisfiedTrue(id));
     }
 }

@@ -16,6 +16,6 @@ public interface RequirementService {
 
     Result add(RequirementAddDto requirementAddDto);
     Result updateSatisfied(RequirementSatisfiedUpdateDto requirementSatisfiedUpdateDto);
-    Result updateSatisfiedTrue(RequirementSatisfiedUpdateDto requirementSatisfiedUpdateDto);
+    Result updateSatisfiedTrue(Integer id);
 
 }

@@ -2,7 +2,6 @@ package ecrow.backend.business.abstracts;
 
 import ecrow.backend.core.utilities.results.DataResult;
 import ecrow.backend.core.utilities.results.Result;
-import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.concretes.Employee;
 import ecrow.backend.entities.dtos.*;
 
@@ -15,7 +14,7 @@ public interface EmployeeService {
     DataResult<Employee> getByPhoneNumber(String phoneNumber);
     DataResult<List<Employee>> getByFkTownId(Integer townId);
     DataResult<List<Employee>> getByFkCityId(Integer cityId);
-    DataResult<Employee> getByEmailAndPassword(SignInDto signInDto);
+    DataResult<Employee> signIn(SignInDto signInDto);
     Result deleteById(Integer id);
 
     Result add(EmployeeAddDto employeeAddDto);
