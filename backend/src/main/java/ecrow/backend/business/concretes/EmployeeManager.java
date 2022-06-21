@@ -132,6 +132,7 @@ public class EmployeeManager implements EmployeeService {
         employee.setName(employee.getName());
         employee.setSurname(employee.getSurname());
         employee.setPhoneNumber(employee.getPhoneNumber());
+        employeeDao.save(employee);
         return new SuccessResult("Customer Updated");
     }
 
@@ -154,6 +155,7 @@ public class EmployeeManager implements EmployeeService {
         employee.setExpertiseFee(employeeDetailsUpdateDto.getExpertiseFee());
         employee.setAvailable(employeeDetailsUpdateDto.getAvailable());
         employee.setDescription(employee.getDescription());
+        employeeDao.save(employee);
         return new SuccessResult("Employee Details Updated");
     }
 
@@ -164,6 +166,7 @@ public class EmployeeManager implements EmployeeService {
         }
         Employee employee = employeeDao.findById(employeeBalanceUpdateDto.getId()).get();
         employee.setBalance(employeeBalanceUpdateDto.getBalance());
+        employeeDao.save(employee);
         return new SuccessResult("Employee Balance Updated");
     }
 }

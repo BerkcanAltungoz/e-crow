@@ -85,6 +85,7 @@ public class PaymentMethodManager implements PaymentMethodService {
         paymentMethod.setCvc(paymentMethodUpdateDto.getCvc());
         paymentMethod.setExpiryDateMonth(paymentMethodUpdateDto.getExpiryDateMonth());
         paymentMethod.setExpiryDateYear(paymentMethodUpdateDto.getExpiryDateYear());
+        paymentMethodDao.save(paymentMethod);
         return new SuccessResult("Payment Method Saved");
     }
 }

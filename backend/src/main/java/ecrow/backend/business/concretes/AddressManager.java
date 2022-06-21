@@ -102,6 +102,7 @@ public class AddressManager implements AddressService {
         address.setFkTown(townDao.findById(addressUpdateDto.getFkTownId()).get());
         address.setPostalCode(addressUpdateDto.getPostalCode());
         address.setAddressLine(addressUpdateDto.getAddressLine());
+        addressDao.save(address);
         return new SuccessResult("Address Updated");
     }
 }

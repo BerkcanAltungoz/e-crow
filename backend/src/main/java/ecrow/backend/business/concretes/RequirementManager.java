@@ -73,6 +73,7 @@ public class RequirementManager implements RequirementService {
         }
         Requirement requirement = requirementDao.findById(requirementSatisfiedUpdateDto.getId()).get();
         requirement.setSatisfied(requirementSatisfiedUpdateDto.getSatisfied());
+        requirementDao.save(requirement);
         return new SuccessResult("Satisfied Updated");
     }
 
@@ -83,6 +84,7 @@ public class RequirementManager implements RequirementService {
         }
         Requirement requirement = requirementDao.findById(requirementSatisfiedUpdateDto.getId()).get();
         requirement.setSatisfied(true);
+        requirementDao.save(requirement);
         return new SuccessResult("Satisfied Updated to True");
     }
 }

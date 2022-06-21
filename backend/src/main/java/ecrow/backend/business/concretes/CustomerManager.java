@@ -105,6 +105,7 @@ public class CustomerManager implements CustomerService {
         customer.setName(customer.getName());
         customer.setSurname(customer.getSurname());
         customer.setPhoneNumber(customer.getPhoneNumber());
+        customerDao.save(customer);
         return new SuccessResult("Customer Updated");
     }
 
@@ -115,6 +116,7 @@ public class CustomerManager implements CustomerService {
         }
         Customer customer = customerDao.findById(customerBalanceUpdateDto.getId()).get();
         customer.setBalance(customerBalanceUpdateDto.getBalance());
+        customerDao.save(customer);
         return new SuccessResult("Customer Balance Updated");
     }
 }

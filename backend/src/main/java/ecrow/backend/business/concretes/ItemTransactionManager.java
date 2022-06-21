@@ -110,6 +110,7 @@ public class ItemTransactionManager implements ItemTransactionService {
         }
         ItemTransaction itemTransaction = itemTransactionDao.findById(itemTransactionStatusUpdateDto.getId()).get();
         itemTransaction.setFkStatus(statusDao.findById(itemTransactionStatusUpdateDto.getFkStatusId()).get());
+        itemTransactionDao.save(itemTransaction);
         return new SuccessResult("Updated Transaction Status");
     }
 }
