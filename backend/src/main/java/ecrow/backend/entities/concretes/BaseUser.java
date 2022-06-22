@@ -15,7 +15,6 @@ import java.time.OffsetTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "base_user")
 @Inheritance(strategy = InheritanceType.JOINED)
