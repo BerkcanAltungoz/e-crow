@@ -3,34 +3,34 @@ import axios from "axios";
 export default class ItemTransactionService{
 
     getAll() {
-        axios.get("http://localhost:8080/api/itemTransaction/getAll")
+        return axios.get("http://localhost:8080/api/itemTransaction/getAll")
     }
 
     getAllSortedByStatus(){
-        axios.get("http://localhost:8080/api/itemTransaction/getAllSortedByStatus")
+        return axios.get("http://localhost:8080/api/itemTransaction/getAllSortedByStatus")
     }
 
     getById(id) {
-        axios.get(`http://localhost:8080/api/itemTransaction/getById?id=${id}`)
+        return axios.get(`http://localhost:8080/api/itemTransaction/getById?id=${id}`)
     }
 
     getByBuyerId(buyerId){
-        axios.get(`http://localhost:8080/api/itemTransaction/getByFkBuyerId?buyerId=${buyerId}`)
+        return axios.get(`http://localhost:8080/api/itemTransaction/getByFkBuyerId?buyerId=${buyerId}`)
     }
 
     getByEmployeeId(employeeId){
-        axios.get(`http://localhost:8080/api/itemTransaction/getByFkEmployeeId?employeeId=${employeeId}`)
+        return axios.get(`http://localhost:8080/api/itemTransaction/getByFkEmployeeId?employeeId=${employeeId}`)
     }
 
     getBySellerId(sellerId){
-        axios.get(`http://localhost:8080/api/itemTransaction/getByFkSellerId?sellerId=${sellerId}`)
+        return axios.get(`http://localhost:8080/api/itemTransaction/getByFkSellerId?sellerId=${sellerId}`)
     }
 
     deleteById(id) {
-        axios.delete(`http://localhost:8080/api/itemTransaction/deleteById?id=${id}`)
+        return axios.delete(`http://localhost:8080/api/itemTransaction/deleteById?id=${id}`)
     }
 
     updateStatus(values){
-        axios.patch("http://localhost:8080/api/itemTransaction/updateStatus", values)
+        return axios.patch("http://localhost:8080/api/itemTransaction/updateStatus", values)
     }
 }

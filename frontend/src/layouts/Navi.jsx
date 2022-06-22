@@ -1,4 +1,4 @@
-import {Container, Icon, Image, Menu} from "semantic-ui-react";
+import {Container, Icon, Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import SignedOut from "./SignedOut";
 

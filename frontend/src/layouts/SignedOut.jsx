@@ -1,4 +1,4 @@
-import {Button, Grid, Header, Icon, Modal, Segment} from "semantic-ui-react";
+import {Button, Grid, Header, Icon, Modal} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {useState} from "react";
 

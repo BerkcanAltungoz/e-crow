@@ -13,7 +13,7 @@ export default function CustomerSignup() {
         name: Yup.string().required("Required").max(50, "Maximum 50 characters"),
         surname: Yup.string().required("Required").max(50, "Maximum 50 characters"),
         phoneNumber: Yup.string().required("Required").matches(/\d{10}/, "Invalid Phone Number"),
-        email: Yup.string().required("Required").max(100, "Maximum 100 Characters").matches(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/, "Invalid E-Mail Format"),
+        email: Yup.string().required("Required").max(100, "Maximum 100 Characters").email("Invalid E-Mail Format"),
         password: Yup.string().required("Required").min(6, "Minimum 6 Characters").max(100, "Maximum 100 Characters"),
         rePassword: Yup.string().oneOf([Yup.ref("password"), null], "Not matching").required("Required")
     });
@@ -25,15 +25,18 @@ export default function CustomerSignup() {
             phoneNumber: "",
             email: "",
             password: "",
-            rePassword: "",
+            rePassword: ""
         },
         validationSchema: customerSignupSchema,
         onSubmit: (values) => {
+            console.log(values)
             customerService.add(values).then((result) => {
+                console.log(result.data.message)
                 toast.success(result.data.message)
                 history.push("/login/customer")
             })
                 .catch((result) => {
+                    // console.log(result.response.data.message)
                     toast.error(result.response.data.message)
                 })
         }
@@ -160,15 +163,9 @@ export default function CustomerSignup() {
                                     placeholder="Repeat Password"
                                     type="password"
                                     name="rePassword"
-                                    value={formik.values.rePassword}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
-                                {formik.errors.rePassword && formik.touched.rePassword && (
-                                    <div className={"ui pointing red basic label"}>
-                                        {formik.errors.rePassword}
-                                    </div>
-                                )}
                             </div>
                         </Grid.Column>
                     </Grid>

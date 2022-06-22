@@ -83,13 +83,20 @@ public class CustomerManager implements CustomerService {
         else if(baseUserDao.existsByPhoneNumber(customerAddDto.getPhoneNumber())){
             return new ErrorResult("Phone Number Already In Use");
         }
-        Customer customer = Customer.builder()
-                .email(customerAddDto.getEmail())
-                .password(customerAddDto.getPassword())
-                .name(customerAddDto.getName())
-                .surname(customerAddDto.getSurname())
-                .phoneNumber(customerAddDto.getPhoneNumber())
-                .build();
+//        Customer customer = Customer.builder()
+//                .email(customerAddDto.getEmail())
+//                .password(customerAddDto.getPassword())
+//                .name(customerAddDto.getName())
+//                .surname(customerAddDto.getSurname())
+//                .phoneNumber(customerAddDto.getPhoneNumber())
+//                .build();
+        Customer customer = new Customer();
+        customer.setEmail(customerAddDto.getEmail());
+        customer.setPassword(customerAddDto.getPassword());
+        customer.setName(customerAddDto.getName());
+        customer.setSurname(customerAddDto.getSurname());
+        customer.setPhoneNumber(customerAddDto.getPhoneNumber());
+        System.out.println(customer.getId());
         customerDao.save(customer);
         return new SuccessResult("Customer Saved");
     }
