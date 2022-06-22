@@ -5,10 +5,11 @@ import SignedOut from "./SignedOut";
 export default function Navi() {
     return (
         <div>
-            <Menu size={"large"} inverted>
+            <Menu inverted stackable>
                 <Container>
                     <Menu.Item name="Home" as={Link} to={"/"}>
                         <Icon name="home"/>
+                        {/*<Image src={"https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"}/>*/}
                         E-Crow
                     </Menu.Item>
 

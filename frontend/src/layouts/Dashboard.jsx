@@ -11,9 +11,9 @@ import {ToastContainer} from "react-toastify";
 export default function Dashboard() {
     return (
         <div>
+            <Navi/>
             <ToastContainer position="bottom-right" pauseOnFocusLoss={false}/>
             <Container className="main">
-                <Navi/>
                 <Route exact path="/" component={MainPage}/>
                 <Route exact path="/signup/customer" component={CustomerSignup}/>
                 <Route exact path="/signup/employee" component={EmployeeSignup}/>
