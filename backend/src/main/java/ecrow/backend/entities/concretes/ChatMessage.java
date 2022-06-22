@@ -15,8 +15,9 @@ import javax.validation.constraints.NotNull;
 @Table(name = "chat_message")
 public class ChatMessage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chat_message_id_generator")
+    @SequenceGenerator(name = "chat_message_id_generator", sequenceName = "chat_message_id_seq", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

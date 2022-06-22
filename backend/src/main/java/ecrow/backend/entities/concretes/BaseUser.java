@@ -21,8 +21,9 @@ import java.time.OffsetTime;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BaseUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "base_user_id_generator")
+    @SequenceGenerator(name = "base_user_id_generator", sequenceName = "base_user_id_seq", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
 
     @NotNull(message = "Required")

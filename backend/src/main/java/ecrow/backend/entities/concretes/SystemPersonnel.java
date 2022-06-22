@@ -18,8 +18,9 @@ import javax.validation.constraints.Pattern;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class SystemPersonnel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system_personnel_id_generator")
+    @SequenceGenerator(name = "system_personnel_id_generator", sequenceName = "system_personnel_id_seq", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
 
     @NotNull(message = "Required")

@@ -36,7 +36,7 @@ export default function CustomerSignup() {
                 history.push("/login/customer")
             })
                 .catch((result) => {
-                    // console.log(result.response.data.message)
+                    console.log(result.response.data.message)
                     toast.error(result.response.data.message)
                 })
         }

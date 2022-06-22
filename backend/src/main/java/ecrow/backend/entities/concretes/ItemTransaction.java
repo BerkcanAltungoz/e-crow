@@ -18,8 +18,9 @@ import java.time.OffsetTime;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ItemTransaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_transaction_id_generator")
+    @SequenceGenerator(name = "item_transaction_id_generator", sequenceName = "item_transaction_id_seq", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
