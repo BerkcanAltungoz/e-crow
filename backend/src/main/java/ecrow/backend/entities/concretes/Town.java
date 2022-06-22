@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class Town {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "town_id_generator")
-    @SequenceGenerator(name = "town_id_generator", sequenceName = "town_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "town_id_generator", sequenceName = "town_id_generator", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 

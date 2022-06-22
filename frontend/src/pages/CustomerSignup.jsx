@@ -163,9 +163,15 @@ export default function CustomerSignup() {
                                     placeholder="Repeat Password"
                                     type="password"
                                     name="rePassword"
+                                    value={formik.values.rePassword}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
+                                {formik.errors.rePassword && formik.touched.rePassword && (
+                                    <div className={"ui pointing red basic label"}>
+                                        {formik.errors.rePassword}
+                                    </div>
+                                    )}
                             </div>
                         </Grid.Column>
                     </Grid>

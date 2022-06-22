@@ -11,6 +11,7 @@ import ecrow.backend.entities.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -115,6 +116,15 @@ public class EmployeeManager implements EmployeeService {
                 .name(employeeAddDto.getName())
                 .surname(employeeAddDto.getSurname())
                 .phoneNumber(employeeAddDto.getPhoneNumber())
+                .balance(0)
+                .dateCreated(LocalDateTime.now())
+                .available(true)
+                .description("")
+                .emailValidation(false)
+                .phoneValidation(false)
+                .expertise("")
+                .expertiseFee(0)
+                .fee(0)
                 .build();
         employeeDao.save(employee);
         return new SuccessResult("Employee Saved");

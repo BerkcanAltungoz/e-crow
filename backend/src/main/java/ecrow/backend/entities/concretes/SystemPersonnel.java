@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 public class SystemPersonnel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system_personnel_id_generator")
-    @SequenceGenerator(name = "system_personnel_id_generator", sequenceName = "system_personnel_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "system_personnel_id_generator", sequenceName = "system_personnel_id_generator", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 

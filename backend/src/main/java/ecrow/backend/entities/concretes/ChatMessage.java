@@ -1,10 +1,12 @@
 package ecrow.backend.entities.concretes;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
@@ -16,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class ChatMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "chat_message_id_generator")
-    @SequenceGenerator(name = "chat_message_id_generator", sequenceName = "chat_message_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "chat_message_id_generator", sequenceName = "chat_message_id_generator", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
@@ -33,5 +35,9 @@ public class ChatMessage {
     @Lob
     @Column(name = "message", nullable = false)
     private String message;
+
+    @CreatedDate
+    @Column(name = "date_created")
+    private LocalDateTime dateCreated;
 
 }

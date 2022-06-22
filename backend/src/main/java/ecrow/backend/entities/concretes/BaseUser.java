@@ -3,11 +3,13 @@ package ecrow.backend.entities.concretes;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 import java.time.OffsetTime;
 
 @SuperBuilder
@@ -22,7 +24,7 @@ import java.time.OffsetTime;
 public class BaseUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "base_user_id_generator")
-    @SequenceGenerator(name = "base_user_id_generator", sequenceName = "base_user_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "base_user_id_generator", sequenceName = "base_user_id_generator", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
@@ -53,8 +55,9 @@ public class BaseUser {
     private String phoneNumber;
 
     @Column(name = "balance")
-    private Integer balance;
+    private Integer balance = 0;
 
+    @CreatedDate
     @Column(name = "date_created")
-    private OffsetTime dateCreated;
+    private LocalDateTime dateCreated;
 }

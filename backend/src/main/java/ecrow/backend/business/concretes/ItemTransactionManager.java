@@ -12,6 +12,7 @@ import ecrow.backend.entities.dtos.ItemTransactionStatusUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -98,6 +99,9 @@ public class ItemTransactionManager implements ItemTransactionService {
                 .itemName(itemTransactionAddDto.getItemName())
                 .itemPrice(itemTransactionAddDto.getItemPrice())
                 .employeeFee(itemTransactionAddDto.getEmployeeFee())
+                .details(itemTransactionAddDto.getDetails())
+                .dateCreated(LocalDateTime.now())
+                .fkStatus(statusDao.findById(1).get())
                 .build();
         itemTransactionDao.save(itemTransaction);
         return new SuccessResult("Transaction Added");

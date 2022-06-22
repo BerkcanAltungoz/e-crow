@@ -61,6 +61,7 @@ public class RequirementManager implements RequirementService {
         Requirement requirement = Requirement.builder()
                 .fkItemTransaction(itemTransactionDao.findById(requirementAddDto.getFkTransactionId()).get())
                 .requirement(requirementAddDto.getRequirement())
+                .satisfied(false)
                 .build();
         requirementDao.save(requirement);
         return new SuccessResult("Requirement Added");

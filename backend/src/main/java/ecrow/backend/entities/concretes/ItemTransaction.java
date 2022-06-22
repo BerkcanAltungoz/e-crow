@@ -2,10 +2,12 @@ package ecrow.backend.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.time.LocalDateTime;
 import java.time.OffsetTime;
 
 @Builder
@@ -19,7 +21,7 @@ import java.time.OffsetTime;
 public class ItemTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_transaction_id_generator")
-    @SequenceGenerator(name = "item_transaction_id_generator", sequenceName = "item_transaction_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "item_transaction_id_generator", sequenceName = "item_transaction_id_generator", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
@@ -50,15 +52,16 @@ public class ItemTransaction {
     private Integer employeeFee;
 
     @Lob
-    @Column(name = "details")
+    @Column(name = "details", nullable = false)
     private String details;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_status_id")
     private Status fkStatus;
 
+    @CreatedDate
     @Column(name = "date_created")
-    private OffsetTime dateCreated;
+    private LocalDateTime dateCreated;
 
 
 }

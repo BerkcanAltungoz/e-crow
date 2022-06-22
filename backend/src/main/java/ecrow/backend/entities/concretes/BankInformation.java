@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 public class BankInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bank_information_id_generator")
-    @SequenceGenerator(name = "bank_information_id_generator", sequenceName = "bank_information_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "bank_information_id_generator", sequenceName = "bank_information_id_generator", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 

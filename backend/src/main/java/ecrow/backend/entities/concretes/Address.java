@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_id_generator")
-    @SequenceGenerator(name = "address_id_generator", sequenceName = "address_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "address_id_generator", sequenceName = "address_id_generator", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 

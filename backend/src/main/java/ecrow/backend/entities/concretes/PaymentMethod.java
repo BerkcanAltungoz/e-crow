@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_method_id_generator")
-    @SequenceGenerator(name = "payment_method_id_generator", sequenceName = "payment_method_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "payment_method_id_generator", sequenceName = "payment_method_id_generator", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 

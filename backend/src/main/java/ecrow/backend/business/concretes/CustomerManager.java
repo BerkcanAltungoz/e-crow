@@ -12,6 +12,7 @@ import ecrow.backend.entities.dtos.SignInDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -89,14 +90,12 @@ public class CustomerManager implements CustomerService {
                 .name(customerAddDto.getName())
                 .surname(customerAddDto.getSurname())
                 .phoneNumber(customerAddDto.getPhoneNumber())
+                .balance(0)
+                .dateCreated(LocalDateTime.now())
+                .emailValidation(false)
+                .phoneValidation(false)
                 .build();
-//        Customer customer = new Customer();
-//        customer.setEmail(customerAddDto.getEmail());
-//        customer.setPassword(customerAddDto.getPassword());
-//        customer.setName(customerAddDto.getName());
-//        customer.setSurname(customerAddDto.getSurname());
-//        customer.setPhoneNumber(customerAddDto.getPhoneNumber());
-//        System.out.println(customer.getId());
+
         customerDao.save(customer);
         return new SuccessResult("Customer Saved");
     }
