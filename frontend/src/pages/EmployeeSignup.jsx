@@ -17,10 +17,10 @@ export default function EmployeeSignup() {
     const history = useHistory();
 
     const [cities, setCities] = useState([]);
-    const [cityId, setCityId] = useState(1)
+    const [cityId, setCityId] = useState(0)
 
     const [towns, setTowns] = useState([]);
-    const [townId, setTownId] = useState(1);
+    const [townId, setTownId] = useState(0);
 
     useEffect(() => {
         cityService.getAll().then(result => setCities(result.data.data))
