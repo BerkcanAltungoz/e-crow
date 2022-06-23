@@ -36,7 +36,7 @@ export default function CustomerSignup() {
                 history.push("/login/customer")
             })
                 .catch((result) => {
-                    // console.log(result.response.data.message)
+                    console.log(result.response.data.message)
                     toast.error(result.response.data.message)
                 })
         }
@@ -163,9 +163,15 @@ export default function CustomerSignup() {
                                     placeholder="Repeat Password"
                                     type="password"
                                     name="rePassword"
+                                    value={formik.values.rePassword}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
+                                {formik.errors.rePassword && formik.touched.rePassword && (
+                                    <div className={"ui pointing red basic label"}>
+                                        {formik.errors.rePassword}
+                                    </div>
+                                    )}
                             </div>
                         </Grid.Column>
                     </Grid>

@@ -30,4 +30,8 @@ public class ItemTransactionAddDto implements Serializable {
     @NotNull(message = "Required")
     @PositiveOrZero(message = "Cannot Be Negative")
     private final Integer employeeFee;
+
+    @NotNull(message = "Required")
+    @NotBlank(message = "Field Cannot Be Empty")
+    private final String details;
 }

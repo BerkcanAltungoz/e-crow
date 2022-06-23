@@ -12,6 +12,7 @@ import ecrow.backend.entities.dtos.SignInDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -83,20 +84,18 @@ public class CustomerManager implements CustomerService {
         else if(baseUserDao.existsByPhoneNumber(customerAddDto.getPhoneNumber())){
             return new ErrorResult("Phone Number Already In Use");
         }
-//        Customer customer = Customer.builder()
-//                .email(customerAddDto.getEmail())
-//                .password(customerAddDto.getPassword())
-//                .name(customerAddDto.getName())
-//                .surname(customerAddDto.getSurname())
-//                .phoneNumber(customerAddDto.getPhoneNumber())
-//                .build();
-        Customer customer = new Customer();
-        customer.setEmail(customerAddDto.getEmail());
-        customer.setPassword(customerAddDto.getPassword());
-        customer.setName(customerAddDto.getName());
-        customer.setSurname(customerAddDto.getSurname());
-        customer.setPhoneNumber(customerAddDto.getPhoneNumber());
-        System.out.println(customer.getId());
+        Customer customer = Customer.builder()
+                .email(customerAddDto.getEmail())
+                .password(customerAddDto.getPassword())
+                .name(customerAddDto.getName())
+                .surname(customerAddDto.getSurname())
+                .phoneNumber(customerAddDto.getPhoneNumber())
+                .balance(0)
+                .dateCreated(LocalDateTime.now())
+                .emailValidation(false)
+                .phoneValidation(false)
+                .build();
+
         customerDao.save(customer);
         return new SuccessResult("Customer Saved");
     }

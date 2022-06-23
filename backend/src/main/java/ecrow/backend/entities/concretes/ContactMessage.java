@@ -2,11 +2,13 @@ package ecrow.backend.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
@@ -18,8 +20,9 @@ import javax.validation.constraints.Pattern;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ContactMessage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_message_id_generator")
+    @SequenceGenerator(name = "contact_message_id_generator", sequenceName = "contact_message_id_generator", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
 
     @NotNull(message = "Required")
@@ -49,4 +52,7 @@ public class ContactMessage {
     @Column(name = "message", nullable = false)
     private String message;
 
+    @CreatedDate
+    @Column(name = "date_created")
+    private LocalDateTime dateCreated;
 }
