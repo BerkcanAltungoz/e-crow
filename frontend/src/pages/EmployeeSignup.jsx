@@ -17,26 +17,30 @@ export default function EmployeeSignup() {
     const history = useHistory();
 
     const [cities, setCities] = useState([]);
-    const [cityId, setCityId] = useState(0)
+    const [cityId, setCityId] = useState(1)
 
     const [towns, setTowns] = useState([]);
-    const [townId, setTownId] = useState(0);
+    const [townId, setTownId] = useState(1);
 
     useEffect(() => {
         cityService.getAll().then(result => setCities(result.data.data))
+
+    },)
+
+    useEffect(()=>{
         if(cityId !== 0){
             townService.getByCityId(cityId).then(result => setTowns(result.data.data))
         }
-    })
+    },[cityId])
 
-    const cityOptions = [{value: 0, text: "City"}];
+    const cityOptions = [];
     cities.map((city) => (cityOptions.push({
         key: city.id,
         text: city.name,
         value: city.id,
     })));
 
-    const townOptions = [{value: 0, text: "Town"}];
+    const townOptions = [];
     towns.map((town) => (townOptions.push({
         key: town.id,
         text: town.name,
@@ -45,10 +49,12 @@ export default function EmployeeSignup() {
 
     const handleChangeCity = (value) => {
         setCityId(value)
+        formik.values.fkCityId = value
         console.log("City Id: " + value)
     }
     const handleChangeTown = (value) => {
         setTownId(value)
+        formik.values.fkTownId = value
         console.log("Town Id: " + value)
     }
 
@@ -69,6 +75,8 @@ export default function EmployeeSignup() {
             email: "",
             password: "",
             rePassword: "",
+            fkCityId: 0,
+            fkTownId: 0
         },
         validationSchema: customerSignupSchema,
         onSubmit: (values) => {

@@ -119,10 +119,10 @@ public class EmployeeManager implements EmployeeService {
                 .balance(0)
                 .dateCreated(LocalDateTime.now())
                 .available(true)
-                .description("")
+                .description(" ")
                 .emailValidation(false)
                 .phoneValidation(false)
-                .expertise("")
+                .expertise(" ")
                 .expertiseFee(0)
                 .fee(0)
                 .build();

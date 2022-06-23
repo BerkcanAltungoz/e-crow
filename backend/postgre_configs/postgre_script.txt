@@ -280,7 +280,7 @@ ALTER TABLE IF EXISTS public.town
 
 insert into status (id,name) values (1,'pending'),(2,'completed'), (3,'failed');
 
-insert into city (id,name) values (1,'Ankara'), (2,'Antalya'), (3,'İstanbul'), (4,'İzmir');
+insert into city (id,name) values (1,'Adana'), (2,'Ankara'), (3,'Antalya'), (4,'İstanbul');
 
 insert into town (id,fk_city_id,name) values (1,1,'Çukurova'), (2,1,'Sarıçam'), (3,1,'Seyhan'), (4,1,'Yüreğir'),(5,2,'Çankaya'),(6,2,'Altındağ'),(7,2,'Mamak'),(8,2,'Gölbaşı'),(9,3,'Kepez'),(10,3,'Muratpaşa'),(11,3,'Döşemealtı'),(12,3,'Konyaaltı'),(13,4,'Ataşehir'),(14,4,'Kadıköy'),(15,4,'Bağcılar'),(16,4,'Beşiktaş');
 END;
