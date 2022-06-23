@@ -47,8 +47,7 @@ public class Address {
 
     @NotNull(message = "Required")
     @NotBlank(message = "Field Cannot Be Empty")
-    @Lob
-    @Column(name = "address_line", nullable = false)
+    @Column(name = "address_line", nullable = false, length = 1000)
     private String addressLine;
 
 }

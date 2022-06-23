@@ -25,7 +25,7 @@ export default function EmployeeSignup() {
     useEffect(() => {
         cityService.getAll().then(result => setCities(result.data.data))
 
-    },)
+    },[])
 
     useEffect(()=>{
         if(cityId !== 0){
@@ -50,18 +50,18 @@ export default function EmployeeSignup() {
     const handleChangeCity = (value) => {
         setCityId(value)
         formik.values.fkCityId = value
-        console.log("City Id: " + value)
+        // console.log("City Id: " + value)
     }
     const handleChangeTown = (value) => {
         setTownId(value)
         formik.values.fkTownId = value
-        console.log("Town Id: " + value)
+        // console.log("Town Id: " + value)
     }
 
     const customerSignupSchema = Yup.object().shape({
         name: Yup.string().required("Required").max(50, "Maximum 50 characters"),
         surname: Yup.string().required("Required").max(50, "Maximum 50 characters"),
-        phoneNumber: Yup.string().required("Required").matches(/\d{10}/, "Invalid Phone Number"),
+        phoneNumber: Yup.string().required("Required").matches(/^[0-9]{10}$/, "Invalid Phone Number"),
         email: Yup.string().required("Required").max(100, "Maximum 100 Characters").email("Invalid E-Mail Format"),
         password: Yup.string().required("Required").min(6, "Minimum 6 Characters").max(100, "Maximum 100 Characters"),
         rePassword: Yup.string().oneOf([Yup.ref("password"), null], "Not matching").required("Required")

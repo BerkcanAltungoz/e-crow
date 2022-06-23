@@ -48,8 +48,7 @@ public class ContactMessage {
 
     @NotNull(message = "Required")
     @NotBlank(message = "Field Cannot Be Empty")
-    @Lob
-    @Column(name = "message", nullable = false)
+    @Column(name = "message", nullable = false, length = 10000)
     private String message;
 
     @CreatedDate

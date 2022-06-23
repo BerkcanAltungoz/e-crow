@@ -1,6 +1,8 @@
-import {Container, Icon, Menu} from "semantic-ui-react";
+import {Container, Icon, Image, Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import SignedOut from "./SignedOut";
+import {userProps} from "../store/initialValues/userProps";
+import SignedIn from "./SignedIn";
 
 export default function Navi() {
     return (
@@ -9,22 +11,15 @@ export default function Navi() {
                 <Container>
                     <Menu.Item name="Home" as={Link} to={"/"}>
                         <Icon name="home"/>
-                        {/*<Image src={"https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"}/>*/}
+                        {/*<Image size={"mini"} src={"https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"}/>*/}
                         E-Crow
                     </Menu.Item>
 
-                    <Menu.Menu position="right">
-                        {/*{authItem[0].loggedIn && authItem[0].user.userType===2 &&  <Button primary as={Link} to={"/jobAdCreate"}>*/}
-                        {/*    İlan Ekle*/}
-                        {/*</Button>}*/}
-                        {/*{authItem[0].loggedIn && authItem[0].user.userType===1 &&  <Button color="red" as={Link} to={`/jobAdFavorites`}>*/}
-                        {/*    <Icon name='heart' />*/}
-                        {/*    Favori İlanlar*/}
-                        {/*</Button>}*/}
+                    <Menu.Item name={"Messages.jsx"} as={Link} to{"/Messages.jsx"}
 
-                        {/*{authItem[0].loggedIn?<SingedIn/>:<SingedOut/>}*/}
+                    <Menu.Menu position="right">
                         <Menu.Item>
-                            <SignedOut/>
+                            {userProps.loggedIn ? <SignedIn/> : <SignedOut/>}
                         </Menu.Item>
                     </Menu.Menu>
                 </Container>

@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
@@ -50,8 +51,9 @@ public class ItemTransaction {
     @Column(name = "employee_fee", nullable = false)
     private Integer employeeFee;
 
-    @Lob
-    @Column(name = "details", nullable = false)
+    @NotNull(message = "Required")
+    @NotBlank(message = "Field Cannot Be Empty")
+    @Column(name = "details", nullable = false, length = 10000)
     private String details;
 
     @ManyToOne(fetch = FetchType.LAZY)
