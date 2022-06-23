@@ -2,8 +2,8 @@ package ecrow.backend.business.concretes;
 
 import ecrow.backend.business.abstracts.RequirementService;
 import ecrow.backend.core.utilities.results.*;
-import ecrow.backend.dataAccess.concretes.RequirementDao;
 import ecrow.backend.dataAccess.concretes.ItemTransactionDao;
+import ecrow.backend.dataAccess.concretes.RequirementDao;
 import ecrow.backend.entities.concretes.Requirement;
 import ecrow.backend.entities.dtos.RequirementAddDto;
 import ecrow.backend.entities.dtos.RequirementSatisfiedUpdateDto;
