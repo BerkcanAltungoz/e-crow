@@ -97,7 +97,7 @@ export default function CustomerAddress() {
                 <Grid.Column width={4} style={{marginBottom: "10em", marginTop: "8.5em"}}>
                     <CustomerSettingCategories/>
                 </Grid.Column>
-                <Grid.Column width={11} style={{marginBottom: "10em", marginTop: "2em"}}>
+                <Grid.Column width={12} style={{marginBottom: "10em", marginTop: "2em"}}>
                     <Header as="h2" color="black" textAlign="center" style={{marginTop: "1em"}}>
                         <Image
                             src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>
