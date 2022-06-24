@@ -26,7 +26,7 @@ export default function SignedIn() {
                 {userProps.userType === 1 && <Menu.Item as={Link} to={"/customer/account"}>My Account</Menu.Item>}
                 {userProps.userType === 1 && <Menu.Item as={Link} to={"/transactions"}>Transactions</Menu.Item>}
                 {userProps.userType === 2 && <Menu.Item as={Link} to={"/employee/account"}>My Account</Menu.Item>}
-                {userProps.userType === 2 && <Menu.Item as={Link} to={"/employee/transactions"}>Transactions</Menu.Item>}
+                {userProps.userType === 2 && <Menu.Item as={Link} to={"/transactions"}>Transactions</Menu.Item>}
                 <Menu.Item onClick={() => handleSignout(userProps.user)}>Sign-Out</Menu.Item>
             </Menu.Item>
 

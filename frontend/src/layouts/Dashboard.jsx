@@ -15,6 +15,7 @@ import CustomerAddress from "../pages/CustomerAddress";
 import CustomerPayment from "../pages/CustomerPayment";
 import BankAccount from "../pages/BankAccount";
 import EmployeeDetails from "../pages/EmployeeDetails";
+import Footer from "./Footer";
 
 export default function Dashboard() {
     return (
@@ -38,6 +39,8 @@ export default function Dashboard() {
                 <Route exact path="/employee/account" component={EmployeeAccount}/>
                 <Route exact path="/employee/details" component={EmployeeDetails}/>
             </Container>
+            <Footer/>
         </div>
+
     )
 }
