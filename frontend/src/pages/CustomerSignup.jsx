@@ -61,8 +61,8 @@ export default function CustomerSignup() {
                                     iconPosition="left"
                                     placeholder="Name"
                                     type="text"
-                                    value={formik.values.name}
                                     name="name"
+                                    value={formik.values.name}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />

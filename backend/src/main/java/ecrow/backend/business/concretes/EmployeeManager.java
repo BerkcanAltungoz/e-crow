@@ -139,9 +139,9 @@ public class EmployeeManager implements EmployeeService {
         Employee employee = employeeDao.findById(employeeBaseUpdateDto.getId()).get();
         employee.setEmail(employeeBaseUpdateDto.getEmail());
         employee.setPassword(employeeBaseUpdateDto.getPassword());
-        employee.setName(employee.getName());
-        employee.setSurname(employee.getSurname());
-        employee.setPhoneNumber(employee.getPhoneNumber());
+        employee.setName(employeeBaseUpdateDto.getName());
+        employee.setSurname(employeeBaseUpdateDto.getSurname());
+        employee.setPhoneNumber(employeeBaseUpdateDto.getPhoneNumber());
         employeeDao.save(employee);
         return new SuccessResult("Customer Updated");
     }

@@ -108,9 +108,9 @@ public class CustomerManager implements CustomerService {
         Customer customer = customerDao.findById(customerBaseUpdateDto.getId()).get();
         customer.setEmail(customerBaseUpdateDto.getEmail());
         customer.setPassword(customerBaseUpdateDto.getPassword());
-        customer.setName(customer.getName());
-        customer.setSurname(customer.getSurname());
-        customer.setPhoneNumber(customer.getPhoneNumber());
+        customer.setName(customerBaseUpdateDto.getName());
+        customer.setSurname(customerBaseUpdateDto.getSurname());
+        customer.setPhoneNumber(customerBaseUpdateDto.getPhoneNumber());
         customerDao.save(customer);
         return new SuccessResult("Customer Updated");
     }
