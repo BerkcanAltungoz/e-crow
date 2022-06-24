@@ -12,6 +12,7 @@ import CustomerTransactions from "../pages/CustomerTransactions";
 import CustomerAccount from "../pages/CustomerAccount";
 import EmployeeTransactions from "../pages/EmployeeTransactions";
 import EmployeeAccount from "../pages/EmployeeAccount";
+import CustomerAddress from "../pages/CustomerAddress";
 
 export default function Dashboard() {
     return (
@@ -24,6 +25,7 @@ export default function Dashboard() {
                 <Route exact path="/login/customer" component={CustomerLogin}/>
                 <Route exact path="/customer/transactions" component={CustomerTransactions}/>
                 <Route exact path="/customer/account" component={CustomerAccount}/>
+                <Route exact path="/customer/address" component={CustomerAddress}/>
                 <Route exact path="/signup/customer" component={CustomerSignup}/>
                 <Route exact path="/signup/employee" component={EmployeeSignup}/>
                 <Route exact path="/login/employee" component={EmployeeLogin}/>
