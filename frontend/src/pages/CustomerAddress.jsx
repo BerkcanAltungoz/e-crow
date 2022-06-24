@@ -101,7 +101,7 @@ export default function CustomerAddress() {
                     <Header as="h2" color="black" textAlign="center" style={{marginTop: "1em"}}>
                         <Image
                             src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>
-                        New Address
+                        Add Address
                     </Header>
                     <Form onSubmit={formik.handleSubmit}>
                         <Segment>

@@ -16,7 +16,7 @@ export default function EmployeeSettingCategories(){
                 Account Details
             </Menu.Item>
 
-            <Menu.Item as={Link} to={"/employee/bankAccount"} active={location === "/employee/bankAccount"}>
+            <Menu.Item as={Link} to={"/bankAccount"} active={location === "/bankAccount"}>
                 <Icon name="money"/>
                 Bank Account
             </Menu.Item>

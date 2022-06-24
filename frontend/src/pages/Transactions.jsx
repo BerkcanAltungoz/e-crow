@@ -1,4 +1,4 @@
-export default function EmployeeTransactions(){
+export default function Transactions(){
     return(
         "Employee Transactions"
     )

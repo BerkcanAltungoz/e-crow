@@ -15,12 +15,8 @@ export default function Navi() {
                         {/*<Image size={"mini"} src={"https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"}/>*/}
                         E-Crow
                     </Menu.Item>
-                    {userProps.loggedIn &&
-                        <Menu.Item as={Link} to={"/messages"}>Messages</Menu.Item>
-                    }
-                    {userProps.loggedIn &&
-                        <Menu.Item>Balance: {userProps?.user?.balance} $</Menu.Item>
-                    }
+                    {userProps.loggedIn && <Menu.Item as={Link} to={"/messages"}>Messages</Menu.Item>}
+                    {userProps.loggedIn && <Menu.Item>Balance: {userProps?.user?.balance} $</Menu.Item>}
                     <Menu.Menu position={"right"}>
                         {userProps.loggedIn ? <SignedIn/> : <SignedOut/>}
                     </Menu.Menu>
