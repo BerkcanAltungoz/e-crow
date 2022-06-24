@@ -171,7 +171,7 @@ export default function EmployeeSignup() {
                                 <label><b>E-Mail</b></label>
                                 <Form.Input
                                     fluid
-                                    icon="mail"
+                                    icon="at"
                                     iconPosition="left"
                                     placeholder="E-Mail Address"
                                     type="email"

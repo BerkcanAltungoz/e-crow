@@ -1,44 +1,44 @@
-import {Button, Grid, Header, Icon, Modal} from "semantic-ui-react";
+import {Button, Grid, Header, Icon, MenuItem, Modal} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {useState} from "react";
 
 export default function SignedOut() {
-    const [customerOpen, setCustomerOpen] = useState(false);
-    const [employeeOpen, setEmployeeOpen] = useState(false);
+    const [loginOpen, setLoginOpen] = useState(false);
+    const [signupOpen, setSignupOpen] = useState(false);
 
-    const handleCustomerModal = (value) => {
-        setCustomerOpen(value);
+    const handleLoginModal = (value) => {
+        setLoginOpen(value);
     };
 
-    const handleEmployeeModal = (value) => {
-        setEmployeeOpen(value);
+    const handleSignupModal = (value) => {
+        setSignupOpen(value);
     };
 
     return (
         <div>
-            <Button
-                circular
-                content="Log-in"
-                onClick={() => handleCustomerModal(true)}
-            />
+            <MenuItem fitted={"vertically"}>
+                <MenuItem onClick={() => handleLoginModal(true)}>
+                    Log-In
+                </MenuItem>
 
-            <Button
-                circular
-                content="Sign up"
-                onClick={() => handleEmployeeModal(true)}
-            />
+                <MenuItem onClick={() => handleSignupModal(true)}>
+                    Sign Up
+                </MenuItem>
+            </MenuItem>
+
+
 
             <Modal
                 basic
                 dimmer
-                onClose={() => handleCustomerModal(false)}
-                onOpen={() => handleCustomerModal(true)}
-                open={customerOpen}
+                onClose={() => handleLoginModal(false)}
+                onOpen={() => handleLoginModal(true)}
+                open={loginOpen}
                 size="small"
             >
                 <Header icon as="h2">
                     <Icon name="sign-in"/>
-                    Log-in As
+                    Log-in as
                 </Header>
 
                 <Modal.Actions>
@@ -48,10 +48,10 @@ export default function SignedOut() {
                                 <Button
                                     circular
                                     fluid
-                                    content="Candidate"
+                                    content="Customer"
                                     as={Link}
                                     to={"/login/customer"}
-                                    onClick={() => setCustomerOpen(false)}
+                                    onClick={() => setLoginOpen(false)}
                                 ></Button>
                             </Grid.Column>
 
@@ -62,7 +62,7 @@ export default function SignedOut() {
                                     content="Employee"
                                     as={Link}
                                     to={"/login/employee"}
-                                    onClick={() => setCustomerOpen(false)}
+                                    onClick={() => setLoginOpen(false)}
                                 ></Button>
                             </Grid.Column>
                         </Grid.Row>
@@ -73,14 +73,14 @@ export default function SignedOut() {
             <Modal
                 basic
                 dimmer
-                onClose={() => handleEmployeeModal(false)}
-                onOpen={() => handleEmployeeModal(true)}
-                open={employeeOpen}
+                onClose={() => handleSignupModal(false)}
+                onOpen={() => handleSignupModal(true)}
+                open={signupOpen}
                 size="small"
             >
-                <Header icon as="h2" className="orbitron">
-                    <Icon name="paper plane"/>
-                    Create Account As ?
+                <Header icon as="h2">
+                    <Icon name="signup"/>
+                    Create Account as ?
                 </Header>
 
                 <Modal.Actions>
@@ -93,7 +93,7 @@ export default function SignedOut() {
                                     content="Customer"
                                     as={Link}
                                     to={"/signup/customer"}
-                                    onClick={() => setEmployeeOpen(false)}
+                                    onClick={() => setSignupOpen(false)}
                                 />
                             </Grid.Column>
                             <Grid.Column width="8">
@@ -103,7 +103,7 @@ export default function SignedOut() {
                                     content="Employee"
                                     as={Link}
                                     to={"/signup/employee"}
-                                    onClick={() => setEmployeeOpen(false)}
+                                    onClick={() => setSignupOpen(false)}
                                 />
                             </Grid.Column>
                         </Grid.Row>
