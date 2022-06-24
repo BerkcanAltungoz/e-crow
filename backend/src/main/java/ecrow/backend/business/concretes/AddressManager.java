@@ -63,13 +63,13 @@ public class AddressManager implements AddressService {
 
     @Override
     public Result add(AddressAddDto addressAddDto) {
-        if(!addressDao.existsByFkCustomerId(addressAddDto.getFkCustomerId())){
+        if(!customerDao.existsById(addressAddDto.getFkCustomerId())){
             return new ErrorResult("Invalid Customer Id");
         }
-        else if(!addressDao.existsByFkCityId(addressAddDto.getFkCityId())){
+        else if(!cityDao.existsById(addressAddDto.getFkCityId())){
             return new ErrorResult("Invalid City Id");
         }
-        else if(!addressDao.existsByFkTownId(addressAddDto.getFkTownId())){
+        else if(!townDao.existsById(addressAddDto.getFkTownId())){
             return new ErrorResult("Invalid Town Id");
         }
         Address address = Address.builder()

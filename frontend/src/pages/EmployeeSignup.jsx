@@ -59,9 +59,9 @@ export default function EmployeeSignup() {
     }
 
     const customerSignupSchema = Yup.object().shape({
-        name: Yup.string().required("Required").max(50, "Maximum 50 characters"),
-        surname: Yup.string().required("Required").max(50, "Maximum 50 characters"),
-        phoneNumber: Yup.string().required("Required").matches(/^[0-9]{10}$/, "Invalid Phone Number"),
+        name: Yup.string().required("Required").max(50, "Maximum 50 Characters"),
+        surname: Yup.string().required("Required").max(50, "Maximum 50 Characters"),
+        phoneNumber: Yup.string().required("Required").max(10, "Maximum 10 Characters").matches(/^\d{10}$/, "Invalid Phone Number"),
         email: Yup.string().required("Required").max(100, "Maximum 100 Characters").email("Invalid E-Mail Format"),
         password: Yup.string().required("Required").min(6, "Minimum 6 Characters").max(100, "Maximum 100 Characters"),
         rePassword: Yup.string().oneOf([Yup.ref("password"), null], "Not matching").required("Required")
