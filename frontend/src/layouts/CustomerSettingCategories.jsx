@@ -22,7 +22,7 @@ export default function CustomerSettingCategories(){
                 Payment and Balance
             </Menu.Item>
 
-            <Menu.Item as={Link} to={"/customer/bankAccount"} active={location === "/bankAccount"}>
+            <Menu.Item as={Link} to={"/customer/bankAccount"} active={location === "/customer/bankAccount"}>
                 <Icon name="money"/>
                 Bank Account
             </Menu.Item>
