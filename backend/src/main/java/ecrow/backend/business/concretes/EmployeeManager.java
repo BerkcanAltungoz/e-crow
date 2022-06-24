@@ -11,6 +11,7 @@ import ecrow.backend.entities.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -74,7 +75,7 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public DataResult<Employee> getByEmailAndPassword(SignInDto signInDto) {
+    public DataResult<Employee> signIn(SignInDto signInDto) {
         if(!employeeDao.existsByEmail(signInDto.getEmail())){
             return new ErrorDataResult<>("Email Does Not Exist");
         }
@@ -115,6 +116,15 @@ public class EmployeeManager implements EmployeeService {
                 .name(employeeAddDto.getName())
                 .surname(employeeAddDto.getSurname())
                 .phoneNumber(employeeAddDto.getPhoneNumber())
+                .balance(0)
+                .dateCreated(LocalDateTime.now())
+                .available(false)
+                .description("Blank")
+                .emailValidation(false)
+                .phoneValidation(false)
+                .expertise("None")
+                .expertiseFee(0)
+                .fee(0)
                 .build();
         employeeDao.save(employee);
         return new SuccessResult("Employee Saved");
@@ -132,6 +142,7 @@ public class EmployeeManager implements EmployeeService {
         employee.setName(employee.getName());
         employee.setSurname(employee.getSurname());
         employee.setPhoneNumber(employee.getPhoneNumber());
+        employeeDao.save(employee);
         return new SuccessResult("Customer Updated");
     }
 
@@ -154,6 +165,7 @@ public class EmployeeManager implements EmployeeService {
         employee.setExpertiseFee(employeeDetailsUpdateDto.getExpertiseFee());
         employee.setAvailable(employeeDetailsUpdateDto.getAvailable());
         employee.setDescription(employee.getDescription());
+        employeeDao.save(employee);
         return new SuccessResult("Employee Details Updated");
     }
 
@@ -164,6 +176,7 @@ public class EmployeeManager implements EmployeeService {
         }
         Employee employee = employeeDao.findById(employeeBalanceUpdateDto.getId()).get();
         employee.setBalance(employeeBalanceUpdateDto.getBalance());
+        employeeDao.save(employee);
         return new SuccessResult("Employee Balance Updated");
     }
 }

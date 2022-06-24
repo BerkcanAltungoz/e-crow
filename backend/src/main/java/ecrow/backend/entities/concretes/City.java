@@ -17,8 +17,9 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class City  {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_id_generator")
+    @SequenceGenerator(name = "city_id_generator", sequenceName = "city_id_generator", allocationSize = 1)
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull(message = "Required")

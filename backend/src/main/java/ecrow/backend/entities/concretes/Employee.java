@@ -43,8 +43,7 @@ public class Employee extends BaseUser{
     @Column(name = "available")
     private Boolean available;
 
-    @Lob
-    @Column(name = "description")
+    @Column(name = "description", length = 10000)
     private String description;
 
     @Column(name = "email_validation")

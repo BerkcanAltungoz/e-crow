@@ -2,8 +2,6 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.EmployeeService;
 import ecrow.backend.core.utilities.Utils;
-import ecrow.backend.core.utilities.results.DataResult;
-import ecrow.backend.entities.concretes.Employee;
 import ecrow.backend.entities.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,9 +38,9 @@ public class EmployeeController {
         return Utils.getResponseEntity(employeeService.getByPhoneNumber(phoneNumber));
     }
 
-    @GetMapping("/getByEmailAndPassword")
+    @PostMapping("/signIn")
     public ResponseEntity<?> getByEmailAndPassword(@RequestBody SignInDto signInDto) {
-        return Utils.getResponseEntity(employeeService.getByEmailAndPassword(signInDto));
+        return Utils.getResponseEntity(employeeService.signIn(signInDto));
     }
 
     @GetMapping("getByFkTownId")

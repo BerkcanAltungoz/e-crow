@@ -2,8 +2,6 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.CustomerService;
 import ecrow.backend.core.utilities.Utils;
-import ecrow.backend.core.utilities.results.DataResult;
-import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
 import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
 import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
@@ -44,9 +42,9 @@ public class CustomerController {
         return Utils.getResponseEntity(customerService.getByPhoneNumber(phoneNumber));
     }
 
-    @GetMapping("/getByEmailAndPassword")
+    @PostMapping("/signIn")
     public ResponseEntity<?> getByEmailAndPassword(@RequestBody SignInDto signInDto) {
-        return Utils.getResponseEntity(customerService.getByEmailAndPassword(signInDto));
+        return Utils.getResponseEntity(customerService.signIn(signInDto));
     }
     @DeleteMapping("/deleteById")
     public ResponseEntity<?> deleteById(@RequestParam Integer id) {

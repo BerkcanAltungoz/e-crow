@@ -79,6 +79,7 @@ public class BankInformationManager implements BankInformationService {
         BankInformation bankInformation = bankInformationDao.findById(bankInformationUpdateDto.getId()).get();
         bankInformation.setNickname(bankInformationUpdateDto.getNickname());
         bankInformation.setIban(bankInformationUpdateDto.getIban());
+        bankInformationDao.save(bankInformation);
         return new SuccessResult("Bank Information Updated");
     }
 }

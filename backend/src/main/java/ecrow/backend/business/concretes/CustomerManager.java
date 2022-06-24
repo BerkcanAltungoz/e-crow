@@ -12,6 +12,7 @@ import ecrow.backend.entities.dtos.SignInDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -56,7 +57,7 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public DataResult<Customer> getByEmailAndPassword(SignInDto signInDto) {
+    public DataResult<Customer> signIn(SignInDto signInDto) {
         if(!customerDao.existsByEmail(signInDto.getEmail())){
             return new ErrorDataResult<>("Email Does Not Exist");
         }
@@ -89,7 +90,12 @@ public class CustomerManager implements CustomerService {
                 .name(customerAddDto.getName())
                 .surname(customerAddDto.getSurname())
                 .phoneNumber(customerAddDto.getPhoneNumber())
+                .balance(0)
+                .dateCreated(LocalDateTime.now())
+                .emailValidation(false)
+                .phoneValidation(false)
                 .build();
+
         customerDao.save(customer);
         return new SuccessResult("Customer Saved");
     }
@@ -105,6 +111,7 @@ public class CustomerManager implements CustomerService {
         customer.setName(customer.getName());
         customer.setSurname(customer.getSurname());
         customer.setPhoneNumber(customer.getPhoneNumber());
+        customerDao.save(customer);
         return new SuccessResult("Customer Updated");
     }
 
@@ -115,6 +122,7 @@ public class CustomerManager implements CustomerService {
         }
         Customer customer = customerDao.findById(customerBalanceUpdateDto.getId()).get();
         customer.setBalance(customerBalanceUpdateDto.getBalance());
+        customerDao.save(customer);
         return new SuccessResult("Customer Balance Updated");
     }
 }

@@ -4,14 +4,15 @@ import ecrow.backend.business.abstracts.ItemTransactionService;
 import ecrow.backend.core.utilities.results.*;
 import ecrow.backend.dataAccess.concretes.CustomerDao;
 import ecrow.backend.dataAccess.concretes.EmployeeDao;
-import ecrow.backend.dataAccess.concretes.StatusDao;
 import ecrow.backend.dataAccess.concretes.ItemTransactionDao;
+import ecrow.backend.dataAccess.concretes.StatusDao;
 import ecrow.backend.entities.concretes.ItemTransaction;
 import ecrow.backend.entities.dtos.ItemTransactionAddDto;
 import ecrow.backend.entities.dtos.ItemTransactionStatusUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -98,6 +99,9 @@ public class ItemTransactionManager implements ItemTransactionService {
                 .itemName(itemTransactionAddDto.getItemName())
                 .itemPrice(itemTransactionAddDto.getItemPrice())
                 .employeeFee(itemTransactionAddDto.getEmployeeFee())
+                .details(itemTransactionAddDto.getDetails())
+                .dateCreated(LocalDateTime.now())
+                .fkStatus(statusDao.findById(1).get())
                 .build();
         itemTransactionDao.save(itemTransaction);
         return new SuccessResult("Transaction Added");
@@ -110,6 +114,7 @@ public class ItemTransactionManager implements ItemTransactionService {
         }
         ItemTransaction itemTransaction = itemTransactionDao.findById(itemTransactionStatusUpdateDto.getId()).get();
         itemTransaction.setFkStatus(statusDao.findById(itemTransactionStatusUpdateDto.getFkStatusId()).get());
+        itemTransactionDao.save(itemTransaction);
         return new SuccessResult("Updated Transaction Status");
     }
 }

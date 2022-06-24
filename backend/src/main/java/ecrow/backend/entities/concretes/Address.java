@@ -18,8 +18,9 @@ import javax.validation.constraints.Pattern;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_id_generator")
+    @SequenceGenerator(name = "address_id_generator", sequenceName = "address_id_generator", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -46,8 +47,7 @@ public class Address {
 
     @NotNull(message = "Required")
     @NotBlank(message = "Field Cannot Be Empty")
-    @Lob
-    @Column(name = "address_line", nullable = false)
+    @Column(name = "address_line", nullable = false, length = 1000)
     private String addressLine;
 
 }

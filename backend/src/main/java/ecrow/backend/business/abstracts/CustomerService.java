@@ -15,7 +15,7 @@ public interface CustomerService {
     DataResult<Customer> getById(Integer id);
     DataResult<Customer> getByEmail(String email);
     DataResult<Customer> getByPhoneNumber(String phoneNumber);
-    DataResult<Customer> getByEmailAndPassword(SignInDto signInDto);
+    DataResult<Customer> signIn(SignInDto signInDto);
     Result deleteById(Integer id);
 
     Result add(CustomerAddDto customerAddDto);

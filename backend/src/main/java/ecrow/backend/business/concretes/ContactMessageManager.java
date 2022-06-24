@@ -7,6 +7,7 @@ import ecrow.backend.entities.concretes.ContactMessage;
 import ecrow.backend.entities.dtos.ContactMessageAddDto;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -54,6 +55,7 @@ public class ContactMessageManager implements ContactMessageService {
                 .email(contactMessageAddDto.getEmail())
                 .subject(contactMessageAddDto.getSubject())
                 .message(contactMessageAddDto.getMessage())
+                .dateCreated(LocalDateTime.now())
                 .build();
         contactMessageDao.save(contactMessage);
         return new SuccessResult("Contact Message Saved");

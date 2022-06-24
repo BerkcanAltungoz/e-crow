@@ -10,6 +10,7 @@ import ecrow.backend.entities.dtos.ChatMessageAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -83,6 +84,7 @@ public class ChatMessageManager implements ChatMessageService {
                 .fkCustomer(customerDao.findById(chatMessageAddDto.getFkCustomerId()).get())
                 .fkEmployee(employeeDao.findById(chatMessageAddDto.getFkEmployeeId()).get())
                 .message(chatMessageAddDto.getMessage())
+                .dateCreated(LocalDateTime.now())
                 .build();
         chatMessageDao.save(chatMessage);
         return new SuccessResult("Chat Message Saved");

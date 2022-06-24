@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.OffsetTime;
+import java.time.LocalDateTime;
 
 @SuperBuilder
 @AllArgsConstructor
@@ -24,8 +25,9 @@ import java.time.OffsetTime;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BaseUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "base_user_id_generator")
+    @SequenceGenerator(name = "base_user_id_generator", sequenceName = "base_user_id_generator", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
 
     @NotNull(message = "Required")
@@ -55,8 +57,9 @@ public class BaseUser {
     private String phoneNumber;
 
     @Column(name = "balance")
-    private Integer balance;
+    private Integer balance = 0;
 
+    @CreatedDate
     @Column(name = "date_created")
-    private OffsetTime dateCreated;
+    private LocalDateTime dateCreated;
 }

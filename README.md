@@ -23,29 +23,44 @@ product and delivers it to the seller.
 
 E-Crow is built using the tools and libraries below. If you wish to tweak and look at the internal structure the recommended versions are listed.
 
-| Recommended                  | Reference                                                      |
-|------------------------------|----------------------------------------------------------------|
+| Recommended                | Reference                                                      |
+|----------------------------|----------------------------------------------------------------|
 | Oracle Java 11 JDK or higher | [Download](https://www.oracle.com/java/technologies/downloads/)|
-| PostgreSQL 14.2 or higher    | [Download](https://www.postgresql.org/download/)               |
-| Maven 3.8 or higher          | [Download](https://maven.apache.org/download.cgi)              |
-| Git 2.36 or higher           | [Download](https://git-scm.com/downloads)                      |
-| Spring Boot 2.4.5 or higher  | [Website](https://spring.io/projects/spring-boot#learn)        |
-| React 18.1 or higher         | [Website](https://reactjs.org/docs/getting-started.html)       |
-| Your Preferred IDE           | [IntelliJ Idea](https://www.jetbrains.com/idea/download/)      |
+| PostgreSQL 14.2 or higher  | [Download](https://www.postgresql.org/download/)               |
+| Maven 3.8 or higher        | [Download](https://maven.apache.org/download.cgi)              |
+| Git 2.36 or higher         | [Download](https://git-scm.com/downloads)                      |
+| Spring Boot 2.4.5 or higher | [Website](https://spring.io/projects/spring-boot#learn)        |
+| React 17 or higher         | [Website](https://reactjs.org/docs/getting-started.html)       |
+| Your Preferred IDE         | [IntelliJ Idea](https://www.jetbrains.com/idea/download/)      |
 
 ## Running E-Crow Locally
 
-You should build a jar file using [Maven](https://spring.io/guides/gs/maven/) after cloning from Github and run it from the command line.  
+* Clone the repository
 
-```
-git clone https://github.com/BerkcanAltungoz/e-crow
-cd e-crow
-./mvnw package
-java -jar target/*.jar
-```
-You can then access the website here: http://localhost:8080/
+* Create a PostgreSQL database and run the scripts in the [postgre_script.txt](./backend/postgre_configs/postgre_script.txt)
 
-*Further details will be added on how to configure the database and frontend*
+* Configure your [application.properties](./backend/src/main/resources/application.properties) file with your DB options.
+
+* Move into the [backend](./backend) directory and install maven dependencies.
+
+* Run [BackendApplication](./backend/src/main/java/ecrow/backend/BackendApplication.java) to start backend server.
+
+* Move to the [frontend](./frontend) directory
+
+* Run ```npm install``` to install frontend dependencies
+
+* Run ```npm start``` to start the frontend server.
+
+You can then access the website here: http://localhost:3000/
+
+You can access the backend API endpoints by using swagger on this address: http://localhost:8080/swagger-ui.html#/
+
+## Screenshots
+
+**Entity Relationship Diagram**
+![ERD](./backend/postgre_configs/Entity_Relationship_Diagram.png)
+**API Endpoints**
+![API](./backend/postgre_configs/Endpoints.png)
 
 ## Why Spring Boot?
 
