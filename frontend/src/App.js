@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import Dashboard from "./layouts/Dashboard";
+import {useLayoutEffect} from "react";
+import {customerLogin, employeeLogin} from "./store/actions/userActions";
+import {useDispatch} from "react-redux";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    if(localStorage.getItem("customer")){
+      dispatch(customerLogin(JSON.parse(localStorage.getItem("customer"))))
+    }
+
+      if(localStorage.getItem("employee")){
+          dispatch(employeeLogin(JSON.parse(localStorage.getItem("employee"))))
+      }
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <Dashboard/>
+      </div>
   );
 }
 

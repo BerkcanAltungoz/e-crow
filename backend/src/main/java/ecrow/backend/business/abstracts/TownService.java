@@ -1,8 +1,6 @@
 package ecrow.backend.business.abstracts;
 
 import ecrow.backend.core.utilities.results.DataResult;
-import ecrow.backend.core.utilities.results.Result;
-import ecrow.backend.entities.concretes.City;
 import ecrow.backend.entities.concretes.Town;
 
 import java.util.List;

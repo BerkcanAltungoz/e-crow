@@ -1,9 +1,12 @@
 package ecrow.backend.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Builder
 @AllArgsConstructor
@@ -12,26 +15,41 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "payment_method")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PaymentMethod {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_method_id_generator")
+    @SequenceGenerator(name = "payment_method_id_generator", sequenceName = "payment_method_id_generator", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_customer_id", nullable = false)
     private Customer fkCustomer;
 
+    @NotNull(message = "Required")
+    @NotBlank(message = "Field Cannot Be Empty")
     @Column(name = "name_on_card", nullable = false, length = 100)
     private String nameOnCard;
 
-    @Column(name = "card_number", nullable = false, length = 16)
+    @NotNull(message = "Required")
+    @Pattern(regexp = "\\d{16}", message = "Invalid Card Number Format")
+    @Column(name = "card_number", nullable = false, unique = true, length = 16)
     private String cardNumber;
 
-    @Column(name = "expiry_date", nullable = false)
-    private LocalDate expiryDate;
-
+    @NotNull(message = "Required")
+    @Pattern(regexp = "\\d{3}", message = "Invalid Card Number Format")
     @Column(name = "cvc", nullable = false, length = 3)
     private String cvc;
+
+    @NotNull(message = "Required")
+    @Pattern(regexp = "\\d{2}", message = "Invalid Expiry Date Month Format")
+    @Column(name = "expiry_date_month", nullable = false, length = 2)
+    private Integer expiryDateMonth;
+
+    @NotNull(message = "Required")
+    @Pattern(regexp = "\\d{2}", message = "Invalid Expiry Date Year Format")
+    @Column(name = "expiry_date_year", nullable = false, length = 2)
+    private Integer expiryDateYear;
 
 }

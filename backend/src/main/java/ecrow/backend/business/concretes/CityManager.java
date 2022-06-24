@@ -1,7 +1,9 @@
 package ecrow.backend.business.concretes;
 
 import ecrow.backend.business.abstracts.CityService;
-import ecrow.backend.core.utilities.results.*;
+import ecrow.backend.core.utilities.results.DataResult;
+import ecrow.backend.core.utilities.results.ErrorDataResult;
+import ecrow.backend.core.utilities.results.SuccessDataResult;
 import ecrow.backend.dataAccess.concretes.CityDao;
 import ecrow.backend.entities.concretes.City;
 import org.springframework.beans.factory.annotation.Autowired;

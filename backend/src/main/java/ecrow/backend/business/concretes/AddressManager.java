@@ -7,7 +7,7 @@ import ecrow.backend.dataAccess.concretes.CityDao;
 import ecrow.backend.dataAccess.concretes.CustomerDao;
 import ecrow.backend.dataAccess.concretes.TownDao;
 import ecrow.backend.entities.concretes.Address;
-import ecrow.backend.entities.dtos.AddressDto;
+import ecrow.backend.entities.dtos.AddressAddDto;
 import ecrow.backend.entities.dtos.AddressUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +46,7 @@ public class AddressManager implements AddressService {
     @Override
     public Result deleteById(Integer id) {
         if(!addressDao.existsById(id)){
-            return new ErrorDataResult<>("Address Not Found");
+            return new ErrorResult("Address Not Found");
         }
         addressDao.deleteById(id);
         return new SuccessResult("Address Deleted");
@@ -62,23 +62,23 @@ public class AddressManager implements AddressService {
     }
 
     @Override
-    public Result add(AddressDto addressDto) {
-        if(!addressDao.existsByFkCustomerId(addressDto.getFkCustomerId())){
+    public Result add(AddressAddDto addressAddDto) {
+        if(!addressDao.existsByFkCustomerId(addressAddDto.getFkCustomerId())){
             return new ErrorResult("Invalid Customer Id");
         }
-        else if(!addressDao.existsByFkCityId(addressDto.getFkCityId())){
+        else if(!addressDao.existsByFkCityId(addressAddDto.getFkCityId())){
             return new ErrorResult("Invalid City Id");
         }
-        else if(!addressDao.existsByFkTownId(addressDto.getFkTownId())){
+        else if(!addressDao.existsByFkTownId(addressAddDto.getFkTownId())){
             return new ErrorResult("Invalid Town Id");
         }
         Address address = Address.builder()
-                .fkCustomer(customerDao.findById(addressDto.getFkCustomerId()).get())
-                .namesurname(addressDto.getNamesurname())
-                .fkCity(cityDao.findById(addressDto.getFkCityId()).get())
-                .fkTown(townDao.findById(addressDto.getFkTownId()).get())
-                .postalCode(addressDto.getPostalCode())
-                .addressLine(addressDto.getAddressLine())
+                .fkCustomer(customerDao.findById(addressAddDto.getFkCustomerId()).get())
+                .namesurname(addressAddDto.getNamesurname())
+                .fkCity(cityDao.findById(addressAddDto.getFkCityId()).get())
+                .fkTown(townDao.findById(addressAddDto.getFkTownId()).get())
+                .postalCode(addressAddDto.getPostalCode())
+                .addressLine(addressAddDto.getAddressLine())
                 .build();
 
         addressDao.save(address);
@@ -90,10 +90,19 @@ public class AddressManager implements AddressService {
         if(!addressDao.existsById(addressUpdateDto.getId())){
             new ErrorResult("Address Not Found");
         }
+        else if(!addressDao.existsByFkCityId(addressUpdateDto.getFkCityId())){
+            return new ErrorResult("Invalid City Id");
+        }
+        else if(!addressDao.existsByFkTownId(addressUpdateDto.getFkTownId())){
+            return new ErrorResult("Invalid Town Id");
+        }
         Address address = addressDao.findById(addressUpdateDto.getId()).get();
         address.setNamesurname(addressUpdateDto.getNamesurname());
+        address.setFkCity(cityDao.findById(addressUpdateDto.getFkCityId()).get());
+        address.setFkTown(townDao.findById(addressUpdateDto.getFkTownId()).get());
         address.setPostalCode(addressUpdateDto.getPostalCode());
         address.setAddressLine(addressUpdateDto.getAddressLine());
+        addressDao.save(address);
         return new SuccessResult("Address Updated");
     }
 }
