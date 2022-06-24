@@ -74,6 +74,7 @@ public class EmployeeManager implements EmployeeService {
         return new SuccessDataResult<>(employeeDao.getByFkCityId(cityId));
     }
 
+    //TODO: CHECK IF EMAIL VERIFIED
     @Override
     public DataResult<Employee> signIn(SignInDto signInDto) {
         if(!employeeDao.existsByEmail(signInDto.getEmail())){
@@ -94,6 +95,7 @@ public class EmployeeManager implements EmployeeService {
         return new SuccessResult("Employee Deleted");
     }
 
+    //TODO: SEND EMAIL VERIFICATION & HASH PASSWORD
     @Override
     public Result add(EmployeeAddDto employeeAddDto) {
         if(!townDao.existsById(employeeAddDto.getFkTownId())){

@@ -1,6 +1,5 @@
 import React from "react";
-import {Container, Grid, Header, Icon, List, Segment,} from "semantic-ui-react";
-import {Link} from "react-router-dom";
+import {Container, Grid, Header, List, Segment,} from "semantic-ui-react";
 
 export default function Footer() {
     return (
@@ -18,7 +17,7 @@ export default function Footer() {
                 }}
             >
                 <Container>
-                    <Grid divided inverted stackable verticalAlign={"middle"}>
+                    <Grid divided inverted  verticalAlign={"middle"}>
                         <Grid.Row>
                             <Grid.Column width={6} style={{marginBottom: "0.5em"}}>
                                 <List link inverted>

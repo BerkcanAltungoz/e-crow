@@ -16,6 +16,7 @@ import CustomerPayment from "../pages/CustomerPayment";
 import BankAccount from "../pages/BankAccount";
 import EmployeeDetails from "../pages/EmployeeDetails";
 import Footer from "./Footer";
+import EmployeeExpanded from "../pages/EmployeeExpanded";
 
 export default function Dashboard() {
     return (
@@ -38,6 +39,7 @@ export default function Dashboard() {
                 <Route exact path="/login/employee" component={EmployeeLogin}/>
                 <Route exact path="/employee/account" component={EmployeeAccount}/>
                 <Route exact path="/employee/details" component={EmployeeDetails}/>
+                <Route exact path="/employee/:id" component={EmployeeExpanded}/>
             </Container>
             <Footer/>
         </div>

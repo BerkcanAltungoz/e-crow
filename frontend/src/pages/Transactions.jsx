@@ -1,4 +1,4 @@
-export default function Transactions(){
+export default function Transactions() {
     return(
         "Transactions"
     )
