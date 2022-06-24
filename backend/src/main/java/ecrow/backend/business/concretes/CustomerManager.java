@@ -56,6 +56,7 @@ public class CustomerManager implements CustomerService {
         return new SuccessDataResult<>(customerDao.getByPhoneNumber(phoneNumber));
     }
 
+    //TODO: CHECK IF EMAIL VERIFIED
     @Override
     public DataResult<Customer> signIn(SignInDto signInDto) {
         if(!customerDao.existsByEmail(signInDto.getEmail())){
@@ -76,6 +77,7 @@ public class CustomerManager implements CustomerService {
         return new SuccessResult("Customer Deleted");
     }
 
+    //TODO: SEND EMAIL VERIFICATION & HASH PASSWORD
     @Override
     public Result add(CustomerAddDto customerAddDto) {
         if(baseUserDao.existsByEmail(customerAddDto.getEmail())){
