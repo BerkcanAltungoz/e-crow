@@ -164,7 +164,7 @@ public class EmployeeManager implements EmployeeService {
         employee.setFee(employeeDetailsUpdateDto.getFee());
         employee.setExpertiseFee(employeeDetailsUpdateDto.getExpertiseFee());
         employee.setAvailable(employeeDetailsUpdateDto.getAvailable());
-        employee.setDescription(employee.getDescription());
+        employee.setDescription(employeeDetailsUpdateDto.getDescription());
         employeeDao.save(employee);
         return new SuccessResult("Employee Details Updated");
     }

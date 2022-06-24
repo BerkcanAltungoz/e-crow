@@ -67,7 +67,7 @@ export default function CustomerAddress() {
         namesurname: "",
         addressLine: ""
     }
-    const customerSignupSchema = Yup.object().shape({
+    const customerAddressSchema = Yup.object().shape({
         namesurname: Yup.string().required("Required").max(100, "Maximum 100 Characters"),
         addressLine: Yup.string().required("Required").max(1000, "Maximum 1000 Characters"),
         postalCode: Yup.string().required("Required").max(5,"Maximum 5 Characters").matches(/^\d{5}$/, "Invalid Postal Code")
@@ -76,7 +76,7 @@ export default function CustomerAddress() {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: initial,
-        validationSchema: customerSignupSchema,
+        validationSchema: customerAddressSchema,
         onSubmit: (values) => {
             console.log(values)
             // console.log(userProps.user)
@@ -149,11 +149,8 @@ export default function CustomerAddress() {
                                         )}
                                     </div>
                                     <div style={{marginTop: "1em"}}>
-                                        <label><b>Address Line</b></label>
-                                        <Form.Input
-                                            fluid
-                                            icon="home"
-                                            iconPosition="left"
+                                        <label><b>Address</b></label>
+                                        <Form.TextArea
                                             placeholder="Address Line"
                                             type="text"
                                             name="addressLine"

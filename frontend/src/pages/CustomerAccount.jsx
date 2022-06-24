@@ -24,19 +24,19 @@ export default function CustomerAccount() {
         password: "",
         rePassword: ""
     }
-    const customerSignupSchema = Yup.object().shape({
-        name: Yup.string().max(50, "Maximum 50 characters"),
-        surname: Yup.string().max(50, "Maximum 50 characters"),
+    const customerAccountSchema = Yup.object().shape({
+        name: Yup.string().max(50, "Maximum 50 Characters"),
+        surname: Yup.string().max(50, "Maximum 50 Characters"),
         phoneNumber: Yup.string().matches(/\d{10}/, "Invalid Phone Number"),
         email: Yup.string().max(100, "Maximum 100 Characters").email("Invalid E-Mail Format"),
-        password: Yup.string().required("Required").min(6, "Minimum 6 Characters").max(100, "Maximum 100 Characters").req,
+        password: Yup.string().required("Required").min(6, "Minimum 6 Characters").max(100, "Maximum 100 Characters"),
         rePassword: Yup.string().oneOf([Yup.ref("password"), null], "Not matching").required("Required")
     });
 
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: initial,
-        validationSchema: customerSignupSchema,
+        validationSchema: customerAccountSchema,
         onSubmit: (values) => {
             console.log(values)
             // console.log(userProps.user)
