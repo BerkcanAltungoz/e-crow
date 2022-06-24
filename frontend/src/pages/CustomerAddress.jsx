@@ -84,6 +84,7 @@ export default function CustomerAddress() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 history.push("/customer/address")
+                window.location.reload();
             })
                 .catch((result) => {
                     console.log(result.response.data.message)

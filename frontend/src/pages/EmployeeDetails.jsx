@@ -93,6 +93,7 @@ export default function EmployeeDetails() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 history.push("/employee/details")
+                window.location.reload();
             })
                 .catch((result) => {
                     console.log(result.response.data.message)

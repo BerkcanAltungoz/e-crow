@@ -17,7 +17,7 @@ export default function MainPage() {
     const [towns, setTowns] = useState([]);
     const [townId, setTownId] = useState(0);
 
-    let firstChange = true;
+    let firstTownChange = true;
     useEffect(() => {
         cityService.getAll().then(result => setCities(result.data.data))
     }, [])
@@ -25,15 +25,16 @@ export default function MainPage() {
     useEffect(() => {
         if (cityId !== 0) {
             townService.getByCityId(cityId).then(result => setTowns(result.data.data))
+            employeeService.getByCityId(cityId).then(result => setEmployees(result.data.data))
         }
     }, [cityId])
 
     useEffect(() => { //TODO: GET ACTIVE EMPLOYEES
-        if (townId !== 0 && firstChange) {
+        if (townId !== 0 && firstTownChange) {
             setEmployees([])
-            firstChange = false
+            firstTownChange = false
             employeeService.getByTownId(townId).then(result => setEmployees(result.data.data))
-        } else if (townId !== 0 && !firstChange) {
+        } else if (townId !== 0 && !firstTownChange) {
             employeeService.getByTownId(townId).then(result => setEmployees(result.data.data))
         } else {
             employeeService.getAll().then(result => setEmployees(result.data.data))

@@ -42,6 +42,7 @@ export default function EmployeeAccount() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 history.push("/employee/account")
+                window.location.reload();
             })
                 .catch((result) => {
                     console.log(result.response.data.message)

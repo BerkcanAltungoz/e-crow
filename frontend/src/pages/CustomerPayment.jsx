@@ -40,6 +40,7 @@ export default function CustomerPayment() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 history.push("/customer/payment")
+                window.location.reload();
             })
                 .catch((result) => {
                     console.log(result.response.data.message)
