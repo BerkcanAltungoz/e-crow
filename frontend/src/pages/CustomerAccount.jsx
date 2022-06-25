@@ -43,7 +43,7 @@ export default function CustomerAccount() {
             customerService.updateBase(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                history.push("/customer/account")
+                // history.push("/customer/account")
                 formik.resetForm({...initial});
             })
                 .catch((result) => {

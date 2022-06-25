@@ -1,6 +1,6 @@
 import {Button, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
@@ -9,12 +9,14 @@ import PaymentMethodService from "../services/PaymentMethodService";
 import React from "react";
 import {useEffect, useState} from "react";
 import CustomerService from "../services/CustomerService";
+import {userUpdateBalance} from "../store/actions/userActions";
 
 export default function CustomerPayment() { //TODO: SHOW BILLING HISTORY
     const paymentService = new PaymentMethodService();
     const customerService = new CustomerService();
     const userProps = useSelector(state => state?.user?.userProps)
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [paymentMethods,setPaymentMethods] = useState([])
     const [paymentMethodId, setPaymentMethodId] = useState(0)
@@ -58,9 +60,11 @@ export default function CustomerPayment() { //TODO: SHOW BILLING HISTORY
             // console.log(userProps.user)
             customerService.depositBalance(values).then((result) => {
                 console.log(result.data.message)
-                history.push("/customer/payment")
                 toast.success(result.data.message)
+                // history.push("/customer/payment")
                 addBalanceFormik.resetForm({...addBalanceInitial});
+                dispatch(userUpdateBalance(result.data.data))
+
 
             })
                 .catch((result) => {
@@ -98,8 +102,7 @@ export default function CustomerPayment() { //TODO: SHOW BILLING HISTORY
             paymentService.add(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                history.push("/customer/payment")
-                window.location.reload();
+                addPaymentFormik.resetForm({...addPaymentInitial})
             })
                 .catch((result) => {
                     console.log(result.response.data.message)
@@ -113,7 +116,7 @@ export default function CustomerPayment() { //TODO: SHOW BILLING HISTORY
                 <Grid.Column width={4} style={{marginBottom: "10em", marginTop: "8.5em"}}>
                     <CustomerSettingCategories/>
                 </Grid.Column>
-                <Grid.Column width={12} style={{marginBottom: "10em", marginTop: "2em"}}>
+                <Grid.Column width={12} style={{marginBottom: "10em", marginTop: "3.25em"}}>
                     <Header as="h2" color="black" textAlign="center" style={{ marginBottom: "1em"}}>
                         <Image
                             src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>

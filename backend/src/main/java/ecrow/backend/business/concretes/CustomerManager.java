@@ -123,8 +123,9 @@ public class CustomerManager implements CustomerService {
             return new ErrorResult("Customer Not Found");
         }
         Customer customer = customerDao.findById(customerDepositBalanceDto.getFkCustomerId()).get();
-        customer.setBalance(customer.getBalance() + customerDepositBalanceDto.getDepositAmount());
+        int newBalance = customer.getBalance() + customerDepositBalanceDto.getDepositAmount();
+        customer.setBalance(newBalance);
         customerDao.save(customer);
-        return new SuccessResult("Customer Balance Updated");
+        return new SuccessDataResult<>(newBalance,"Customer Balance Updated");
     }
 }

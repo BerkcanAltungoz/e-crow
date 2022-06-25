@@ -91,7 +91,7 @@ export default function EmployeeDetails() {
             employeeService.updateDetails(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                history.push("/employee/details")
+                // history.push("/employee/details")
                 formik.resetForm({...initial});
             })
                 .catch((result) => {

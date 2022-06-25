@@ -15,9 +15,8 @@ export default function SignedIn() {
         dispatch(userSignOut(user))
         localStorage.removeItem("customer");
         localStorage.removeItem("employee");
-        toast.error("Signed Out")
         history.push("/")
-        window.location.reload();
+        toast.error("Signed Out")
     }
 
     return (

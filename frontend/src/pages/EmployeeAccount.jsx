@@ -41,7 +41,7 @@ export default function EmployeeAccount() {
             employeeService.updateBase(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                history.push("/employee/account")
+                // history.push("/employee/account")
                 formik.resetForm({...initial});
             })
                 .catch((result) => {

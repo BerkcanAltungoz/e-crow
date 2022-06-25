@@ -89,7 +89,7 @@ export default function CustomerAddress() {
             addressService.add(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                history.push("/customer/address")
+                // history.push("/customer/address")
                 formik.resetForm({...initial});
             })
                 .catch((result) => {

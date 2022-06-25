@@ -34,7 +34,7 @@ export default function BankAccount(){
             bankInformationService.add(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                history.push("/bankAccount")
+                // history.push("/bankAccount")
                 formik.resetForm({...initial});
             })
                 .catch((result) => {
