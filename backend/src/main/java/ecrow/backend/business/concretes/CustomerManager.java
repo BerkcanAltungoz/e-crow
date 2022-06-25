@@ -6,7 +6,7 @@ import ecrow.backend.dataAccess.concretes.BaseUserDao;
 import ecrow.backend.dataAccess.concretes.CustomerDao;
 import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
-import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
+import ecrow.backend.entities.dtos.CustomerDepositBalanceDto;
 import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
 import ecrow.backend.entities.dtos.SignInDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,12 +118,12 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public Result updateBalance(CustomerBalanceUpdateDto customerBalanceUpdateDto) {
-        if(!customerDao.existsById(customerBalanceUpdateDto.getId())){
+    public Result depositBalance(CustomerDepositBalanceDto customerDepositBalanceDto) { //TODO: REAL CREDIT CARD PAYMENT
+        if(!customerDao.existsById(customerDepositBalanceDto.getFkCustomerId())){
             return new ErrorResult("Customer Not Found");
         }
-        Customer customer = customerDao.findById(customerBalanceUpdateDto.getId()).get();
-        customer.setBalance(customerBalanceUpdateDto.getBalance());
+        Customer customer = customerDao.findById(customerDepositBalanceDto.getFkCustomerId()).get();
+        customer.setBalance(customer.getBalance() + customerDepositBalanceDto.getDepositAmount());
         customerDao.save(customer);
         return new SuccessResult("Customer Balance Updated");
     }

@@ -4,7 +4,7 @@ import ecrow.backend.core.utilities.results.DataResult;
 import ecrow.backend.core.utilities.results.Result;
 import ecrow.backend.entities.concretes.Customer;
 import ecrow.backend.entities.dtos.CustomerAddDto;
-import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
+import ecrow.backend.entities.dtos.CustomerDepositBalanceDto;
 import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
 import ecrow.backend.entities.dtos.SignInDto;
 
@@ -20,5 +20,5 @@ public interface CustomerService {
 
     Result add(CustomerAddDto customerAddDto);
     Result updateBase(CustomerBaseUpdateDto customerBaseUpdateDto);
-    Result updateBalance(CustomerBalanceUpdateDto customerBalanceUpdateDto);
+    Result depositBalance(CustomerDepositBalanceDto customerDepositBalanceDto);
 }

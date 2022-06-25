@@ -44,7 +44,7 @@ export default function CustomerAccount() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 history.push("/customer/account")
-                window.location.reload();
+                formik.resetForm({...initial});
             })
                 .catch((result) => {
                     console.log(result.response.data.message)

@@ -58,7 +58,7 @@ export default function EmployeeSignup() {
         // console.log("Town Id: " + value)
     }
 
-    const customerSignupSchema = Yup.object().shape({
+    const employeeSignupSchema = Yup.object().shape({
         name: Yup.string().required("Required").max(50, "Maximum 50 Characters"),
         surname: Yup.string().required("Required").max(50, "Maximum 50 Characters"),
         phoneNumber: Yup.string().required("Required").max(10, "Maximum 10 Characters").matches(/^\d{10}$/, "Invalid Phone Number"),
@@ -78,7 +78,7 @@ export default function EmployeeSignup() {
             fkCityId: 0,
             fkTownId: 0
         },
-        validationSchema: customerSignupSchema,
+        validationSchema: employeeSignupSchema,
         onSubmit: (values) => {
             console.log(values)
             employeeService.add(values).then((result) => {

@@ -30,7 +30,7 @@ export default class CustomerService {
         return axios.post("http://localhost:8080/api/customer/add", values)
     }
 
-    updateBalance(values){
+    depositBalance(values){
         return axios.patch("http://localhost:8080/api/customer/updateBalance", values)
     }
 

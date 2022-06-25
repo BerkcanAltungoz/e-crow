@@ -3,7 +3,7 @@ package ecrow.backend.api.controllers;
 import ecrow.backend.business.abstracts.CustomerService;
 import ecrow.backend.core.utilities.Utils;
 import ecrow.backend.entities.dtos.CustomerAddDto;
-import ecrow.backend.entities.dtos.CustomerBalanceUpdateDto;
+import ecrow.backend.entities.dtos.CustomerDepositBalanceDto;
 import ecrow.backend.entities.dtos.CustomerBaseUpdateDto;
 import ecrow.backend.entities.dtos.SignInDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +62,7 @@ public class CustomerController {
     }
 
     @PatchMapping("/updateBalance")
-    public ResponseEntity<?> updateBalance(@RequestBody CustomerBalanceUpdateDto customerBalanceUpdateDto) {
-        return Utils.getResponseEntity(customerService.updateBalance(customerBalanceUpdateDto));
+    public ResponseEntity<?> updateBalance(@RequestBody CustomerDepositBalanceDto customerDepositBalanceDto) {
+        return Utils.getResponseEntity(customerService.depositBalance(customerDepositBalanceDto));
     }
 }

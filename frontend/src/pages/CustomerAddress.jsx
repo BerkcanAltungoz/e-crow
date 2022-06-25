@@ -1,7 +1,7 @@
 import {Button, Card, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useSelector} from "react-redux";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
@@ -27,7 +27,6 @@ export default function CustomerAddress() {
 
     useEffect(() => {
         cityService.getAll().then(result => setCities(result.data.data))
-
     }, [])
 
     useEffect(() => {
@@ -37,8 +36,10 @@ export default function CustomerAddress() {
     }, [cityId])
 
     useEffect(() => {
+        if(typeof userProps?.user?.id !== 'undefined') {
             addressService.getByCustomerId(userProps?.user?.id).then(result => setAddresses(result.data.data))
-    }, [])
+        }
+    }, [userProps?.user?.id])
 
     const cityOptions = [];
     cities.map((city) => (cityOptions.push({
@@ -89,7 +90,7 @@ export default function CustomerAddress() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 history.push("/customer/address")
-                window.location.reload();
+                formik.resetForm({...initial});
             })
                 .catch((result) => {
                     console.log(result.response.data.message)

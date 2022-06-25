@@ -26,7 +26,6 @@ export default function EmployeeDetails() {
 
     useEffect(() => {
         cityService.getAll().then(result => setCities(result.data.data))
-
     }, [])
 
     useEffect(() => {
@@ -93,7 +92,7 @@ export default function EmployeeDetails() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 history.push("/employee/details")
-                window.location.reload();
+                formik.resetForm({...initial});
             })
                 .catch((result) => {
                     console.log(result.response.data.message)

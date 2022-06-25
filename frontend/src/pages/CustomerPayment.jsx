@@ -7,13 +7,70 @@ import {useFormik} from "formik";
 import {toast} from "react-toastify";
 import PaymentMethodService from "../services/PaymentMethodService";
 import React from "react";
+import {useEffect, useState} from "react";
+import CustomerService from "../services/CustomerService";
 
-export default function CustomerPayment() {
+export default function CustomerPayment() { //TODO: SHOW BILLING HISTORY
     const paymentService = new PaymentMethodService();
+    const customerService = new CustomerService();
     const userProps = useSelector(state => state?.user?.userProps)
     const history = useHistory();
 
-    const initial = {
+    const [paymentMethods,setPaymentMethods] = useState([])
+    const [paymentMethodId, setPaymentMethodId] = useState(0)
+
+    useEffect(() => {
+        if(typeof userProps?.user?.id !== 'undefined') {
+            paymentService.getByCustomerId(userProps?.user?.id).then(result => setPaymentMethods(result.data.data))
+        }
+    }, [userProps?.user?.id])
+
+    const paymentOptions = [];
+    paymentMethods.map((paymentMethod) => (paymentOptions.push({
+        key: paymentMethod.id,
+        text: paymentMethod.nameOnCard + " - " +paymentMethod.cardNumber,
+        value: paymentMethod.id,
+    })));
+
+    const handleChangePaymentOption = (value) => {
+        setPaymentMethodId(value)
+        addBalanceFormik.values.fkPaymentMethodId = value
+    }
+
+
+    const addBalanceInitial = {
+        fkCustomerId: userProps?.user?.id,
+        fkPaymentMethodId: 0,
+        depositAmount: 0
+    }
+
+    const addBalanceSchema = Yup.object().shape({
+        depositAmount: Yup.number().integer("Must be an Integer").positive("Must be a Positive Number")
+    });
+
+
+    const addBalanceFormik = useFormik({
+        enableReinitialize: true,
+        initialValues: addBalanceInitial,
+        validationSchema: addBalanceSchema,
+        onSubmit: (values) => {
+            console.log(values)
+            // console.log(userProps.user)
+            customerService.depositBalance(values).then((result) => {
+                console.log(result.data.message)
+                history.push("/customer/payment")
+                toast.success(result.data.message)
+                addBalanceFormik.resetForm({...addBalanceInitial});
+
+            })
+                .catch((result) => {
+                    console.log(result.response.data.message)
+                    toast.error(result.response.data.message)
+                })
+        }
+    });
+
+    const addPaymentInitial = {
         fkCustomerId: userProps?.user?.id,
         nameOnCard: "",
         cardNumber: "",
@@ -21,7 +78,7 @@ export default function CustomerPayment() {
         expiryDateMonth: 1,
         expiryDateYear: 1
     }
-    const customerAccountSchema = Yup.object().shape({
+    const addPaymentSchema = Yup.object().shape({
         nameOnCard: Yup.string().required("Required").max(100, "Maximum 100 Characters"),
         cardNumber: Yup.string().required("Required").length(16, "Invalid Card Number"),
         cvc: Yup.string().required("Required").length(3, "Invalid CVC"),
@@ -29,10 +86,12 @@ export default function CustomerPayment() {
         expiryDateYear: Yup.number().integer("Must be an Integer").positive("Must be a Positive Number")
     });
 
-    const formik = useFormik({
+
+
+    const addPaymentFormik = useFormik({
         enableReinitialize: true,
-        initialValues: initial,
-        validationSchema: customerAccountSchema,
+        initialValues: addPaymentInitial,
+        validationSchema: addPaymentSchema,
         onSubmit: (values) => {
             console.log(values)
             // console.log(userProps.user)
@@ -55,12 +114,59 @@ export default function CustomerPayment() {
                     <CustomerSettingCategories/>
                 </Grid.Column>
                 <Grid.Column width={12} style={{marginBottom: "10em", marginTop: "2em"}}>
+                    <Header as="h2" color="black" textAlign="center" style={{ marginBottom: "1em"}}>
+                        <Image
+                            src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>
+                        Deposit Balance
+                    </Header>
+
+                    <Form onSubmit={addBalanceFormik.handleSubmit}>
+                        <Segment>
+                            <Grid stackable>
+                                <Grid.Column>
+                                    <div style={{marginTop: "1em"}}>
+                                        <label><b>Payment Method</b></label>
+                                        <Form.Select
+                                            name="paymentMethod"
+                                            placeholder="Payment Method"
+                                            options={paymentOptions}
+                                            onChange={(event, data) => handleChangePaymentOption(data.value)}
+                                        />
+                                    </div>
+                                    <div style={{marginTop: "1em"}}>
+                                        <label><b>Deposit Amount</b></label>
+                                        <Form.Input
+                                            fluid
+                                            icon="money"
+                                            iconPosition="left"
+                                            placeholder="0"
+                                            type="number"
+                                            name="depositAmount"
+                                            value={addBalanceFormik.values.depositAmount}
+                                            onChange={addBalanceFormik.handleChange}
+                                            onBlur={addBalanceFormik.handleBlur}
+                                        />
+                                        {addBalanceFormik.errors.depositAmount && addBalanceFormik.touched.depositAmount && (
+                                            <div className={"ui pointing red basic label"}>
+                                                {addBalanceFormik.errors.depositAmount}
+                                            </div>
+                                        )}
+                                    </div>
+                                </Grid.Column>
+                            </Grid>
+                            <br/>
+                            <Button color="black" fluid size="large" type="submit">
+                                Deposit
+                            </Button>
+                        </Segment>
+                    </Form>
+
                     <Header as="h2" color="black" textAlign="center" style={{marginTop: "1em"}}>
                         <Image
                             src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>
                         Add Payment Method
                     </Header>
-                    <Form onSubmit={formik.handleSubmit}>
+                    <Form onSubmit={addPaymentFormik.handleSubmit}>
                         <Segment>
                             <Grid stackable>
                                 <Grid.Column>
@@ -73,14 +179,14 @@ export default function CustomerPayment() {
                                             placeholder="Name on Card"
                                             type="text"
                                             name="nameOnCard"
-                                            value={formik.values.nameOnCard}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
+                                            value={addPaymentFormik.values.nameOnCard}
+                                            onChange={addPaymentFormik.handleChange}
+                                            onBlur={addPaymentFormik.handleBlur}
                                         />
                                         {
-                                            formik.errors.nameOnCard && formik.touched.nameOnCard && (
+                                            addPaymentFormik.errors.nameOnCard && addPaymentFormik.touched.nameOnCard && (
                                                 <div className={"ui pointing red basic label"}>
-                                                    {formik.errors.nameOnCard}
+                                                    {addPaymentFormik.errors.nameOnCard}
                                                 </div>
                                             )
                                         }
@@ -94,13 +200,13 @@ export default function CustomerPayment() {
                                             placeholder="Card Number"
                                             type="text"
                                             name="cardNumber"
-                                            value={formik.values.cardNumber}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
+                                            value={addPaymentFormik.values.cardNumber}
+                                            onChange={addPaymentFormik.handleChange}
+                                            onBlur={addPaymentFormik.handleBlur}
                                         />
-                                        {formik.errors.cardNumber && formik.touched.cardNumber && (
+                                        {addPaymentFormik.errors.cardNumber && addPaymentFormik.touched.cardNumber && (
                                             <div className={"ui pointing red basic label"}>
-                                                {formik.errors.cardNumber}
+                                                {addPaymentFormik.errors.cardNumber}
                                             </div>
                                         )}
                                     </div>
@@ -113,13 +219,13 @@ export default function CustomerPayment() {
                                             placeholder="CVC"
                                             type="text"
                                             name="cvc"
-                                            value={formik.values.cvc}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
+                                            value={addPaymentFormik.values.cvc}
+                                            onChange={addPaymentFormik.handleChange}
+                                            onBlur={addPaymentFormik.handleBlur}
                                         />
-                                        {formik.errors.cvc && formik.touched.cvc && (
+                                        {addPaymentFormik.errors.cvc && addPaymentFormik.touched.cvc && (
                                             <div className={"ui pointing red basic label"}>
-                                                {formik.errors.cvc}
+                                                {addPaymentFormik.errors.cvc}
                                             </div>
                                         )}
                                     </div>
@@ -132,13 +238,13 @@ export default function CustomerPayment() {
                                             placeholder="Expiry Month"
                                             type="number"
                                             name="expiryDateMonth"
-                                            value={formik.values.expiryDateMonth}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
+                                            value={addPaymentFormik.values.expiryDateMonth}
+                                            onChange={addPaymentFormik.handleChange}
+                                            onBlur={addPaymentFormik.handleBlur}
                                         />
-                                        {formik.errors.expiryDateMonth && formik.touched.expiryDateMonth && (
+                                        {addPaymentFormik.errors.expiryDateMonth && addPaymentFormik.touched.expiryDateMonth && (
                                             <div className={"ui pointing red basic label"}>
-                                                {formik.errors.expiryDateMonth}
+                                                {addPaymentFormik.errors.expiryDateMonth}
                                             </div>
                                         )}
                                     </div>
@@ -151,19 +257,18 @@ export default function CustomerPayment() {
                                             placeholder="Expiry Year"
                                             type="number"
                                             name="expiryDateYear"
-                                            value={formik.values.expiryDateYear}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
+                                            value={addPaymentFormik.values.expiryDateYear}
+                                            onChange={addPaymentFormik.handleChange}
+                                            onBlur={addPaymentFormik.handleBlur}
                                         />
-                                        {formik.errors.expiryDateYear && formik.touched.expiryDateYear && (
+                                        {addPaymentFormik.errors.expiryDateYear && addPaymentFormik.touched.expiryDateYear && (
                                             <div className={"ui pointing red basic label"}>
-                                                {formik.errors.expiryDateYear}
+                                                {addPaymentFormik.errors.expiryDateYear}
                                             </div>
                                         )}
                                     </div>
                                 </Grid.Column>
                             </Grid>
-
                             <br/>
                             <Button color="black" fluid size="large" type="submit">
                                 Save
