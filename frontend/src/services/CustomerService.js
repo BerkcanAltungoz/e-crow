@@ -31,7 +31,7 @@ export default class CustomerService {
     }
 
     depositBalance(values){
-        return axios.patch("http://localhost:8080/api/customer/updateBalance", values)
+        return axios.patch("http://localhost:8080/api/customer/depositBalance", values)
     }
 
     updateBase(values){

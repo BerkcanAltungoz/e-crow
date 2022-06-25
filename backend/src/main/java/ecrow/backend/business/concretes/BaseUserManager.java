@@ -1,11 +1,11 @@
 package ecrow.backend.business.concretes;
 
 import ecrow.backend.business.abstracts.BaseUserService;
-import ecrow.backend.core.utilities.results.DataResult;
-import ecrow.backend.core.utilities.results.ErrorDataResult;
-import ecrow.backend.core.utilities.results.SuccessDataResult;
+import ecrow.backend.core.utilities.results.*;
 import ecrow.backend.dataAccess.concretes.BaseUserDao;
 import ecrow.backend.entities.concretes.BaseUser;
+import ecrow.backend.entities.concretes.Customer;
+import ecrow.backend.entities.dtos.WithdrawBalanceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +47,18 @@ public class BaseUserManager implements BaseUserService {
             return new ErrorDataResult<>("Base User Not Found");
         }
         return new SuccessDataResult<>(baseUserDao.getByPhoneNumber(phoneNumber));
+    }
+
+    //TODO: WITHDRAW FROM BANK ACCOUNT
+    @Override
+    public Result withdrawBalance(WithdrawBalanceDto withdrawBalanceDto) {
+        if(!baseUserDao.existsById(withdrawBalanceDto.getFkUserId())){
+            return new ErrorResult("User Not Found");
+        }
+        BaseUser baseUser = baseUserDao.findById(withdrawBalanceDto.getFkUserId()).get();
+        int newBalance = baseUser.getBalance() - withdrawBalanceDto.getWithdrawAmount();
+        baseUser.setBalance(newBalance);
+        baseUserDao.save(baseUser);
+        return new SuccessDataResult<>(newBalance,"Withdraw Successful");
     }
 }

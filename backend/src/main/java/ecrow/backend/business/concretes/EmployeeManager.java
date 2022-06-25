@@ -96,6 +96,7 @@ public class EmployeeManager implements EmployeeService {
     }
 
     //TODO: CHECK IF EMAIL VERIFIED
+
     @Override
     public DataResult<Employee> signIn(SignInDto signInDto) {
         if(!employeeDao.existsByEmail(signInDto.getEmail())){
@@ -192,14 +193,4 @@ public class EmployeeManager implements EmployeeService {
         return new SuccessResult("Employee Details Updated");
     }
 
-    @Override
-    public Result updateBalance(EmployeeBalanceUpdateDto employeeBalanceUpdateDto) {
-        if(!employeeDao.existsById(employeeBalanceUpdateDto.getId())){
-            return new ErrorResult("Employee Not Found");
-        }
-        Employee employee = employeeDao.findById(employeeBalanceUpdateDto.getId()).get();
-        employee.setBalance(employeeBalanceUpdateDto.getBalance());
-        employeeDao.save(employee);
-        return new SuccessResult("Employee Balance Updated");
-    }
 }

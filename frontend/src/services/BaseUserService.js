@@ -16,4 +16,8 @@ export default class BaseUserService{
     getByEmail(email) {
         return axios.get(`http://localhost:8080/api/baseUser/getByEmail?email=ad${email}`)
     }
+
+    withdrawBalance(values){
+        return axios.patch("http://localhost:8080/api/baseUser/withdrawBalance", values)
+    }
 }

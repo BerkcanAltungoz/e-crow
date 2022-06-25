@@ -61,8 +61,8 @@ public class CustomerController {
         return Utils.getResponseEntity(customerService.updateBase(customerBaseUpdateDto));
     }
 
-    @PatchMapping("/updateBalance")
-    public ResponseEntity<?> updateBalance(@RequestBody CustomerDepositBalanceDto customerDepositBalanceDto) {
+    @PatchMapping("/depositBalance")
+    public ResponseEntity<?> depositBalance(@RequestBody CustomerDepositBalanceDto customerDepositBalanceDto) {
         return Utils.getResponseEntity(customerService.depositBalance(customerDepositBalanceDto));
     }
 }

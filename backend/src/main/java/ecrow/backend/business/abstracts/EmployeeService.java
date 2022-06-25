@@ -23,5 +23,5 @@ public interface EmployeeService {
     Result add(EmployeeAddDto employeeAddDto);
     Result updateBase(EmployeeBaseUpdateDto employeeBaseUpdateDto);
     Result updateDetails(EmployeeDetailsUpdateDto employeeDetailsUpdateDto);
-    Result updateBalance(EmployeeBalanceUpdateDto employeeBalanceUpdateDto);
+
 }

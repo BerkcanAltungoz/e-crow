@@ -114,11 +114,12 @@ public class CustomerManager implements CustomerService {
         customer.setSurname(customerBaseUpdateDto.getSurname());
         customer.setPhoneNumber(customerBaseUpdateDto.getPhoneNumber());
         customerDao.save(customer);
-        return new SuccessResult("Customer Updated");
+        return new SuccessDataResult<>(customer, "Customer Updated");
     }
 
+    //TODO: REAL CREDIT CARD PAYMENT
     @Override
-    public Result depositBalance(CustomerDepositBalanceDto customerDepositBalanceDto) { //TODO: REAL CREDIT CARD PAYMENT
+    public Result depositBalance(CustomerDepositBalanceDto customerDepositBalanceDto) {
         if(!customerDao.existsById(customerDepositBalanceDto.getFkCustomerId())){
             return new ErrorResult("Customer Not Found");
         }

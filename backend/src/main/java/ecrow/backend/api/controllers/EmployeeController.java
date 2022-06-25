@@ -2,16 +2,10 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.EmployeeService;
 import ecrow.backend.core.utilities.Utils;
-import ecrow.backend.core.utilities.results.DataResult;
-import ecrow.backend.core.utilities.results.ErrorDataResult;
-import ecrow.backend.core.utilities.results.SuccessDataResult;
-import ecrow.backend.entities.concretes.Employee;
 import ecrow.backend.entities.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -94,8 +88,4 @@ public class EmployeeController {
         return Utils.getResponseEntity(employeeService.updateDetails(employeeDetailsUpdateDto));
     }
 
-    @PatchMapping("/updateBalance")
-    public ResponseEntity<?> updateBalance(@RequestBody EmployeeBalanceUpdateDto employeeBalanceUpdateDto) {
-        return Utils.getResponseEntity(employeeService.updateBalance(employeeBalanceUpdateDto));
-    }
 }

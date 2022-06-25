@@ -4,13 +4,13 @@ import * as Yup from "yup";
 import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import React from "react";
 
 export default function CustomerAccount() {
 
-
     const customerService = new CustomerService();
+    const dispatch = new useDispatch();
     const userProps = useSelector(state => state?.user?.userProps)
 
     const initial = {

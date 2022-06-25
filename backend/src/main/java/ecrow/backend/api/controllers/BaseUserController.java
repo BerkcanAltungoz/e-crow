@@ -2,6 +2,7 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.BaseUserService;
 import ecrow.backend.core.utilities.Utils;
+import ecrow.backend.entities.dtos.WithdrawBalanceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +33,14 @@ public class BaseUserController {
         return Utils.getResponseEntity(baseUserService.getByEmail(email));
     }
 
+
     @GetMapping("/getByPhoneNumber")
     public ResponseEntity<?> getByPhoneNumber(@RequestParam String phoneNumber) {
         return Utils.getResponseEntity(baseUserService.getByPhoneNumber(phoneNumber));
+    }
+
+    @PatchMapping("/withdrawBalance")
+    public ResponseEntity<?> withdrawBalance(@RequestBody WithdrawBalanceDto withdrawBalanceDto) {
+        return Utils.getResponseEntity(baseUserService.withdrawBalance(withdrawBalanceDto));
     }
 }
