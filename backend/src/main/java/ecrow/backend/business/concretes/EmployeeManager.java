@@ -167,7 +167,7 @@ public class EmployeeManager implements EmployeeService {
         employee.setSurname(employeeBaseUpdateDto.getSurname());
         employee.setPhoneNumber(employeeBaseUpdateDto.getPhoneNumber());
         employeeDao.save(employee);
-        return new SuccessResult("Customer Updated");
+        return new SuccessDataResult<>(employee, "Customer Updated");
     }
 
     @Override

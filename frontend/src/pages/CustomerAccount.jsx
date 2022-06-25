@@ -5,7 +5,8 @@ import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
-import React from "react";
+import React, {useState} from "react";
+import {customerLogin} from "../store/actions/userActions";
 
 export default function CustomerAccount() {
 
@@ -41,7 +42,9 @@ export default function CustomerAccount() {
             customerService.updateBase(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                // history.push("/customer/account")
+
+                dispatch(customerLogin(result.data.data))
+                localStorage.setItem("customer", JSON.stringify(result.data.data))
                 formik.resetForm({...initial});
             })
                 .catch((result) => {

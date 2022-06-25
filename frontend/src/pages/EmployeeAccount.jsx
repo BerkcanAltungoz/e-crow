@@ -1,4 +1,4 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import EmployeeService from "../services/EmployeeService";
 import {Button, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import EmployeeSettingCategories from "../layouts/EmployeeSettingCategories";
@@ -6,9 +6,11 @@ import React from "react";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
+import {employeeLogin} from "../store/actions/userActions";
 
 export default function EmployeeAccount() {
     const employeeService = new EmployeeService();
+    const dispatch = useDispatch();
     const userProps = useSelector(state => state?.user?.userProps)
 
     const initial = {
@@ -39,6 +41,9 @@ export default function EmployeeAccount() {
             employeeService.updateBase(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
+
+                dispatch(employeeLogin(result.data.data))
+                localStorage.setItem("employee", JSON.stringify(result.data.data))
                 // history.push("/employee/account")
                 formik.resetForm({...initial});
             })
