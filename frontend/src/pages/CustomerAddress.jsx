@@ -1,7 +1,7 @@
-import {Button, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
+import {Button, Card, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
@@ -20,6 +20,7 @@ export default function CustomerAddress() {
 
     const [cities, setCities] = useState([]);
     const [cityId, setCityId] = useState(0)
+    const [addresses,setAddresses] = useState([])
 
     const [towns, setTowns] = useState([]);
     const [townId, setTownId] = useState(0);
@@ -34,6 +35,10 @@ export default function CustomerAddress() {
             townService.getByCityId(cityId).then(result => setTowns(result.data.data))
         }
     }, [cityId])
+
+    useEffect(() => {
+            addressService.getByCustomerId(userProps?.user?.id).then(result => setAddresses(result.data.data))
+    }, [])
 
     const cityOptions = [];
     cities.map((city) => (cityOptions.push({
@@ -98,7 +103,23 @@ export default function CustomerAddress() {
                 <Grid.Column width={4} style={{marginBottom: "10em", marginTop: "8.5em"}}>
                     <CustomerSettingCategories/>
                 </Grid.Column>
-                <Grid.Column width={12} style={{marginBottom: "10em", marginTop: "2em"}}>
+                <Grid.Column width={12} style={{marginBottom: "10em", marginTop: "3.5em"}}>
+                    <Header as="h2" color="black" textAlign="center" style={{ marginBottom: "1em"}}>
+                        <Image
+                            src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>
+                        My Addresses
+                    </Header>
+                    <Card.Group >
+                        {addresses.map(address => (
+                            <Card key={address.id} color={"black"} fluid>
+                                <Card.Content>
+                                    <Card.Header>{address.namesurname}</Card.Header>
+                                    <Card.Meta>{address.fkCity.name + ", " + address.fkTown.name}</Card.Meta>
+                                    <Card.Description>{address.addressLine}</Card.Description>
+                                </Card.Content>
+                            </Card>
+                        ))}
+                    </Card.Group>
                     <Header as="h2" color="black" textAlign="center" style={{marginTop: "1em"}}>
                         <Image
                             src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>
