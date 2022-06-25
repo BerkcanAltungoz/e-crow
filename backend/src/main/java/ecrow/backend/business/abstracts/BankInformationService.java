@@ -11,7 +11,7 @@ import java.util.List;
 public interface BankInformationService {
     DataResult<List<BankInformation>> getAll();
     DataResult<BankInformation> getById(Integer id);
-    DataResult<BankInformation> getByFkUserId(Integer userId);
+    DataResult<List<BankInformation>> getByFkUserId(Integer userId);
     Result deleteById(Integer id);
 
     Result add(BankInformationAddDto bankInformationAddDto);

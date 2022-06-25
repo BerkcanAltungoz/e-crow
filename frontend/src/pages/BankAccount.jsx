@@ -1,18 +1,27 @@
-import {Button, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
+import {Button, Card, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
 import BankInformationService from "../services/BankInformationService";
 import EmployeeSettingCategories from "../layouts/EmployeeSettingCategories";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 export default function BankAccount(){
     const bankInformationService = new BankInformationService();
+
     const userProps = useSelector(state => state?.user?.userProps)
-    const history = useHistory();
+
+
+    const [bankAccounts, setBankAccounts] = useState([]);
+
+    useEffect(() => {
+        if(typeof userProps?.user?.id !== 'undefined') {
+            bankInformationService.getByUserId(userProps?.user?.id).then(result => setBankAccounts(result.data.data))
+        }
+    }, [userProps?.user?.id])
+
     const initial = {
         fkUserId: userProps?.user?.id,
         nickname: "",
@@ -35,6 +44,7 @@ export default function BankAccount(){
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 // history.push("/bankAccount")
+                window.location.reload()
                 formik.resetForm({...initial});
             })
                 .catch((result) => {
@@ -50,7 +60,24 @@ export default function BankAccount(){
                     {userProps.userType === 1 && <CustomerSettingCategories/>}
                     {userProps.userType === 2 && <EmployeeSettingCategories/>}
                 </Grid.Column>
-                <Grid.Column width={12} style={{marginBottom: "10em", marginTop: "2em"}}>
+                <Grid.Column width={12} style={{marginBottom: "10em", marginTop: "3.4em"}}>
+                    <Header as="h2" color="black" textAlign="center" style={{ marginBottom: "1em"}}>
+                        <Image
+                            src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>
+                        My Bank Accounts
+                    </Header>
+                    <Card.Group >
+                        {bankAccounts.map(bankAccount => (
+                            <Card key={bankAccount.id} color={"black"} fluid>
+                                <Card.Content>
+                                    <Card.Header>{bankAccount.nickname}</Card.Header>
+                                    <Card.Description>{bankAccount.iban}</Card.Description>
+                                </Card.Content>
+                            </Card>
+                        ))}
+                    </Card.Group>
+
+
                     <Header as="h2" color="black" textAlign="center" style={{marginTop: "1em"}}>
                         <Image
                             src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>

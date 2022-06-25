@@ -37,7 +37,7 @@ public class BankInformationManager implements BankInformationService {
     }
 
     @Override
-    public DataResult<BankInformation> getByFkUserId(Integer userId) {
+    public DataResult<List<BankInformation>> getByFkUserId(Integer userId) {
         if(!bankInformationDao.existsByFkUserId(userId)){
             return new ErrorDataResult<>("Bank Information Not Found");
         }

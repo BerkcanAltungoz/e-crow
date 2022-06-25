@@ -1,5 +1,4 @@
 import {useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
 import EmployeeService from "../services/EmployeeService";
 import {Button, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import EmployeeSettingCategories from "../layouts/EmployeeSettingCategories";
@@ -11,7 +10,6 @@ import {toast} from "react-toastify";
 export default function EmployeeAccount() {
     const employeeService = new EmployeeService();
     const userProps = useSelector(state => state?.user?.userProps)
-    const history = useHistory();
 
     const initial = {
         id: userProps?.user?.id,

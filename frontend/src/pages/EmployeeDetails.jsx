@@ -3,7 +3,6 @@ import EmployeeSettingCategories from "../layouts/EmployeeSettingCategories";
 import EmployeeService from "../services/EmployeeService";
 import CityService from "../services/CityService";
 import TownService from "../services/TownService";
-import {useHistory} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import * as Yup from "yup";
 import {useFormik} from "formik";
@@ -16,7 +15,6 @@ export default function EmployeeDetails() {
     const townService = new TownService();
 
     const userProps = useSelector(state => state?.user?.userProps)
-    const history = useHistory();
 
     const [cities, setCities] = useState([]);
     const [cityId, setCityId] = useState(0)

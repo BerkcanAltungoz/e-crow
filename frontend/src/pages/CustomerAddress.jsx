@@ -1,7 +1,6 @@
 import {Button, Card, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
@@ -16,7 +15,6 @@ export default function CustomerAddress() {
     const townService = new TownService();
 
     const userProps = useSelector(state => state?.user?.userProps)
-    const history = useHistory();
 
     const [cities, setCities] = useState([]);
     const [cityId, setCityId] = useState(0)
@@ -89,7 +87,7 @@ export default function CustomerAddress() {
             addressService.add(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                // history.push("/customer/address")
+                window.location.reload()
                 formik.resetForm({...initial});
             })
                 .catch((result) => {

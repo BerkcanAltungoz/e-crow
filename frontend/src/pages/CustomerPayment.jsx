@@ -1,13 +1,11 @@
 import {Button, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useDispatch, useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
 import PaymentMethodService from "../services/PaymentMethodService";
-import React from "react";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import CustomerService from "../services/CustomerService";
 import {userUpdateBalance} from "../store/actions/userActions";
 
@@ -15,7 +13,6 @@ export default function CustomerPayment() { //TODO: SHOW BILLING HISTORY
     const paymentService = new PaymentMethodService();
     const customerService = new CustomerService();
     const userProps = useSelector(state => state?.user?.userProps)
-    const history = useHistory();
     const dispatch = useDispatch();
 
     const [paymentMethods,setPaymentMethods] = useState([])

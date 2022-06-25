@@ -1,4 +1,3 @@
-import {useHistory} from "react-router-dom";
 import {Button, Form, Grid, Header, Image, Segment} from 'semantic-ui-react'
 import CustomerService from "../services/CustomerService";
 import * as Yup from "yup";
@@ -13,7 +12,6 @@ export default function CustomerAccount() {
 
     const customerService = new CustomerService();
     const userProps = useSelector(state => state?.user?.userProps)
-    const history = useHistory();
 
     const initial = {
         id: userProps?.user?.id,
