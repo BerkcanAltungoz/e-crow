@@ -74,6 +74,27 @@ public class EmployeeManager implements EmployeeService {
         return new SuccessDataResult<>(employeeDao.getByFkCityId(cityId));
     }
 
+    @Override
+    public DataResult<List<Employee>> getAllByAvailableIsTrue() {
+        return new SuccessDataResult<>(employeeDao.getAllByAvailableIsTrue());
+    }
+
+    @Override
+    public DataResult<List<Employee>> getByFkTownIdAndAvailableIsTrue(Integer townId) {
+        if(!employeeDao.existsByFkTownId(townId)){
+            return new ErrorDataResult<>("Employee Not Found");
+        }
+        return new SuccessDataResult<>(employeeDao.getByFkTownIdAndAvailableIsTrue(townId));
+    }
+
+    @Override
+    public DataResult<List<Employee>> getByFkCityIdAndAvailableIsTrue(Integer cityId) {
+        if(!employeeDao.existsByFkCityId(cityId)){
+            return new ErrorDataResult<>("Employee Not Found");
+        }
+        return new SuccessDataResult<>(employeeDao.getByFkCityIdAndAvailableIsTrue(cityId));
+    }
+
     //TODO: CHECK IF EMAIL VERIFIED
     @Override
     public DataResult<Employee> signIn(SignInDto signInDto) {

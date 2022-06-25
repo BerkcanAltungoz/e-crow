@@ -2,10 +2,16 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.EmployeeService;
 import ecrow.backend.core.utilities.Utils;
+import ecrow.backend.core.utilities.results.DataResult;
+import ecrow.backend.core.utilities.results.ErrorDataResult;
+import ecrow.backend.core.utilities.results.SuccessDataResult;
+import ecrow.backend.entities.concretes.Employee;
 import ecrow.backend.entities.dtos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -43,14 +49,29 @@ public class EmployeeController {
         return Utils.getResponseEntity(employeeService.signIn(signInDto));
     }
 
-    @GetMapping("getByFkTownId")
+    @GetMapping("/getByFkTownId")
     public ResponseEntity<?> getByFkTownId(@RequestParam Integer townId) {
         return Utils.getResponseEntity(employeeService.getByFkTownId(townId));
     }
 
-    @GetMapping("getByFkCityId")
+    @GetMapping("/getByFkCityId")
     public ResponseEntity<?> getByFkCityId(@RequestParam Integer cityId) {
         return Utils.getResponseEntity(employeeService.getByFkCityId(cityId));
+    }
+
+    @GetMapping("/getAllByAvailableIsTrue")
+    public ResponseEntity<?> getAllByAvailableIsTrue() {
+        return Utils.getResponseEntity(employeeService.getAllByAvailableIsTrue());
+    }
+
+    @GetMapping("/getByFkTownIdAndAvailableIsTrue")
+    public ResponseEntity<?> getByFkTownIdAndAvailableIsTrue(@RequestParam Integer townId) {
+        return Utils.getResponseEntity(employeeService.getByFkTownIdAndAvailableIsTrue(townId));
+    }
+
+    @GetMapping("/getByFkCityIdAndAvailableIsTrue")
+    public ResponseEntity<?> getByFkCityIdAndAvailableIsTrue(@RequestParam Integer cityId) {
+        return Utils.getResponseEntity(employeeService.getByFkCityIdAndAvailableIsTrue(cityId));
     }
 
     @DeleteMapping("/deleteById")

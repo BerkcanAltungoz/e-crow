@@ -25,19 +25,19 @@ export default function MainPage() {
     useEffect(() => {
         if (cityId !== 0) {
             townService.getByCityId(cityId).then(result => setTowns(result.data.data))
-            employeeService.getByCityId(cityId).then(result => setEmployees(result.data.data))
+            employeeService.getByCityIdAvailableIsTrue(cityId).then(result => setEmployees(result.data.data))
         }
     }, [cityId])
 
-    useEffect(() => { //TODO: GET ACTIVE EMPLOYEES
+    useEffect(() => {
         if (townId !== 0 && firstTownChange) {
             setEmployees([])
             firstTownChange = false
-            employeeService.getByTownId(townId).then(result => setEmployees(result.data.data))
+            employeeService.getByTownIdAvailableIsTrue(townId).then(result => setEmployees(result.data.data))
         } else if (townId !== 0 && !firstTownChange) {
-            employeeService.getByTownId(townId).then(result => setEmployees(result.data.data))
+            employeeService.getByTownIdAvailableIsTrue(townId).then(result => setEmployees(result.data.data))
         } else {
-            employeeService.getAll().then(result => setEmployees(result.data.data))
+            employeeService.getAllByAvailableIsTrue().then(result => setEmployees(result.data.data))
         }
     }, [townId])
 

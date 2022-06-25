@@ -17,6 +17,9 @@ public interface EmployeeDao extends JpaRepository<Employee, Integer> {
     boolean existsByEmailAndPassword(String email, String password);
     List<Employee> getByFkTownId(Integer townId);
     List<Employee> getByFkCityId(Integer cityId);
+    List<Employee> getAllByAvailableIsTrue();
+    List<Employee> getByFkTownIdAndAvailableIsTrue(Integer townId);
+    List<Employee> getByFkCityIdAndAvailableIsTrue(Integer cityId);
     Employee getByEmail(String email);
     Employee getByPhoneNumber(String phoneNumber);
     Employee getByEmailAndPassword(String email, String password);

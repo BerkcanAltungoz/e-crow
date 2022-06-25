@@ -14,6 +14,9 @@ public interface EmployeeService {
     DataResult<Employee> getByPhoneNumber(String phoneNumber);
     DataResult<List<Employee>> getByFkTownId(Integer townId);
     DataResult<List<Employee>> getByFkCityId(Integer cityId);
+    DataResult<List<Employee>> getAllByAvailableIsTrue();
+    DataResult<List<Employee>> getByFkTownIdAndAvailableIsTrue(Integer townId);
+    DataResult<List<Employee>> getByFkCityIdAndAvailableIsTrue(Integer cityId);
     DataResult<Employee> signIn(SignInDto signInDto);
     Result deleteById(Integer id);
 
