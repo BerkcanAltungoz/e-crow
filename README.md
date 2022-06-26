@@ -6,7 +6,7 @@ Made by: Berkcan Altungöz
 
 Student Number: 20170808014
 
-Advisor: Murat Ak :man_teacher:
+Advisor: Asst.Prof.Dr. Murat Ak :man_teacher:
 ## Description
 
 **E-Crow** is a **web-based escrow service** that is made to solve a big problem that hasn’t been solved in buying an item from the second-hand market. It aims to solve trust,
