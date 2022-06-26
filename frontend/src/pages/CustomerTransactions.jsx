@@ -80,8 +80,8 @@ export default function CustomerTransactions() {
                                             </Table.Cell>
                                             <Table.Cell>
                                                 {"Seller: " + buyerTransaction?.fkSeller?.name + " " + buyerTransaction?.fkSeller?.surname}
-                                                <Button color="black" as={Link} to={"/message"} size={"small"}
-                                                        disabled style={{marginLeft: "1em"}}>Message</Button>
+                                                <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
+                                                        disabled >Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
                                                 {"Employee: " + buyerTransaction?.fkEmployee?.name + " " +  buyerTransaction?.fkEmployee?.surname}
@@ -144,18 +144,18 @@ export default function CustomerTransactions() {
                                     <Table.Body>
                                         <Table.Row>
                                             <Table.Cell>
-                                                {"Buyer: " + sellerTransaction?.fkBuyer?.name + sellerTransaction?.fkBuyer?.surname}
-                                                <Button color="black" as={Link} to={"/message"}
+                                                {"Buyer: " + sellerTransaction?.fkBuyer?.name + " " + sellerTransaction?.fkBuyer?.surname}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Seller: " + sellerTransaction?.fkSeller?.name + sellerTransaction?.fkSeller?.surname}
-                                                <Button color="black" as={Link} to={"/message"}
+                                                {"Seller: " + sellerTransaction?.fkSeller?.name + " " + sellerTransaction?.fkSeller?.surname}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Employee: " + sellerTransaction?.fkEmployee?.name + sellerTransaction?.fkEmployee?.surname}
-                                                <Button color="black" as={Link} to={"/message"}
+                                                {"Employee: " + sellerTransaction?.fkEmployee?.name + " " + sellerTransaction?.fkEmployee?.surname}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                         </Table.Row>
