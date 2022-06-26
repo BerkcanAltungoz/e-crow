@@ -60,8 +60,10 @@ export default function EmployeeDetails() {
         console.log("Town Id: " + value)
     }
 
+    //TODO: FIX AVAILABLE
     const handleChangeAvailable = (value) => {
         formik.values.available = value
+        console.log(formik.values.available)
         console.log("Available: " + value)
     }
     const initial = {

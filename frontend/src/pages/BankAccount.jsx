@@ -107,7 +107,6 @@ export default function BankAccount(){
                 console.log(result.data.message)
                 toast.success(result.data.message)
                 // history.push("/bankAccount")
-                window.location.reload()
                 bankFormik.resetForm({...bankInitial});
             })
                 .catch((result) => {

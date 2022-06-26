@@ -10,7 +10,7 @@ import java.util.List;
 @Transactional
 @Repository
 public interface EmployeeDao extends JpaRepository<Employee, Integer> {
-    boolean existsByFkCityId(Integer customerId);
+    boolean existsByFkCityId(Integer cityId);
     boolean existsByFkTownId(Integer townId);
     boolean existsByEmail(String email);
     boolean existsByPhoneNumber(String phoneNumber);
