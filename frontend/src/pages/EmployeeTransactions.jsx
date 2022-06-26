@@ -16,7 +16,9 @@ export default function EmployeeTransactions() {
         let employeeExists = false
         if (typeof userProps?.user?.id !== 'undefined') {
             transactionService.existsByEmployeeId(userProps?.user?.id).then(result => employeeExists = result.data.data)
-            if (employeeExists) {
+
+            //TODO: FIX THIS
+            if (employeeExists === false) {
                 transactionService.getByEmployeeId(userProps?.user?.id)
                     .then(result => setEmployeeTransactions(result.data.data))
                     .catch((result) => {
@@ -35,8 +37,8 @@ export default function EmployeeTransactions() {
                 Transactions
             </Header>
             {employeeTransactions.map(employeeTransaction => (
-                <CardGroup>
-                    <Card fluid color={"black"} style={{marginTop: "5em"}}>
+                <CardGroup key={employeeTransaction.id}>
+                    <Card fluid color={"black"} style={{marginTop: "1em"}}>
                         <Card.Content>
                             <Card.Description>
                                 <Table celled color={"black"}>
@@ -44,17 +46,17 @@ export default function EmployeeTransactions() {
                                         <Table.Row>
                                             <Table.Cell>
                                                 {"Buyer: " + employeeTransaction.fkBuyer.name + employeeTransaction.fkBuyer.surname}
-                                                <Button color="black" as={Link} to={"/message"}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
                                                 {"Seller: " + employeeTransaction.fkSeller.name + employeeTransaction.fkSeller.surname}
-                                                <Button color="black" as={Link} to={"/message"}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
                                                 {"Employee: " + employeeTransaction.fkEmployee.name + employeeTransaction.fkEmployee.surname}
-                                                <Button color="black" as={Link} to={"/message"}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                         </Table.Row>
@@ -78,7 +80,7 @@ export default function EmployeeTransactions() {
                                             <Table.Cell>
                                                 {"Location: " + employeeTransaction.fkEmployee.fkCity.name + ", " + employeeTransaction.fkEmployee.fkTown.name}
                                             </Table.Cell>
-                                            <Table.Cell>
+                                            <Table.Cell textAlign={"center"}>
                                                 <Button color="black" as={Link} to={"/message"}
                                                         disabled>Requirements</Button>
                                             </Table.Cell>

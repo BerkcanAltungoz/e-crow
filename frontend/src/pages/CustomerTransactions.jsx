@@ -28,6 +28,7 @@ export default function CustomerTransactions() {
                     sellerExists = result.data.data
                 })
 
+            // TODO: FIX THIS
             console.log(buyerExists)
             if (buyerExists === false) {
                 transactionService.getByBuyerId(userProps?.user?.id)
@@ -41,7 +42,7 @@ export default function CustomerTransactions() {
 
             }
 
-            if (sellerExists === true) {
+            if (sellerExists === false) {
                 transactionService.getBySellerId(userProps?.user?.id)
                     .then(result => setSellerTransactions(result.data.data))
                     .catch((result) => {
