@@ -12,21 +12,36 @@ export default function CustomerTransactions() {
     const [sellerTransactions, setSellerTransactions] = useState([]);
 
 
+
     useEffect(() => {
         let buyerExists = false
         let sellerExists = false
         if (typeof userProps?.user?.id !== 'undefined') {
-            transactionService.existsByBuyerId(userProps?.user?.id).then(result => buyerExists = result.data.data)
-            transactionService.existsBySellerId(userProps?.user?.id).then(result => buyerExists = result.data.data)
-            if (buyerExists) {
+            // transactionService.existsByBuyerId(userProps?.user?.id).then(result => buyerExists = result.data.data)
+            transactionService.existsBySellerId(userProps?.user?.id).then(result => sellerExists = result.data.data)
+            transactionService.existsByBuyerId(userProps?.user?.id)
+                .then((result) => {
+                buyerExists = result.data.data
+            })
+            transactionService.existsBySellerId(userProps?.user?.id)
+                .then((result) => {
+                    sellerExists = result.data.data
+                })
+
+            console.log(buyerExists)
+            if (buyerExists === false) {
                 transactionService.getByBuyerId(userProps?.user?.id)
-                    .then(result => setBuyerTransactions(result.data.data))
+                    .then(result => {
+                        setBuyerTransactions(result.data.data)
+                        console.log(result.data.data)
+                    })
                     .catch((result) => {
                         console.log("Buyer " + result.response.data.message)
                     })
+
             }
 
-            if (sellerExists) {
+            if (sellerExists === true) {
                 transactionService.getBySellerId(userProps?.user?.id)
                     .then(result => setSellerTransactions(result.data.data))
                     .catch((result) => {
@@ -50,52 +65,51 @@ export default function CustomerTransactions() {
                 Buyer Transactions
             </Header>
             {buyerTransactions.map(buyerTransaction => (
-                <CardGroup>
-                    <Card fluid color={"black"} style={{marginTop: "5em"}}>
+                <CardGroup key={buyerTransaction.id}>
+                    <Card fluid color={"black"} style={{marginTop: "1em"}}>
                         <Card.Content>
                             <Card.Description>
                                 <Table celled color={"black"}>
                                     <Table.Body>
                                         <Table.Row>
                                             <Table.Cell>
-                                                {"Buyer: " + buyerTransaction.fkBuyer.name + buyerTransaction.fkBuyer.surname}
-                                                <Button color="black" as={Link} to={"/message"}
-                                                        disabled>Message</Button>
+                                                {"Buyer: " + buyerTransaction?.fkBuyer?.name + " " + buyerTransaction?.fkBuyer?.surname}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"}
+                                                        disabled style={{marginLeft: "1em"}}>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Seller: " + buyerTransaction.fkSeller.name + buyerTransaction.fkSeller.surname}
-                                                <Button color="black" as={Link} to={"/message"}
-                                                        disabled>Message</Button>
+                                                {"Seller: " + buyerTransaction?.fkSeller?.name + " " + buyerTransaction?.fkSeller?.surname}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"}
+                                                        disabled style={{marginLeft: "1em"}}>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Employee: " + buyerTransaction.fkEmployee.name + buyerTransaction.fkEmployee.surname}
-                                                <Button color="black" as={Link} to={"/message"}
-                                                        disabled>Message</Button>
-                                            </Table.Cell>
-                                        </Table.Row>
-
-                                        <Table.Row>
-                                            <Table.Cell>
-                                                {"Item: " + buyerTransaction.itemName}
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                {"Item Price: " + buyerTransaction.itemPrice}
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                {"Total Price: " + buyerTransaction.itemPrice + buyerTransaction.employeeFee}
+                                                {"Employee: " + buyerTransaction?.fkEmployee?.name + " " +  buyerTransaction?.fkEmployee?.surname}
+                                                <Button color="black" as={Link} to={"/message"} size={"small"}
+                                                        disabled style={{marginLeft: "1em"}}>Message</Button>
                                             </Table.Cell>
                                         </Table.Row>
 
                                         <Table.Row>
                                             <Table.Cell>
-                                                {"Status: " + buyerTransaction.status.name}
+                                                {"Item: " + buyerTransaction?.itemName}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Location: " + buyerTransaction.fkEmployee.fkCity.name + ", " + buyerTransaction.fkEmployee.fkTown.name}
+                                                {"Item Price: " + buyerTransaction?.itemPrice}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Button color="black" as={Link} to={"/message"}
-                                                        disabled>Requirements</Button>
+                                                {"Total Price: " + buyerTransaction?.itemPrice + buyerTransaction?.employeeFee}
+                                            </Table.Cell>
+                                        </Table.Row>
+
+                                        <Table.Row>
+                                            <Table.Cell>
+                                                {"Status: " + buyerTransaction?.fkStatus?.name}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {"Location: " + buyerTransaction?.fkEmployee?.fkCity?.name + ", " + buyerTransaction?.fkEmployee?.fkTown?.name}
+                                            </Table.Cell>
+                                            <Table.Cell textAlign={"center"}>
+                                                <Button color="black" as={Link} to={"/message"} disabled>Requirements</Button>
                                             </Table.Cell>
                                         </Table.Row>
                                     </Table.Body>
@@ -109,7 +123,7 @@ export default function CustomerTransactions() {
                                 Details
                             </Card.Header>
                         </Card.Content>
-                        <Card.Content description={buyerTransaction.details}/>
+                        <Card.Content description={buyerTransaction?.details}/>
                     </Card>
                 </CardGroup>
             ))}
@@ -122,24 +136,24 @@ export default function CustomerTransactions() {
             </Header>
             {sellerTransactions.map(sellerTransaction => (
                 <CardGroup>
-                    <Card fluid color={"black"} style={{marginTop: "5em"}}>
+                    <Card fluid color={"black"} style={{marginTop: "1em"}}>
                         <Card.Content>
                             <Card.Description>
                                 <Table celled color={"black"}>
                                     <Table.Body>
                                         <Table.Row>
                                             <Table.Cell>
-                                                {"Buyer: " + sellerTransaction.fkBuyer.name + sellerTransaction.fkBuyer.surname}
+                                                {"Buyer: " + sellerTransaction?.fkBuyer?.name + sellerTransaction?.fkBuyer?.surname}
                                                 <Button color="black" as={Link} to={"/message"}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Seller: " + sellerTransaction.fkSeller.name + sellerTransaction.fkSeller.surname}
+                                                {"Seller: " + sellerTransaction?.fkSeller?.name + sellerTransaction?.fkSeller?.surname}
                                                 <Button color="black" as={Link} to={"/message"}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Employee: " + sellerTransaction.fkEmployee.name + sellerTransaction.fkEmployee.surname}
+                                                {"Employee: " + sellerTransaction?.fkEmployee?.name + sellerTransaction?.fkEmployee?.surname}
                                                 <Button color="black" as={Link} to={"/message"}
                                                         disabled>Message</Button>
                                             </Table.Cell>
@@ -147,22 +161,22 @@ export default function CustomerTransactions() {
 
                                         <Table.Row>
                                             <Table.Cell>
-                                                {"Item: " + sellerTransaction.itemName}
+                                                {"Item: " + sellerTransaction?.itemName}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Item Price: " + sellerTransaction.itemPrice}
+                                                {"Item Price: " + sellerTransaction?.itemPrice}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Total Price: " + sellerTransaction.itemPrice + sellerTransaction.employeeFee}
+                                                {"Total Price: " + sellerTransaction?.itemPrice + sellerTransaction?.employeeFee}
                                             </Table.Cell>
                                         </Table.Row>
 
                                         <Table.Row>
                                             <Table.Cell>
-                                                {"Status: " + sellerTransaction.status.name}
+                                                {"Status: " + sellerTransaction?.fkStatus?.name}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Location: " + sellerTransaction.fkEmployee.fkCity.name + ", " + sellerTransaction.fkEmployee.fkTown.name}
+                                                {"Location: " + sellerTransaction?.fkEmployee?.fkCity?.name + ", " + sellerTransaction?.fkEmployee?.fkTown?.name}
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <Button color="black" as={Link} to={"/message"}
@@ -180,7 +194,7 @@ export default function CustomerTransactions() {
                                 Details
                             </Card.Header>
                         </Card.Content>
-                        <Card.Content description={sellerTransaction.details}/>
+                        <Card.Content description={sellerTransaction?.details}/>
                     </Card>
                 </CardGroup>
             ))}

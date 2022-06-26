@@ -43,7 +43,7 @@ export default function Dashboard() {
                 <Route exact path="/login/employee" component={EmployeeLogin}/>
                 <Route exact path="/employee/account" component={EmployeeAccount}/>
                 <Route exact path="/employee/details" component={EmployeeDetails}/>
-                <Route exact path="/employee/:id" component={EmployeeExpanded}/>
+                <Route exact path="/employee/expanded/:id" component={EmployeeExpanded}/>
                 <Route exact path="/employee/transactions" component={EmployeeTransactions}/>
             </Container>
             <Footer/>

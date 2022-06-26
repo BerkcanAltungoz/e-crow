@@ -7,7 +7,8 @@ import React, {useEffect, useState} from "react";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {employeeLogin} from "../store/actions/userActions";
 
 export default function EmployeeDetails() {
     const employeeService = new EmployeeService();
@@ -15,6 +16,7 @@ export default function EmployeeDetails() {
     const townService = new TownService();
 
     const userProps = useSelector(state => state?.user?.userProps)
+    const dispatch = useDispatch();
 
     const [cities, setCities] = useState([]);
     const [cityId, setCityId] = useState(0)
@@ -88,7 +90,11 @@ export default function EmployeeDetails() {
             employeeService.updateDetails(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
-                // history.push("/employee/details")
+
+                //TODO: MAKE THIS PERSIST
+
+                // dispatch(employeeLogin(result.data.data))
+
                 formik.resetForm({...initial});
             })
                 .catch((result) => {

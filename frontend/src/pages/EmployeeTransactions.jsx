@@ -29,14 +29,10 @@ export default function EmployeeTransactions() {
 
     return (
         <div>
-            <Button color="black" as={Link} to={"/transactions/new"} size={"huge"} style={{marginTop: "2em"}}>
-                New Transaction
-            </Button>
-
             <Header as="h1" color="black" textAlign="center" style={{marginTop: "1em", marginBottom: "1em"}}>
                 <Image
                     src="https://uxwing.com/wp-content/themes/uxwing/download/29-animals-and-birds/crow.png"/>
-                Buyer Transactions
+                Transactions
             </Header>
             {employeeTransactions.map(employeeTransaction => (
                 <CardGroup>
@@ -77,7 +73,7 @@ export default function EmployeeTransactions() {
 
                                         <Table.Row>
                                             <Table.Cell>
-                                                {"Status: " + employeeTransaction.status.name}
+                                                {"Status: " + employeeTransaction.fkStatus.name}
                                             </Table.Cell>
                                             <Table.Cell>
                                                 {"Location: " + employeeTransaction.fkEmployee.fkCity.name + ", " + employeeTransaction.fkEmployee.fkTown.name}

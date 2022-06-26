@@ -96,6 +96,7 @@ public class ItemTransactionManager implements ItemTransactionService {
         return new SuccessResult("Transaction Deleted");
     }
 
+    // TODO: WITHDRAW FROM BUYER BALANCE
     @Override
     public Result add(ItemTransactionAddDto itemTransactionAddDto) {
         if(!employeeDao.existsById(itemTransactionAddDto.getFkEmployeeId())){

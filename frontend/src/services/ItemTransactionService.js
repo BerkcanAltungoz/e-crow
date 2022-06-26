@@ -38,6 +38,9 @@ export default class ItemTransactionService{
         return axios.get(`http://localhost:8080/api/itemTransaction/getByFkSellerId?sellerId=${sellerId}`)
     }
 
+    add(values){
+        return axios.post("http://localhost:8080/api/itemTransaction/add", values)
+    }
     deleteById(id) {
         return axios.delete(`http://localhost:8080/api/itemTransaction/deleteById?id=${id}`)
     }

@@ -190,7 +190,7 @@ public class EmployeeManager implements EmployeeService {
         employee.setAvailable(employeeDetailsUpdateDto.getAvailable());
         employee.setDescription(employeeDetailsUpdateDto.getDescription());
         employeeDao.save(employee);
-        return new SuccessResult("Employee Details Updated");
+        return new SuccessDataResult<>(employee, "Employee Details Updated");
     }
 
 }

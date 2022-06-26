@@ -109,7 +109,7 @@ export default function MainPage() {
                                 </Card.Content>
                                 <Card.Content extra>
                                     <div>
-                                        <Button fluid color="black" as={Link} to={`/employee/${employee.id}`}>
+                                        <Button fluid color="black" as={Link} to={`/employee/expanded/${employee.id}`}>
                                             Show Details
                                         </Button>
                                     </div>
