@@ -179,7 +179,7 @@ export default function CustomerTransactions() {
                                             <Table.Cell>
                                                 {"Location: " + sellerTransaction?.fkEmployee?.fkCity?.name + ", " + sellerTransaction?.fkEmployee?.fkTown?.name}
                                             </Table.Cell>
-                                            <Table.Cell>
+                                            <Table.Cell textAlign={"center"}>
                                                 <Button color="black" as={Link} to={"/message"}
                                                         disabled>Requirements</Button>
                                             </Table.Cell>
