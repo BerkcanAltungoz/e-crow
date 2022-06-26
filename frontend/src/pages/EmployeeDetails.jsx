@@ -38,7 +38,6 @@ export default function EmployeeDetails() {
         text: city.name,
         value: city.id,
     })));
-
     const townOptions = [];
     towns.map((town) => (townOptions.push({
         key: town.id,

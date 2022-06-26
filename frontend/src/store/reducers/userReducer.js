@@ -39,7 +39,8 @@ export default function userReducer(state = initialState, {type, payload}){
                 ...state,
                 userProps: {
                     ...state.userProps,
-                    user: {...state.userProps.user, balance:payload}
+                    user: {...state.userProps.user, balance:payload},
+                    ...state.userProps.user.balance
                 }
             }
         default:
