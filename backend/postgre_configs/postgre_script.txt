@@ -278,7 +278,7 @@ ALTER TABLE IF EXISTS public.town
     ON UPDATE NO ACTION
     ON DELETE NO ACTION;
 
-insert into status (id,name) values (1,'pending'),(2,'completed'), (3,'failed');
+insert into status (id,name) values (1,'Pending'),(2,'Completed'), (3,'Failed');
 
 insert into city (id,name) values (1,'Adana'), (2,'Ankara'), (3,'Antalya'), (4,'İstanbul');
 
