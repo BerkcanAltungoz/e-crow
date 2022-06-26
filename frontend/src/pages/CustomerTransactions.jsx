@@ -98,7 +98,7 @@ export default function CustomerTransactions() {
                                                 {"Item Price: " + buyerTransaction?.itemPrice}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Total Price: " + buyerTransaction?.itemPrice + buyerTransaction?.employeeFee}
+                                                {"Total Price: " + (buyerTransaction?.itemPrice + buyerTransaction?.employeeFee)}
                                             </Table.Cell>
                                         </Table.Row>
 
@@ -168,7 +168,7 @@ export default function CustomerTransactions() {
                                                 {"Item Price: " + sellerTransaction?.itemPrice}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Total Price: " + sellerTransaction?.itemPrice + sellerTransaction?.employeeFee}
+                                                {"Total Price: " + (sellerTransaction?.itemPrice + sellerTransaction?.employeeFee)}
                                             </Table.Cell>
                                         </Table.Row>
 

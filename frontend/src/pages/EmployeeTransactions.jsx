@@ -69,7 +69,7 @@ export default function EmployeeTransactions() {
                                                 {"Item Price: " + employeeTransaction.itemPrice}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Total Price: " + employeeTransaction.itemPrice + employeeTransaction.employeeFee}
+                                                {"Total Price: " + (employeeTransaction.itemPrice + employeeTransaction.employeeFee)}
                                             </Table.Cell>
                                         </Table.Row>
 
