@@ -28,7 +28,7 @@ export default function EmployeeTransactions() {
         }
     }, [userProps?.user?.id])
 
-
+    //TODO: EDIT STATUS
     return (
         <div>
             <Header as="h1" color="black" textAlign="center" style={{marginTop: "1em", marginBottom: "1em"}}>
@@ -45,17 +45,17 @@ export default function EmployeeTransactions() {
                                     <Table.Body>
                                         <Table.Row>
                                             <Table.Cell>
-                                                {"Buyer: " + employeeTransaction.fkBuyer.name + employeeTransaction.fkBuyer.surname}
+                                                {"Buyer: " + employeeTransaction.fkBuyer.name + " " + employeeTransaction.fkBuyer.surname}
                                                 <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Seller: " + employeeTransaction.fkSeller.name + employeeTransaction.fkSeller.surname}
+                                                {"Seller: " + employeeTransaction.fkSeller.name + " " +employeeTransaction.fkSeller.surname}
                                                 <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                {"Employee: " + employeeTransaction.fkEmployee.name + employeeTransaction.fkEmployee.surname}
+                                                {"Employee: " + employeeTransaction.fkEmployee.name + " " + employeeTransaction.fkEmployee.surname}
                                                 <Button color="black" as={Link} to={"/message"} size={"small"} style={{marginLeft: "1em"}}
                                                         disabled>Message</Button>
                                             </Table.Cell>
