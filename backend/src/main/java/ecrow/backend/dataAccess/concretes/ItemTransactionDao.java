@@ -11,9 +11,9 @@ import java.util.List;
 @Transactional
 @Repository
 public interface ItemTransactionDao extends JpaRepository<ItemTransaction, Integer> {
-    boolean existsByFkEmployeeId(Integer employeeId);
-    boolean existsByFkBuyerId(Integer buyerId);
-    boolean existsByFkSellerId(Integer sellerId);
+    Boolean existsByFkEmployeeId(Integer employeeId);
+    Boolean existsByFkBuyerId(Integer buyerId);
+    Boolean existsByFkSellerId(Integer sellerId);
     List<ItemTransaction> getByFkEmployeeId(Integer employeeId);
     List<ItemTransaction> getByFkBuyerId(Integer buyerId);
     List<ItemTransaction> getByFkSellerId(Integer sellerId);

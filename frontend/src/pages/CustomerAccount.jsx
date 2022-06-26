@@ -5,7 +5,7 @@ import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useFormik} from "formik";
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
-import React, {useState} from "react";
+import React from "react";
 import {customerLogin} from "../store/actions/userActions";
 
 export default function CustomerAccount() {

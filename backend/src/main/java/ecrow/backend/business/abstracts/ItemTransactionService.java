@@ -15,6 +15,9 @@ public interface ItemTransactionService {
     DataResult<List<ItemTransaction>> getByFkEmployeeId(Integer employeeId);
     DataResult<List<ItemTransaction>> getByFkBuyerId(Integer buyerId);
     DataResult<List<ItemTransaction>> getByFkSellerId(Integer sellerId);
+    DataResult<Boolean> existsByFkEmployeeId(Integer employeeId);
+    DataResult<Boolean> existsByFkBuyerId(Integer buyerId);
+    DataResult<Boolean> existsByFkSellerId(Integer sellerId);
     Result deleteById(Integer id);
 
     Result add(ItemTransactionAddDto itemTransactionAddDto);

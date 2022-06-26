@@ -1,4 +1,4 @@
-import {Button, Card, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
+import {Button, Form, Grid, Header, Image, Segment} from "semantic-ui-react";
 import CustomerSettingCategories from "../layouts/CustomerSettingCategories";
 import {useDispatch, useSelector} from "react-redux";
 import BankInformationService from "../services/BankInformationService";

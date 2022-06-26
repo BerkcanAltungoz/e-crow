@@ -100,11 +100,11 @@ export default function EmployeeExpanded(){
             </Card>
 
             <div >
-                <Button  color="black" as={Link} to={"/"} floated={"left"} style={{width:"7em"}} >
+                <Button  color="black" as={Link} to={"/"} floated={"left"} size={"large"} >
                     Back
                 </Button>
 
-                <Button  color="black" as={Link} to={"/"} floated={"right"} style={{width:"7em"}} >
+                <Button  color="black" as={Link} to={"/"} floated={"right"} size={"large"} >
                     Message
                 </Button>
             </div>

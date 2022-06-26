@@ -2,6 +2,8 @@ package ecrow.backend.api.controllers;
 
 import ecrow.backend.business.abstracts.ItemTransactionService;
 import ecrow.backend.core.utilities.Utils;
+import ecrow.backend.core.utilities.results.DataResult;
+import ecrow.backend.core.utilities.results.SuccessDataResult;
 import ecrow.backend.entities.dtos.ItemTransactionAddDto;
 import ecrow.backend.entities.dtos.ItemTransactionStatusUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,21 @@ public class ItemTransactionController {
     @GetMapping("/getByFkSellerId")
     public ResponseEntity<?> getByFkSellerId(@RequestParam Integer sellerId) {
         return Utils.getResponseEntity(itemTransactionService.getByFkSellerId(sellerId));
+    }
+
+    @GetMapping("/existsByFkEmployeeId")
+    public ResponseEntity<?> existsByFkEmployeeId(@RequestParam Integer employeeId) {
+        return Utils.getResponseEntity(itemTransactionService.existsByFkEmployeeId(employeeId));
+    }
+
+    @GetMapping("/existsByFkBuyerId")
+    public ResponseEntity<?> existsByFkBuyerId(@RequestParam Integer buyerId) {
+        return Utils.getResponseEntity(itemTransactionService.existsByFkBuyerId(buyerId));
+    }
+
+    @GetMapping("/existsByFkSellerId")
+    public ResponseEntity<?> existsByFkSellerId(@RequestParam Integer sellerId) {
+        return Utils.getResponseEntity(itemTransactionService.existsByFkSellerId(sellerId));
     }
 
     @DeleteMapping("/deleteById")

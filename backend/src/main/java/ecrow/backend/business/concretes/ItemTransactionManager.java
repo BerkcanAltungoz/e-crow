@@ -73,6 +73,21 @@ public class ItemTransactionManager implements ItemTransactionService {
     }
 
     @Override
+    public DataResult<Boolean> existsByFkEmployeeId(Integer employeeId) {
+        return new SuccessDataResult<>(itemTransactionDao.existsByFkEmployeeId(employeeId));
+    }
+
+    @Override
+    public DataResult<Boolean> existsByFkBuyerId(Integer buyerId) {
+        return new SuccessDataResult<>(itemTransactionDao.existsByFkBuyerId(buyerId));
+    }
+
+    @Override
+    public DataResult<Boolean> existsByFkSellerId(Integer sellerId) {
+        return new SuccessDataResult<>(itemTransactionDao.existsByFkSellerId(sellerId));
+    }
+
+    @Override
     public Result deleteById(Integer id) {
         if(!itemTransactionDao.existsById(id)){
             return new ErrorDataResult<>("Transaction Not Found");

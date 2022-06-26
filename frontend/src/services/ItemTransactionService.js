@@ -14,6 +14,18 @@ export default class ItemTransactionService{
         return axios.get(`http://localhost:8080/api/itemTransaction/getById?id=${id}`)
     }
 
+    existsByBuyerId(buyerId){
+        return axios.get(`http://localhost:8080/api/itemTransaction/existsByFkBuyerId?buyerId=${buyerId}`)
+    }
+
+    existsByEmployeeId(employeeId){
+        return axios.get(`http://localhost:8080/api/itemTransaction/existsByFkEmployeeId?employeeId=${employeeId}`)
+    }
+
+    existsBySellerId(sellerId){
+        return axios.get(`http://localhost:8080/api/itemTransaction/existsByFkSellerId?sellerId=${sellerId}`)
+    }
+
     getByBuyerId(buyerId){
         return axios.get(`http://localhost:8080/api/itemTransaction/getByFkBuyerId?buyerId=${buyerId}`)
     }
