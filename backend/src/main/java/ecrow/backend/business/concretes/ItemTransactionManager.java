@@ -97,6 +97,7 @@ public class ItemTransactionManager implements ItemTransactionService {
     }
 
     // TODO: WITHDRAW FROM BUYER BALANCE
+
     @Override
     public Result add(ItemTransactionAddDto itemTransactionAddDto) {
         if(!employeeDao.existsById(itemTransactionAddDto.getFkEmployeeId())){

@@ -118,6 +118,7 @@ public class EmployeeManager implements EmployeeService {
     }
 
     //TODO: SEND EMAIL VERIFICATION & HASH PASSWORD
+
     @Override
     public Result add(EmployeeAddDto employeeAddDto) {
         if(!townDao.existsById(employeeAddDto.getFkTownId())){
@@ -175,10 +176,10 @@ public class EmployeeManager implements EmployeeService {
         if(!employeeDao.existsById(employeeDetailsUpdateDto.getId())){
             return new ErrorResult("Employee Not Found");
         }
-        else if(!employeeDao.existsByFkTownId(employeeDetailsUpdateDto.getFkTownId())){
+        else if(!townDao.existsById(employeeDetailsUpdateDto.getFkTownId())){
             return new ErrorResult("Invalid Town Id");
         }
-        else if(!employeeDao.existsByFkCityId(employeeDetailsUpdateDto.getFkCityId())){
+        else if(!cityDao.existsById(employeeDetailsUpdateDto.getFkCityId())){
             return new ErrorResult("Invalid City Id");
         }
         Employee employee = employeeDao.findById(employeeDetailsUpdateDto.getId()).get();

@@ -15,7 +15,7 @@ export default function EmployeeTransactions() {
     useEffect(() => {
         let employeeExists = false
         if (typeof userProps?.user?.id !== 'undefined') {
-            transactionService.existsByEmployeeId(userProps?.user?.id).then(result => employeeExists = result.data.data)
+           // transactionService.existsByEmployeeId(userProps?.user?.id).then(result => employeeExists = result.data.data)
 
             //TODO: FIX THIS
             if (employeeExists === false) {

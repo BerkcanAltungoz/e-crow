@@ -78,7 +78,7 @@ public class ChatMessageManager implements ChatMessageService {
             return new ErrorResult("Invalid Customer Id");
         }
         else if(!employeeDao.existsById(chatMessageAddDto.getFkEmployeeId())){
-            return new ErrorResult("Invalid Customer Id");
+            return new ErrorResult("Invalid Employee Id");
         }
         ChatMessage chatMessage = ChatMessage.builder()
                 .fkCustomer(customerDao.findById(chatMessageAddDto.getFkCustomerId()).get())

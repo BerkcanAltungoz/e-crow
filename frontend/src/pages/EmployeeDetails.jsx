@@ -51,19 +51,17 @@ export default function EmployeeDetails() {
 
     const handleChangeCity = (value) => {
         setCityId(value)
-        formik.values.fkCityId = value
+        formik.setFieldValue('fkCityId', value)
         console.log("City Id: " + value)
     }
     const handleChangeTown = (value) => {
         setTownId(value)
-        formik.values.fkTownId = value
+        formik.setFieldValue('fkTownId', value)
         console.log("Town Id: " + value)
     }
 
-    //TODO: FIX AVAILABLE
     const handleChangeAvailable = (value) => {
-        formik.values.available = value
-        console.log(formik.values.available)
+        formik.setFieldValue('available', value)
         console.log("Available: " + value)
     }
     const initial = {
@@ -88,14 +86,15 @@ export default function EmployeeDetails() {
         initialValues: initial,
         validationSchema: employeeDetailsSchema,
         onSubmit: (values) => {
+            console.log("Values")
             console.log(values)
             employeeService.updateDetails(values).then((result) => {
                 console.log(result.data.message)
                 toast.success(result.data.message)
 
                 //TODO: MAKE THIS PERSIST
-
-                // dispatch(employeeLogin(result.data.data))
+                dispatch(employeeLogin(result.data.data))
+                localStorage.setItem("employee", JSON.stringify(result.data.data))
 
                 formik.resetForm({...initial});
             })

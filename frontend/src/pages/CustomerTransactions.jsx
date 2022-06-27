@@ -53,7 +53,7 @@ export default function CustomerTransactions() {
         }
     }, [userProps?.user?.id])
 
-
+    //TODO: ADD REQUIREMENT
     return (
         <div>
             <Button color="black" as={Link} to={"/transactions/new"} size={"huge"} style={{marginTop: "2em"}}>

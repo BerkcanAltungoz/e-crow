@@ -43,6 +43,7 @@ export default function CustomerAccount() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
 
+                //TODO: MAKE THIS PERSIST
                 dispatch(customerLogin(result.data.data))
                 localStorage.setItem("customer", JSON.stringify(result.data.data))
                 formik.resetForm({...initial});

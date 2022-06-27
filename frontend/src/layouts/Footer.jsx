@@ -1,6 +1,7 @@
 import React from "react";
 import {Container, Grid, Header, List, Segment,} from "semantic-ui-react";
 
+//TODO: ADD ABOUT & CONTACT US
 export default function Footer() {
     return (
         <div>

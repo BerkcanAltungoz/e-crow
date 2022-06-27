@@ -42,6 +42,8 @@ export default function EmployeeAccount() {
                 console.log(result.data.message)
                 toast.success(result.data.message)
 
+                //TODO: MAKE THIS PERSIST
+
                 dispatch(employeeLogin(result.data.data))
                 localStorage.setItem("employee", JSON.stringify(result.data.data))
                 // history.push("/employee/account")
