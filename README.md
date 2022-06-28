@@ -1,6 +1,6 @@
 # E-Crow - An Escrow Service for Everyone
 
-This project is made for Akdeniz University Class CSE 492 Senior Design Project
+This project is made for Akdeniz University Class CSE 492 - Senior Design Project
 
 Made by: Berkcan Altungöz
 
@@ -55,12 +55,58 @@ You can then access the website here: http://localhost:3000/
 
 You can access the backend API endpoints by using swagger on this address: http://localhost:8080/swagger-ui.html#/
 
-## Screenshots
+## Main Features
+* Sign-up as an Employee
+* Sign-up as a Customer
+* Persisting Log-in
+* Easy Sign-out on Navigation Bar
+* Balance Information on Navigation Bar
+* Settings for Employee/Customer
+* Setting Categories
+* Update Main Account Details as Customer/Employee
+* View Address Information as Customer
+* Update Address Information as Customer
+* Add Payment Method as Customer 
+* Deposit Balance as Customer
+* Add Bank Account Customer/Employee
+* Withdraw Balance as Customer/Employee
+* Configure Employee Details for Listing
+* Listing Available Employees
+* Filter Available Employees by City or Town
+* View Detailed Information About Employees
+* Create New Transaction for an Item
+* View Buying and Selling Transactions for Customer
+* View Escrowing Transactions as Employee
 
-**Entity Relationship Diagram**
+## Screenshots
+### Entity Relationship Diagram
 ![ERD](./backend/postgre_configs/Entity_Relationship_Diagram.png)
-**API Endpoints**
+### API Endpoints
 ![API](./backend/postgre_configs/Endpoints.png)
+### Main Page
+![MainPage](./frontend/screenshots/MainPage.png)
+### Login
+![Login](./frontend/screenshots/CustomerLogin.png)
+### Customer Signup
+![Customer Signup](./frontend/screenshots/CustomerSignup.png)
+### Employee Signup
+![Employee Signup](./frontend/screenshots/EmployeeSignup.png)
+### Customer Transactions
+![Customer Transactions](./frontend/screenshots/CustomerTransactions.png)
+### Employee Transactions
+![Employee Transactions](./frontend/screenshots/EmployeeTransactions.png)
+### Create New Transaction
+![Create New Transaction](./frontend/screenshots/NewTransaction.png)
+### Account Settings
+![Account Settings](./frontend/screenshots/CustomerSettingsAccount.png)
+### Bank Settings
+![Bank Settings](./frontend/screenshots/CustomerSettingsBank.png)
+### Customer Address Settings
+![Customer Address Settings](./frontend/screenshots/CustomerSettingsAddress.png)
+### Customer Payment Settings
+![Customer Payment Settings](./frontend/screenshots/CustomerSettingsPayment.png)
+### Employee Account Details Settings
+![Employee Account Details Settings](./frontend/screenshots/EmployeeSettingsDetails.png)
 
 ## Why Spring Boot?
 
